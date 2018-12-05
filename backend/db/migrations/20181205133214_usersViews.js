@@ -1,10 +1,8 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('userViews', table => {
-    table.increments('uuid');
-    table.string('userName');
-    table.unique('email');
-    table.string('password');
-    table.bool('isAdmin');
+    table.increments('id');
+    table.foreign('userId').references('users.id');
+    table.foreign('videoId').references('videos.id');
   });
 };
 
