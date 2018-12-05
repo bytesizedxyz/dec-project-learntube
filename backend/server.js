@@ -7,7 +7,6 @@ const cors = require('cors');
 const logger = require('morgan');
 const knex = require('./db/knex');
 const session = require('express-session');
-const passport = require('passport');
 
 const index = require('./routes/index');
 const todos = require('./routes/todos');
@@ -22,8 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //middleware use for passport
 app.use(session({ secret: process.env.secret, resave: true, saveUninitialized: true }));
-app.use(authen());
-app.use(passport.initialize());
 
 //routes
 app.use('/', index);
