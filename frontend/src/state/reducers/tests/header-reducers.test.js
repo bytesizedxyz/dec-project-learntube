@@ -1,4 +1,4 @@
-import store from "../../../index";
+import store from "../../index";
 import { login } from "../../actions/header-actions";
 
 describe("header-actions unit tests", () => {
@@ -8,7 +8,13 @@ describe("header-actions unit tests", () => {
 });
 
 describe("header-actions integration tests", () => {
+  const { dispatch, getState } = store;
   it("should log a user in.", () => {
-    //expect(store.getState()).toBe("One");
+    let logged_in;
+    logged_in = getState().authenticationStatus.logged_in;
+    expect(logged_in).toBe(false);
+    login()(dispatch, getState);
+    logged_in = getState().authenticationStatus.logged_in;
+    expect(logged_in).toBe(true);
   });
 });
