@@ -15,8 +15,6 @@ const users = require('./routes/users');
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //middleware use for passport
 app.use(session({ secret: process.env.secret, resave: true, saveUninitialized: true }));
+app.use(authen());
 app.use(passport.initialize());
 
 //routes
