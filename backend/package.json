@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "test": "NODE_ENV=test jest --watchAll"
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
