@@ -3,8 +3,8 @@ const router = express.Router();
 const knex = require('../db/knex');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  knex.raw('SELECT * from todos').then(function(todos) {
+router.get('/', (req, res, next) => {
+  knex.raw('SELECT * from todos').then((todos) => {
     res.send(todos.rows);
   });
 });
