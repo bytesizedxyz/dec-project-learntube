@@ -6,8 +6,8 @@ const cors = require('cors');
 const logger = require('morgan');
 const knex = require('./db/knex');
 
-const index = require('./routes/indexRoutes');
-const todos = require('./routes/todosRoutes');
+const index = require('./routes/index');
+const todos = require('./routes/todos');
 
 const app = express();
 
