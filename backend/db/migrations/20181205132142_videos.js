@@ -4,7 +4,7 @@ exports.up = (knex, Promise) => {
     table.string('name');
     table.string('url');
     table.number("watch_count");
-    table.foreign("user_uuid").references("users.uuid")
+    table.foreign("user_id").references("users.id")
   });
 };
 
