@@ -1,6 +1,6 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('favorites', (table) => {
-    table.foreign("uuid").references("users.id");
+    table.foreign("user_uuid").references("users.id");
     table.foreign("video_id").references("videos.id");
   });
 };
