@@ -4,7 +4,7 @@ const knex = require('../db/knex');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  knex.raw('SELECT * from todos').then((todos) => {
+  knex.raw('SELECT * from todos').then(todos => {
     res.send(todos.rows);
   });
 });
