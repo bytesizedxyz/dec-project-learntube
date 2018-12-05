@@ -1,4 +1,4 @@
-require('dotenv').config;
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -21,8 +21,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //use for passport
-app.use(session({ secret: process.env.SECRET }));
-
+app.use(session({ secret: process.env.secret }));
 //routes
 app.use('/', index);
 app.use('/users', users);
