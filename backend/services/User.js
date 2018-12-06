@@ -1,4 +1,4 @@
-const auth = require('./Auth');
+const auth = require('./Auth/Auth');
 
 const createUser = (req, res, next) => {
   let { password } = req.body;
@@ -17,16 +17,21 @@ const createUser = (req, res, next) => {
       //create token here and then send it back, will be for later implementation
     })
     .then(() => {
-      auth.createUser(newUser).catch(err => {
-        if (err.code == 23505) {
-          res.status(409).json({ error: 'Email is already in use' });
-        } else {
-          console.log('error happened');
-          res
-            .status(503)
-            .json({ error: 'Something went wrong on our end. Please try again later.' });
-        }
-      });
+      auth
+        .createUser(newUser)
+        .then(() => {
+          res.status(201);
+        })
+        .catch(err => {
+          if (err.code == 23505) {
+            res.status(409).json({ error: 'Email is already in use' });
+          } else {
+            console.log('error happened');
+            res
+              .status(503)
+              .json({ error: 'Something went wrong on our end. Please try again later.' });
+          }
+        });
     });
 };
 

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt'); // bcrypt will encrypt passwords to be saved in db
-const knex = require('../db/knex');
+const knex = require('../../db/knex');
 
 // check out bcrypt's docs for more info on their hashing function
 const hashPassword = password => {
