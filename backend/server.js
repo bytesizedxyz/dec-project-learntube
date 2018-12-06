@@ -7,7 +7,6 @@ const logger = require('morgan');
 const knex = require('./db/knex');
 
 const index = require('./routes/index');
-const todos = require('./routes/todos');
 
 const app = express();
 
@@ -19,7 +18,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', index);
-app.use('/todos', todos);
 
 app.listen(port, () => {
   console.log(`🌎  => API Server now listening on PORT ${port}!`);
