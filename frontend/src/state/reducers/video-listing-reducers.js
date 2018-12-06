@@ -2,7 +2,7 @@ import {
   RETRIEVE_VIDEOS_FOR_LISTING,
   RETRIEVE_VIDEOS_FOR_DASHBOARD,
   VIEW_VIDEO
-} from "../actions/video-listing-actions";
+} from "../actions/video";
 
 const initialState = {
   // Will be an object containing the video details
