@@ -1,6 +1,3 @@
-import { cursorTo } from "readline";
-import { access } from "fs";
-
 /*
  * action types
  */
