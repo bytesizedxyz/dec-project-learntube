@@ -1,10 +1,11 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('videos', table => {
-    table.increments('id').primary();
+    table.increments("id").primary();
     table.string('name');
     table.string('url');
-    table.integer('watch_count');
-    table.foreign('user_id').references('users.id');
+    table.integer("watch_count");
+    table.integer('user_id').unsigned();
+    table.foreign("user_id").references('id').inTable('users');
   });
 };
 
