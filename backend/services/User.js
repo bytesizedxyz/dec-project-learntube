@@ -21,6 +21,7 @@ const createUser = (req, res, next) => {
         if (err.code == 23505) {
           res.status(409).json({ error: 'Email is already in use' });
         } else {
+          console.log('error happened');
           res
             .status(503)
             .json({ error: 'Something went wrong on our end. Please try again later.' });
@@ -30,6 +31,11 @@ const createUser = (req, res, next) => {
 };
 
 const signIn = (req, res) => {
+  // get user creds from request body
+  // find user based on username in request
+  // check user's password_digest against pw from request
+  // if match, create and save a new token for user
+  // send back json to client with token and user info
   // const
 };
 
