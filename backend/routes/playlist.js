@@ -35,21 +35,22 @@ const user = {
       name: 'name',
       videos: {
         videoOne: {
-          id: 1,
+          uuid: '75G28y3d9210u433',
+          url: 'youtube.com/someserverlocation',
           name: 'Whateva',
-          url: 'google.com/someshitserverlocation',
-          watch_count: 'ha',
-          user_id: '1'
+          watch_count: 34577882,
+          user_uuid: '98G28y984tT39230u463',
+          title: 'Life Is A Scam'
         }
       }
     }
   }
 };
 
-id: name: url: watch_count: // user--playlist--playlist_video--video
+id: name: // user--playlist--playlist_video--video
 
-user_id: // POST - create an playlist record
-// POST - create an playlist_video record
-// PUT - update playlist record
+url: // POST - create an playlist record
+watch_count: // POST - create an playlist_video record
+user_id: // PUT - update playlist record
 
 module.exports = router;

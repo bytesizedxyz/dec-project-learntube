@@ -1,12 +1,9 @@
-let connectionString =
-  process.platform === 'win32'
-    ? 'postgres://postgres:root@localhost/learntube'
-    : 'postgres://localhost/learntube';
+let { connection } = require("./.dbconfig.js");
 
 module.exports = {
   development: {
     client: 'pg',
-    connection: connectionString,
+    connection,
     migrations: {
       directory: __dirname + '/db/migrations'
     },
@@ -16,7 +13,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection,
     migrations: {
       directory: __dirname + '/db/migrations'
     },
