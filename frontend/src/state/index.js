@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import { authReducer } from "./reducers/header-reducers";
+import { authReducer } from "./reducers/auth-reducers";
 import { videoReducer } from "./reducers/video-listing-reducers";
 
 const globalReduxState = combineReducers({
