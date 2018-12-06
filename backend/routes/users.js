@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const knex = require('../db/knex');
+const user = require('../services/User');
 
 /* GET home page. */
-router.post('/', (req, res, next) => {
-  console.log('at create user route');
+router.post('/', user.createUser);
 
-});
+router.get('/signIn', user.signIn);
 
 module.exports = router;
