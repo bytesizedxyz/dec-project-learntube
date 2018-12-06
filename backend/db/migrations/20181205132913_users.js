@@ -1,10 +1,10 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('users', table => {
-    table.increments('id');
-    table.string('userName');
+    table.increments('id').primary();
+    table.string('user_name');
     table.unique('email');
     table.string('password');
-    table.bool('isAdmin');
+    table.bool('is_admin');
   });
 };
 
