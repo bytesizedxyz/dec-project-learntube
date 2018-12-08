@@ -1,11 +1,13 @@
 import React from "react";
-
-const index = () => {
+import {viewVideo} from "../../state/actions/video-actions";
+import {connect} from "react-redux";
+const index = ({viewVideo}) => {
   return (
     <main>
       <h1>Landing Page</h1>
+      <button onClick={()=>viewVideo("QaVXaMFc6gk")}>watch a video</button>
     </main>
   );
 };
 
-export default index;
+export default connect(state => state, {viewVideo})(index);

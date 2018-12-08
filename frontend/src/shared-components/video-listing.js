@@ -5,10 +5,7 @@
  * action types
  */
 ​
-export const VIEW_VIDEO = 'VIEW_VIDEO'
-
-
-​
+export const VIEW_VIDEO = 'VIEW_VIDEO';
 /*
  * action creators
  */
@@ -19,7 +16,7 @@ export const viewVideo = (video_id) => (dispatch, getState) => {
   // const video = getState()
   // axios request to signup
 
-  const payload = { logged_in: true }
+  const payload = { current_video: true }
   // data for redux store is a boolean flag
-  dispatch({ type: LOGOUT, payload });
+  dispatch({ type: VIEW_VIDEO, payload });
 }

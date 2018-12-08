@@ -1,18 +1,16 @@
-import { cursorTo } from "readline";
-import { access } from "fs";
-
 /*
  * action types
  */
 export const RETRIEVE_VIDEOS_FOR_LISTING = "RETRIEVE_VIDEOS_FOR_LISTING";
 export const RETRIEVE_VIDEOS_FOR_DASHBOARD = "RETRIEVE_VIDEOS_FOR_DASHBOARD";
-export const VIEW_VIDEO = "VIEW_VIDEO";
+
 
 // TEMP DUMMY DATA
 const videoList = [
-  { title: "faketitle1", url: "youtube.com" },
-  { title: "faketitle2", url: "youtube.com" },
-  { title: "faketitle3", url: "youtube.com" }
+  { videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
+  { videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
+  { videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
+  {videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami"}
 ];
 
 // redux thunk action creators
@@ -24,8 +22,8 @@ export const retrieveVideosForListing = () => (dispatch, getState) => {
   let videoIds;
   const normalizedVideos = videoList.reduce((acc, curr, i) => {
     // This ideally should be the video uuid from backend in the future
-    videoIds.push(i);
-    acc[i] = curr;
+    videoIds.push(curr.videoId);
+    acc[curr.videoId] = curr;
     return acc;
   }, {});
 
@@ -36,11 +34,4 @@ export const retrieveVideosForListing = () => (dispatch, getState) => {
   dispatch({ type: RETRIEVE_VIDEOS_FOR_LISTING, payload });
 };
 
-export const viewVideo = videoId => (dispatch, getState) => {
-  // call getState to retrieve a video from the redux store using the videoId argument
-  let retrievedVideo = videoList[videoId];
-  const payload = { video: retrievedVideo };
 
-  // data for redux store is a boolean flag
-  dispatch({ type: VIEW_VIDEO, payload });
-};

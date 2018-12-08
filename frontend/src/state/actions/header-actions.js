@@ -17,7 +17,7 @@ export const signup = () => (dispatch, getState) => {
 
 export const login = () => async (dispatch, getState) => {
   // axios request to login
-  console.log("THE DISPATCH: ", dispatch);
+  //console.log("THE DISPATCH: ", dispatch);
   const payload = { logged_in: true };
   // data for redux store is a boolean flag
   dispatch({ type: LOGIN, payload });
