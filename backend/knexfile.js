@@ -15,7 +15,7 @@ module.exports = {
       directory: __dirname + '/db/seeds'
     }
   },
-  production: {
+  test: {
     client: 'pg',
     connection: {
       host: '127.0.0.1',
