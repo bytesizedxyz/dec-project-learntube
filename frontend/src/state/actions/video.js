@@ -7,16 +7,9 @@ export const RETRIEVE_VIDEOS_FOR_DASHBOARD = "RETRIEVE_VIDEOS_FOR_DASHBOARD";
 
 // TEMP DUMMY DATA
 const videoList = [
-<<<<<<< HEAD:frontend/src/state/actions/video-listing-actions.js
-  { videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
-  { videoId:"20vDj6oQ-pE", url:"https://www.youtube.com/watch?v=20vDj6oQ-pE", title:"Backstreet Boys - Chances (Behind The Scenes)" },
-  { videoId:"xOMmK9iFuE4", url:"https://www.youtube.com/watch?v=xOMmK9iFuE4", title:"Thirsty Gets Lucious Into The Poker Game | Season 5 Ep. 6 | EMPIRE" },
-
-=======
-  { uuid: "1234", title: "faketitle1", url: "youtube.com" },
-  { uuid: "5678", title: "faketitle2", url: "youtube.com" },
-  { uuid: "9101112", title: "faketitle3", url: "youtube.com" }
->>>>>>> frontend:frontend/src/state/actions/video.js
+  { uuid:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
+  { uuid:"20vDj6oQ-pE", url:"https://www.youtube.com/watch?v=20vDj6oQ-pE", title:"Backstreet Boys - Chances (Behind The Scenes)" },
+  { uuid:"xOMmK9iFuE4", url:"https://www.youtube.com/watch?v=xOMmK9iFuE4", title:"Thirsty Gets Lucious Into The Poker Game | Season 5 Ep. 6 | EMPIRE" },
 ];
 
 // redux thunk action creators
@@ -28,8 +21,8 @@ export const retrieveVideosForListing = () => (dispatch, getState) => {
   let videoIds;
   const normalizedVideos = videoList.reduce((acc, curr, i) => {
     // This ideally should be the video uuid from backend in the future
-    videoIds.push(curr.videoId);
-    acc[curr.videoId] = curr;
+    videoIds.push(curr.uuid);
+    acc[curr.uuid] = curr;
     return acc;
   }, {});
 

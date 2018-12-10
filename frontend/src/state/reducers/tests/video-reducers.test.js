@@ -18,7 +18,7 @@ describe("video-actions unit tests", () => {
       viewVideo("QaVXaMFc6gk")(dispatch, getState);
       
       currentViewedVideo = getState().videoState.currentViewedVideo;
-      expect(currentViewedVideo.videoId).toBe("QaVXaMFc6gk");
+      expect(currentViewedVideo.uuid).toBe("QaVXaMFc6gk");
     });
   });
   

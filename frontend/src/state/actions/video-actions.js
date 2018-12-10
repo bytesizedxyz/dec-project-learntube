@@ -2,7 +2,7 @@ import { navigate } from "@reach/router"
 export const VIEW_VIDEO = "VIEW_VIDEO";
 const dummyData = {
   QaVXaMFc6gk:{
-    id:"QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami"
+    uuid:"QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami"
   }
 }
 export const viewVideo = videoId => (dispatch, getState) => {

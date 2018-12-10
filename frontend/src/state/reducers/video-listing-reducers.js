@@ -1,8 +1,7 @@
 import {
   RETRIEVE_VIDEOS_FOR_LISTING,
   RETRIEVE_VIDEOS_FOR_DASHBOARD,
-} from "../actions/video-listing-actions";
-import VIEW_VIDEO from "../actions/video";
+} from "../actions/video";
 
 const initialState = {
   videos: {},
