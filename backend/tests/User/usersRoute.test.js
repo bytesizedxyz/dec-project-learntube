@@ -50,6 +50,7 @@ describe('Hitting the userRoutes, a User may', () => {
   test('create a user', async done => {
     const response = await postRequest(createdRequest, '/users/', newUser);
     const parsed = parseJson(response.text);
+    console.log(parsed);
     expect(parsed.message).toBe('Successfully created a user.');
     done();
   });
@@ -79,41 +80,5 @@ describe('Hitting the userRoutes, a User may', () => {
     done();
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Thanks James
