@@ -37,6 +37,10 @@ knex('users')
   .then(data => {
     console.log('colleting data');
     console.log(data);
+  })
+  .catch(err => {
+    console.log('error happened');
+    console.log(err);
   });
 
 module.exports = server;
