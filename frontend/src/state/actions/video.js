@@ -7,9 +7,9 @@ export const VIEW_VIDEO = "VIEW_VIDEO";
 
 // TEMP DUMMY DATA
 const videoList = [
-  { title: "faketitle1", url: "youtube.com" },
-  { title: "faketitle2", url: "youtube.com" },
-  { title: "faketitle3", url: "youtube.com" }
+  { uuid: "1234", title: "faketitle1", url: "youtube.com" },
+  { uuid: "5678", title: "faketitle2", url: "youtube.com" },
+  { uuid: "9101112", title: "faketitle3", url: "youtube.com" }
 ];
 
 // redux thunk action creators
