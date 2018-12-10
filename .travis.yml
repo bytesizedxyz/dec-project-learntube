@@ -7,11 +7,12 @@ cache:
     - backend/node_modules
 env:
   - TEST_DIR=frontend
-  - TEST_DIR=backend DATABASE_NAME="learntube" DATABASE_PASSWORD=null DATABASE_PORT=5432 NODE_ENV=test
+  - TEST_DIR=backend DATABASE_NAME="learntube" DATABASE_USER="tester" DATABASE_PASSWORD="testing" DATABASE_PORT=5432 NODE_ENV=test
 services:
   - postgresql
 before_script:
   - psql -c 'create database learntube;' -U postgres
+  - psql -c "CREATE USER tester WITH PASSWORD 'testing';" -U postgres
   - cd $TEST_DIR
   - npm install
   - if [ "$TEST_DIR" = "backend" ]; then ./node_modules/.bin/knex migrate:latest; else echo 0; fi
