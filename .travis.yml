@@ -7,7 +7,7 @@ cache:
     - backend/node_modules
 env:
   - TEST_DIR=frontend
-  - TEST_DIR=backend DATABASE_NAME="learntube" DATABASE_PASSWORD="" DATABASE_PORT=5432 NODE_ENV=test
+  - TEST_DIR=backend DATABASE_NAME="learntube" DATABASE_PASSWORD=null DATABASE_PORT=5432 NODE_ENV=test
 services:
   - postgresql
 before_script:
