@@ -32,4 +32,11 @@ const server = app.listen(port, () => {
   console.log(`🌎  => API Server now listening on PORT ${port}!`);
 });
 
+knex('users')
+  .select('*')
+  .then(data => {
+    console.log('colleting data');
+    console.log(data);
+  });
+
 module.exports = server;
