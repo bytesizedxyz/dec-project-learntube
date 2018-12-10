@@ -53,7 +53,7 @@ const dropCollection = async Knex => {
     .del()
     .catch(err => {
       if (err !== null) {
-        console.log(`${Knex} Collection Drop Error: `, err);
+        console.log('User Collection Drop Error: ', err);
       }
     });
 };

@@ -3,7 +3,7 @@ const connection = {
   user: process.env.DATABASE_USER || 'postgres',
   port: process.env.DATABASE_PORT || 5433,
   password: process.env.DATABASE_PASSWORD || 'pass',
-  database: process.env.DATABASE_NAME || 'testerDatabase'
+  database: process.env.DATABASE_NAME || 'testingDatabaseAgain'
 };
 
 const dbConfig = {
