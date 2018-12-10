@@ -65,9 +65,10 @@ render() {
             <div className="form-group">
                 <button className="btn btn-primary">Login</button>
         </div>
-
-            <Link to="/signup" className="btn btn-link">Signup</Link>)
         </form>
+        <div>
+            <Link to="/signup" className="btn btn-link">Signup</Link>)
+        </div>
     
 }
 
