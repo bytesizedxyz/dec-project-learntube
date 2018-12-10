@@ -12,5 +12,5 @@ services:
   - postgresql
 before_script:
   - psql -c 'create database testingDatabase;' -U postgres
-  - ./backend/node_modules/.bin/knex migrate:latest
+  - ./node_modules/.bin/knex migrate:latest
 script: cd $TEST_DIR && npm install && npm test
