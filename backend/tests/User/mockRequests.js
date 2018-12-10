@@ -62,7 +62,12 @@ const parseJson = (string, debug = false) => {
   if (debug) {
     console.log('The passed in string: ', string);
   }
-  const parsed = JSON.parse(string);
+  let parsed;
+  if(typeof string !== "Object"){
+    parsed = JSON.parse(string);
+  } else {
+    parsed = string;
+  }
   if (debug) {
     console.log('The parsed JSON: ', parsed);
   }
