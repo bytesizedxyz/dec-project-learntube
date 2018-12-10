@@ -1,10 +1,6 @@
-
-​
-
 /*
  * action types
  */
-​
 export const VIEW_VIDEO = 'VIEW_VIDEO';
 /*
  * action creators

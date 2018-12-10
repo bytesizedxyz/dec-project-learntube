@@ -19,7 +19,6 @@ export const videoListingReducer = (state = initialState, action) => {
         videoIds: [...state.videoIds, ...action.payload.videoIds]
       };
     case RETRIEVE_VIDEOS_FOR_DASHBOARD:
-      return {};
     default:
       return state;
   }

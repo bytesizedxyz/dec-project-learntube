@@ -8,9 +8,9 @@ export const RETRIEVE_VIDEOS_FOR_DASHBOARD = "RETRIEVE_VIDEOS_FOR_DASHBOARD";
 // TEMP DUMMY DATA
 const videoList = [
   { videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
-  { videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
-  { videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
-  {videoId:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami"}
+  { videoId:"20vDj6oQ-pE", url:"https://www.youtube.com/watch?v=20vDj6oQ-pE", title:"Backstreet Boys - Chances (Behind The Scenes)" },
+  { videoId:"xOMmK9iFuE4", url:"https://www.youtube.com/watch?v=xOMmK9iFuE4", title:"Thirsty Gets Lucious Into The Poker Game | Season 5 Ep. 6 | EMPIRE" },
+
 ];
 
 // redux thunk action creators
