@@ -1,11 +1,12 @@
-exports.up = function(knex, Promise) {
+exports.up = (knex, Promise) => {
   return knex.schema.createTable('playlist', table => {
     table.increments('id').primary();
     table.text('title');
-    table.number('uuid');
+    table.integer('user_id').unsigned();
+    table.foreign('user_id').references('id').inTable('users');
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = (knex, Promise) => {
   return knex.schema.dropTable('playlist');
 };

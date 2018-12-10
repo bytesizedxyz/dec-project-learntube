@@ -1,4 +1,4 @@
-let { connection } = require("./.dbconfig.js");
+let { connection } = require('./.dbconfig.js');
 
 module.exports = {
   development: {
