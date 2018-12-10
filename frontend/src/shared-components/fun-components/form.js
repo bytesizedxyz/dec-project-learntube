@@ -22,7 +22,7 @@ const Form = styled.form`
   button {
     width: 10rem;
     height: 4rem;
-    background: blue;
+    background: orange;
   }
 `;
 
