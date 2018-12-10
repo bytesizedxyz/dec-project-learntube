@@ -82,9 +82,9 @@ render() {
                 </button>
             </div>                    
         </form>
-        <router>
+        <div>
             <SignUpPage path="/signup" />
-        </router>
+        </div>
     
   )}
 };

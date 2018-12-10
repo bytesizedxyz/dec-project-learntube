@@ -61,18 +61,20 @@ render() {
             name="password"
             className="form-conrol"
             />
-    </div>
-    <div className="form-group">
-        <button className="btn btn-primary">Login</button>
-    </div>
-    <Link to="/signup" className="btn btn-link">Signup</Link>)
+        </div>
+            <div className="form-group">
+                <button className="btn btn-primary">Login</button>
+        </div>
+
+            <Link to="/signup" className="btn btn-link">Signup</Link>)
+        </form>
     
 }
 
 const mapDispatchToProps = () => {
     
     return {login, logout}
-    //this is from the docs, still trying to figure this out ^ 
+   
 };
 
 }
