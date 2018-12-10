@@ -87,5 +87,3 @@ const LoginPage = connect(state => state, mapDispatchToProps)(loggedIn)
 
 
 export default LoginPage
-//still trying to figure this out ^
-//dispatch is an event

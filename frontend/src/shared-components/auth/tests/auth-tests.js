@@ -1,13 +1,12 @@
 import React from 'react'
 import {render, fireEvent, cleanup, } from 'react-testing-library'
-// this adds custom jest matchers from jest-dom
 import 'jest-dom/extend-expect'
 import axiosMock from 'axios'
 import SignUpPage from '../signup'
 import LoginPage from '../login'
 import { signup } from '../../../state/actions/auth';
 //import Fetch from '../fetch' 
-//KentC was using fetch in the docs im not sure how it works tho.
+//KentCDods was using fetch in the docs im not sure how it works tho.
 
 
 afterEach(cleanup)
@@ -69,7 +68,7 @@ expect(emailInput.value).toEqual('BobSmith@gmail.com')
 //--------------------------LOGIN TESTS---------------------------------------
 test('clicks login button', () => {
   const loginClick = jest.fn()
-  const {getByText} = render(<loginPage/>)
+  const {getByText} = render(<LoginPage/>)
 
   fireEvent.click(getByText('Login'))
   expect(loginClick).toHaveBeenCalledTimes(1)
