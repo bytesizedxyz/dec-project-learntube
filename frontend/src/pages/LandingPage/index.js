@@ -1,7 +1,6 @@
 import React from "react";
 import {viewVideo} from "../../state/actions/video-actions";
 import {connect} from "react-redux";
-import store from "../../state";
 
 const index = ({viewVideo}) => {
   return (

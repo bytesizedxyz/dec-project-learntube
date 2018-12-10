@@ -11,8 +11,6 @@ export const viewVideo = (video_id) => (dispatch, getState) => {
   // getState should return redux global state
   // const video = getState()
   // axios request to signup
-
-  const payload = { current_video: true }
-  // data for redux store is a boolean flag
+  const payload = { current_video: true };
   dispatch({ type: VIEW_VIDEO, payload });
 }

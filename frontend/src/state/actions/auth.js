@@ -4,7 +4,7 @@
 export const SIGNUP = "SIGNUP";
 export const LOGOUT = "LOGOUT";
 export const LOGIN = "LOGIN";
-export const SEARCH_VIDEOS = "SEARCH_VIDEOS";
+
 
 // redux thunk action creators
 export const signup = () => (dispatch, getState) => {
