@@ -28,6 +28,7 @@ const foundUser = {
   email: 'newUser@NewEmail.com',
   is_admin: false
 };
+let createdRequest;
 describe('Hitting the userRoutes, a User may', () => {
   beforeAll(async done => {
     createdRequest = await request.agent(server);
@@ -50,6 +51,7 @@ describe('Hitting the userRoutes, a User may', () => {
   test('create a user', async done => {
     const response = await postRequest(createdRequest, '/users/', newUser);
     const parsed = parseJson(response.text);
+    console.log('LKASDJLKASJDLKASJDLKAJSLD:J', parsed);
     expect(parsed.message).toBe('Successfully created a user.');
     done();
   });
@@ -79,41 +81,5 @@ describe('Hitting the userRoutes, a User may', () => {
     done();
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Thanks James
