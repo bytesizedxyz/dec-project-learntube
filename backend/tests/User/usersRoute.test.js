@@ -28,6 +28,7 @@ const foundUser = {
   email: 'newUser@NewEmail.com',
   is_admin: false
 };
+let createdRequest;
 describe('Hitting the userRoutes, a User may', () => {
   beforeAll(async done => {
     createdRequest = await request.agent(server);
