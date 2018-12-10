@@ -1,4 +1,4 @@
-import { LOGIN, SIGNUP, LOGOUT } from "../actions/header-actions";
+import { UPLOAD_VIDEO } from "../actions/video-upload-actions";
 
 const initialState = {
   logged_in: false
