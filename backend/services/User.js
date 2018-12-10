@@ -1,47 +1,95 @@
-const auth = require('./Auth/Auth');
-
+const { hashPassword, insertUser, testReqBody, signIn, checkPassword } = require('./Auth');
+const {
+  SUCCESS,
+  NO_CONTENT,
+  NOT_MODIFIED,
+  BAD_REQUEST,
+  CONFLICT,
+  UNPROCESSABLE_ENTITY,
+  INTERNAL_SERVER_ERROR
+} = require('./statusCodes');
 const createUser = (req, res, next) => {
-  let { password } = req.body;
-  const { username, email, is_admin } = req.body;
-  const newUser = {
+  console.log('Creating user');
+  const { username, email, is_admin, password } = req.body;
+  let newUser = {
     username,
     email,
     password,
     is_admin
   };
-  console.log('new user is ', newUser);
-  auth
-    .hashPassword(password)
-    .then(hashedPassowrd => {
-      newUser.password = hashedPassowrd;
-      //create token here and then send it back, will be for later implementation
-    })
+  console.log('hitting test reqbody');
+  testReqBody(newUser)
     .then(() => {
-      auth
-        .createUser(newUser)
-        .then(() => {
-          res.status(201);
+      hashPassword(password)
+        .then(hashedPassowrd => {
+          newUser.password = hashedPassowrd;
+          //create token here and then send it back, will be for later implementation
         })
-        .catch(err => {
-          if (err.code == 23505) {
-            res.status(409).json({ error: 'Email is already in use' });
-          } else {
-            console.log('error happened');
-            res
-              .status(503)
-              .json({ error: 'Something went wrong on our end. Please try again later.' });
-          }
+        .then(() => {
+          insertUser(newUser)
+            .then(data => {
+              if (data.command && data.rowCount === 1) {
+                res.status(SUCCESS).json({ message: 'Successfully created a user.' });
+              }
+            })
+            .catch(err => {
+              if (err.code == 23505) {
+                res.status(CONFLICT).json({ error: 'Email is already in use' });
+              } else {
+                console.log('error happened');
+                res
+                  .status(INTERNAL_SERVER_ERROR)
+                  .json({ error: 'Something went wrong on our end. Please try again later.' });
+              }
+            });
         });
+    })
+    .catch(err => {
+      console.log(err);
+      if (newUser !== err) {
+        const errorMessage = { error: err };
+        res.status(UNPROCESSABLE_ENTITY).json(errorMessage);
+        return;
+      }
     });
 };
 
-const signIn = (req, res) => {
+const signingIn = (req, res) => {
+  console.log('at signing in route');
   // get user creds from request body
   // find user based on username in request
   // check user's password_digest against pw from request
   // if match, create and save a new token for user
   // send back json to client with token and user info
-  // const
+  const { username, password } = req.body;
+  const user = {
+    username,
+    password
+  };
+  signIn(user)
+    .then(data => {
+      console.log('found user is: ', data);
+      checkPassword(password, data)
+        .then(checkedPassword => {
+          if (checkedPassword.response === true) {
+            const userToSend = {
+              username: checkedPassword.foundUser.username,
+              email: checkedPassword.foundUser.email,
+              is_admin: checkedPassword.foundUser.is_admin
+            };
+            res.status(SUCCESS).json({ user: userToSend });
+          }
+        })
+        .catch(err => {
+          res.status(BAD_REQUEST).json({ error: 'Password does not match.' });
+        });
+    })
+    .catch(err => {
+      console.log('error happened', err);
+      res
+        .status(INTERNAL_SERVER_ERROR)
+        .json({ error: 'Internal Server Error. Please try again later.' });
+    });
 };
 
-module.exports = { createUser, signIn };
+module.exports = { createUser, signingIn };

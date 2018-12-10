@@ -28,6 +28,8 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/users', users);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`🌎  => API Server now listening on PORT ${port}!`);
 });
+
+module.exports = server;
