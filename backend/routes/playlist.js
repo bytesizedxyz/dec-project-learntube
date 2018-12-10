@@ -42,8 +42,9 @@ router.get('/playlists/all/:uuid', (req, res) => {
 // parse the result to extract all video_uuid
 // query the vidoes table for all records matching videos_pkey
 router.get('/playlists/:id', (req, res, next) => {
+  let retrievedPlaylist;
   dao.getOne(req.params.id).then(playlist => {
-    playlist ? res.json(playlist) : next();
+    playlist ? (retrievedPlaylist = playlist) : next();
   });
 });
 
