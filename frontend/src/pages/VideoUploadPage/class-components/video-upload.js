@@ -79,10 +79,10 @@ class VideoUpload extends Component {
           <p data-testid="validation-err-msg">{validationErrorMsg}</p>
         ) : null}
         <Form onSubmit={onSubmit}>
-          <Label htmlFor="title">Title</Label>
-          <Input id="title" type="text" value={title} onChange={onChange} />
-          <Label htmlFor="url">URL</Label>
-          <Input id="url" type="text" value={url} onChange={onChange} />
+          <label htmlFor="title">Title</label>
+          <input id="title" type="text" value={title} onChange={onChange} />
+          <label htmlFor="url">URL</label>
+          <input id="url" type="text" value={url} onChange={onChange} />
           <button type="submit" data-testid="upload-submit">
             Upload
           </button>
