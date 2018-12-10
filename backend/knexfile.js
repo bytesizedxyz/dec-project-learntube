@@ -6,6 +6,8 @@ const connection = {
   database: process.env.DATABASE_NAME || 'testingDatabaseAgain'
 };
 
+console.log(connection);
+
 const dbConfig = {
   client: 'pg',
   connection,
