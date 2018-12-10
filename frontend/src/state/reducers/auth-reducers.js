@@ -1,4 +1,4 @@
-import { LOGIN, SIGNUP, LOGOUT } from "../actions/header-actions";
+import { LOGIN, SIGNUP, LOGOUT } from "../actions/auth";
 
 const initialState = {
   logged_in: false
