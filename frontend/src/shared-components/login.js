@@ -42,33 +42,33 @@ render() {
     const { username, password, submitted } = this.state
     return (
         <form handleSubmit={this.handleSubmit}
-        <div className="form-group">
-            <label className="control-label"> Username </label>
-            <input
-            value={this.state.username}
-            handleChange={this.handleChange}
-            type="text"
-            name="username"
-            className="form-conrol"
-            />
-        </div>
-        <div className="form-group">
-            <label className="control-label"> Password </label>
-            <input
-            value={this.state.password}
-            handleChange={this.handleChange}
-            type="password"
-            name="password"
-            className="form-conrol"
-            />
-        </div>
             <div className="form-group">
-                <button className="btn btn-primary">Login</button>
-        </div>
+                <label className="control-label"> Username </label>
+                <input
+                value={this.state.username}
+                handleChange={this.handleChange}
+                type="text"
+                name="username"
+                className="form-conrol"
+                />
+            </div>
+            <div className="form-group">
+                <label className="control-label"> Password </label>
+                <input
+                value={this.state.password}
+                handleChange={this.handleChange}
+                type="password"
+                name="password"
+                className="form-conrol"
+                />
+            </div>
+                <div className="form-group">
+                    <button className="btn btn-primary">Login</button>
+            </div>
+            <div>
+                <Link to="/signup" className="btn btn-link">Signup</Link>)
+            </div>
         </form>
-        <div>
-            <Link to="/signup" className="btn btn-link">Signup</Link>)
-        </div>
     
 }
 

@@ -81,10 +81,10 @@ render() {
                     Sign Up
                 </button>
             </div>                    
+            <div>
+                <SignUpPage path="/signup" />
+            </div>
         </form>
-        <div>
-            <SignUpPage path="/signup" />
-        </div>
     
   )}
 };
