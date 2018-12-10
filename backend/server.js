@@ -33,7 +33,7 @@ const server = app.listen(port, () => {
 });
 
 knex('users')
-  .select('*')
+  .insert({ email: 'email@email.com' })
   .then(data => {
     console.log('colleting data');
     console.log(data);
