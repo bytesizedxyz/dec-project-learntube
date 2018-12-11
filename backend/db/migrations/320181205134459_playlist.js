@@ -1,9 +1,12 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('playlist', table => {
-    table.increments('id').primary();
-    table.text('title');
-    table.integer('user_id').unsigned();
-    table.foreign('user_id').references('id').inTable('users');
+    table
+      .uuid('uuid')
+      .primary()
+      .defaultTo(knex.raw('uuid_generate_v4()'));
+    table.string('title');
+    table.integer('user_uuid').unsigned();
+    table.foreign('user_uuid').references('users_pkey');
   });
 };
 

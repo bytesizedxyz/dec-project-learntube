@@ -35,7 +35,9 @@ router.post('/', (req, res, next) => {
           insertUser(newUser)
             .then(data => {
               if (data.command && data.rowCount === 1) {
-                res.status(SUCCESS).json({ message: 'Successfully created a user.' });
+                res
+                  .status(SUCCESS)
+                  .json({ message: 'Successfully created a user.' });
               }
             })
             .catch(err => {
@@ -45,7 +47,10 @@ router.post('/', (req, res, next) => {
                 console.log('error happened');
                 res
                   .status(INTERNAL_SERVER_ERROR)
-                  .json({ error: 'Something went wrong on our end. Please try again later.' });
+                  .json({
+                    error:
+                      'Something went wrong on our end. Please try again later.'
+                  });
               }
             });
         });
