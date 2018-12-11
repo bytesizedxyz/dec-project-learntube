@@ -16,9 +16,7 @@ const {
   UNPROCESSABLE_ENTITY,
   INTERNAL_SERVER_ERROR
 } = require('../services/statusCodes');
-
 router.post('/', (req, res, next) => {
-  console.log('Creating user');
   const { username, email, is_admin, password } = req.body;
   let newUser = {
     username,
@@ -26,7 +24,6 @@ router.post('/', (req, res, next) => {
     password,
     is_admin
   };
-  console.log('hitting test reqbody');
   testReqBody(newUser)
     .then(() => {
       hashPassword(password)
@@ -64,12 +61,6 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/signIn', (req, res) => {
-  console.log('at signing in route');
-  // get user creds from request body
-  // find user based on username in request
-  // check user's password_digest against pw from request
-  // if match, create and save a new token for user
-  // send back json to client with token and user info
   const { username, password } = req.body;
   const user = {
     username,
@@ -77,7 +68,6 @@ router.get('/signIn', (req, res) => {
   };
   signIn(user)
     .then(data => {
-      console.log('found user is: ', data);
       checkPassword(password, data)
         .then(checkedPassword => {
           if (checkedPassword.response === true) {
