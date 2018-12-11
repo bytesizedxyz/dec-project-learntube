@@ -13,7 +13,7 @@ services:
 before_script:
   - psql -c 'create database learntube;' -U postgres
   - psql -c "CREATE USER tester WITH PASSWORD 'testing';" -U postgres
-  - psql learntube "CREATE EXTENSION IF NOT EXISTS 'uuid-ossp';"
+  - psql learntube -U tester "CREATE EXTENSION IF NOT EXISTS 'uuid-ossp';"
   - cd $TEST_DIR
   - npm install
   - if [ "$TEST_DIR" = "backend" ]; then ./node_modules/.bin/knex migrate:latest; else echo 0; fi
