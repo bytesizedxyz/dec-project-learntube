@@ -3,13 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Form from "../../../shared-components/fun-components/form";
 import { Label, Input } from "../../../shared-styles/form-elements";
-
-const Container = styled.div`
-  h3 {
-    font-size: 3rem;
-    font-family: "Bangers", cursive;
-  }
-`;
+import { AboveModalContainer } from "../../../shared-styles";
 
 class VideoUpload extends Component {
   state = { title: "", url: "", validationErrorMsg: null, uploadResult: null };
@@ -69,7 +63,7 @@ class VideoUpload extends Component {
     const { onSubmit, onChange } = this;
     const { title, url, validationErrorMsg, uploadResult } = this.state;
     return (
-      <Container>
+      <AboveModalContainer>
         {!uploadResult ? (
           <h3 data-testid="header-one">Upload a video</h3>
         ) : (
@@ -87,7 +81,7 @@ class VideoUpload extends Component {
             Upload
           </button>
         </Form>
-      </Container>
+      </AboveModalContainer>
     );
   }
 }
