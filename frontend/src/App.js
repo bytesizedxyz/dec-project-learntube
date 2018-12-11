@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
 import LandingPage from "./pages/LandingPage";
-import VideoUploadPage from "./pages/VideoUploadPage";
+import DashboardPage from "./pages/DashboardPage";
 import "./App.css";
 import LearnTubeLogo from "./resources/learntube.svg";
 import PernHubLogo from "./resources/pernhub.svg";
@@ -36,12 +36,10 @@ class App extends Component {
     return (
       <div>
         <Logo />
-            <Header />
-        
+        <Header />
         <Router>
-          
           <LandingPage path="/" />
-          <VideoUploadPage path="/video/upload" />
+          <DashboardPage path="/dashboard" />
         </Router>
       </div>
     );
