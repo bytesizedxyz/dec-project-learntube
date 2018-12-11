@@ -14,7 +14,7 @@ exports.seed = (knex, Promise) => {
       console.log(res);
       let videoPromises = [];
       videosData.forEach(video => {
-        let user = video.post_by;
+        let user = video.user_uuid;
         videoPromises.push(createProduct(knex, video, user));
       });
       return Promise.all(videoPromises);
