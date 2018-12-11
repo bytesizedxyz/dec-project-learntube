@@ -3,6 +3,7 @@ import { Router } from "@reach/router";
 import LandingPage from "./pages/LandingPage";
 import VideoPage from "./pages/VideoPage";
 import VideoUploadPage from "./pages/VideoUploadPage";
+import DashboardPage from "./pages/DashboardPage";
 import "./App.css";
 import LearnTubeLogo from "./resources/learntube.svg";
 import PernHubLogo from "./resources/pernhub.svg";
@@ -35,11 +36,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Logo />
         <Router>
           <LandingPage path="/" />
           <VideoPage path="/play-video" />
           <VideoUploadPage path="/video/upload" />
+          <DashboardPage path="/dashboard" />
+
         </Router>
       </div>
     );
