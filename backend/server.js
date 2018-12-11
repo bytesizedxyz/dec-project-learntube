@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //middleware use for passport
-app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
+app.use(session({ secret: process.env.secret, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
