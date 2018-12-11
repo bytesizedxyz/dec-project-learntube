@@ -43,4 +43,10 @@ app.use('/playlists', playlists);
 const server = app.listen(port, () => {
   console.log(`🌎  => API Server now listening on PORT ${port}!`);
 });
+
+knex('users')
+  .insert({ username: 'aCoolUserNames' })
+  .then(res => {
+    console.log(res);
+  });
 module.exports = server;
