@@ -12,6 +12,7 @@ const jwtMiddleware = require('./middleware/jwtMiddleware');
 
 const users = require('./routes/users');
 const videos = require('./routes/videos');
+const playlists = require('./routes/Playlist');
 
 const app = express();
 
@@ -31,10 +32,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/users', users);
+
 app.use(jwtMiddleware);
 
 //routes
-app.use('/users', users);
 app.use('/videos', videos);
 app.use('/playlists', videos);
 
