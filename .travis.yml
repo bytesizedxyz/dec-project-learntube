@@ -13,7 +13,6 @@ services:
 before_script:
   - psql -c "create database learntube;" -U postgres
   - psql -c "CREATE USER tester WITH PASSWORD 'testing';" -U postgres
-  # - psql learntube -U tester -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"";"
   - psql learntube -U postgres -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
   - cd $TEST_DIR
   - npm install
