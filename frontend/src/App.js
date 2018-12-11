@@ -6,8 +6,6 @@ import "./App.css";
 import LearnTubeLogo from "./resources/learntube.svg";
 import PernHubLogo from "./resources/pernhub.svg";
 import Header from "./shared-components/header";
-import {Provider} from 'react-redux';
-import store from "./state";
 
 import styled from "styled-components";
 
@@ -38,9 +36,8 @@ class App extends Component {
     return (
       <div>
         <Logo />
-          <Provider store={store}>
             <Header />
-          </Provider>
+        
         <Router>
           
           <LandingPage path="/" />

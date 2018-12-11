@@ -27,7 +27,7 @@ handleLogoutClick() {
 
   render() {
     console.log(this.props)
-    const loggedIn = this.props.authenticationStatus.logged_In;   //containerComponent
+    const loggedIn = this.props.authenticationStatus.logged_in;   //containerComponent
    let button;
     if (loggedIn) {
       button = <button onClick={this.handleLogoutClick}>LogOut</button>
@@ -40,8 +40,8 @@ handleLogoutClick() {
         <ul>
           <li><Link to='/'>Landing</Link></li>
           <li><Link to='/login'>login</Link></li>
-          <li><Link to='/signup'>singup</Link></li>
-          <li><Link to='/logout'>logout</Link></li>          
+          <li><Link to='/signup'>SignUp</Link></li>
+          <li><Link to='/logout'>Logout</Link></li>          
         </ul>
       </div>
 
@@ -52,8 +52,6 @@ handleLogoutClick() {
 
 
 
-const HeaderComponent = connect(state => state)(Header)
+export default connect(state => state)(Header)
 
 
-
-export default Header;
