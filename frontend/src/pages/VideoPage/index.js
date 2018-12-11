@@ -3,18 +3,30 @@ import Youtube from "react-youtube";
 import {connect} from "react-redux";
 import store from "../../state";
 import styled from "styled-components"
-const VideoPage = () => {
-    const {getState} = store;
-    console.log(getState());    
-    const {uuid, title} = getState().videoState.currentViewedVideo;
 
+const VideoPage = () => {
+    const {getState} = store;    
+    const {uuid, title} = getState().videoState.currentViewedVideo;
+    const Main = styled.div`
+    display:flex;
+    div{
+        width:50%;
+    }
+    `
     return (
-        <main>
-            <h1>{title} </h1>
+        <Main>
+            <div>
+            <h1>{title}</h1>
             <Youtube
+            opts={{height: '390',
+            width: '400'}}
             videoId={uuid}
             />
-        </main>
+            </div>
+            <div>
+            suggested videos column here
+            </div>
+        </Main>
     );
 };
 

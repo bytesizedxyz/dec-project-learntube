@@ -1,5 +1,5 @@
 import store from "../../index";
-import { viewVideo } from "../../actions/video-actions";
+import { viewVideo, retrieveVideosForListing } from "../../actions/video";
 
 describe("video-actions unit tests", () => {
     it("a call to the viewVideo function action creator should return a function.", () => {
@@ -11,7 +11,7 @@ describe("video-actions unit tests", () => {
     const { dispatch, getState } = store;
     it("update the video currently being viewed", () => {
       let currentViewedVideo;
-
+      retrieveVideosForListing()(dispatch, getState);
       currentViewedVideo = getState().videoState.currentViewedVideo;
       expect(currentViewedVideo).toBe(null);
 

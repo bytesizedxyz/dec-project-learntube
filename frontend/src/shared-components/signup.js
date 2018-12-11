@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {signup} from '../state/actions/auth'
 
-class SignUpPage extends React.Component {
+class SignUp extends React.Component {
     constructor(props) {
         super(props);
     
-        state = {
+        this.state = {
             username: '',
             password: '',
             passwordConfirmation: '',
@@ -15,7 +15,7 @@ class SignUpPage extends React.Component {
 
         this.onSubmit = this.onSubmit.bind(this);
     }
-}
+
 
 componentDidMount = () => this.props.signup()
 
@@ -89,10 +89,6 @@ render() {
   )}
 };
 
-const mapStateToProps = () => {
-    return {signup}
-
-
-  const SignUpPage = connect(state => state, mapDispatchToProps)(SignUpPage)
+  const SignUpPage = connect(state => state, {signup})(SignUp);
   
-  export default SignUpPage
+  export default SignUpPage;

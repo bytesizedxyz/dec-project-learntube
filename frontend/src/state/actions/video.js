@@ -1,9 +1,11 @@
+import { navigate } from "@reach/router"
+
 /*
  * action types
  */
 export const RETRIEVE_VIDEOS_FOR_LISTING = "RETRIEVE_VIDEOS_FOR_LISTING";
 export const RETRIEVE_VIDEOS_FOR_DASHBOARD = "RETRIEVE_VIDEOS_FOR_DASHBOARD";
-
+export const VIEW_VIDEO = "VIEW_VIDEO";
 
 // TEMP DUMMY DATA
 const videoList = [
@@ -18,19 +20,37 @@ const videoList = [
 export const retrieveVideosForListing = () => (dispatch, getState) => {
   // call getState to retrieve a video from the redux store using the videoId argument
   // Then normalize the data
-  let videoIds;
-  const normalizedVideos = videoList.reduce((acc, curr, i) => {
-    // This ideally should be the video uuid from backend in the future
+  let videoIds = [];
+  //replace videoList with results of an axios request to backend for videos later
+  const videos = videoList.reduce((acc, curr, i) => {
     videoIds.push(curr.uuid);
     acc[curr.uuid] = curr;
     return acc;
   }, {});
 
-  console.log("THE NORMALIZED VIDEOS: ", normalizedVideos);
-
-  const payload = { videos: normalizedVideos, videoIds };
+  const payload = { videos, videoIds };
   // data for redux store is a boolean flag
   dispatch({ type: RETRIEVE_VIDEOS_FOR_LISTING, payload });
 };
 
+export const viewVideo = videoId => (dispatch, getState) => {
+  // call getState to retrieve a video from the redux store using the videoId argument
+  //let retrievedVideo = getState().videoList[videoId];
+  let retrievedVideo;
+  if(getState().videoListingState.videos[videoId]){
+    retrievedVideo = getState().videoListingState.videos[videoId];
+  }else{
+    //simply handle unavailable/invalid videos in production
+    retrievedVideo = { uuid:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" };
+  }
+   
+  const payload = { currentViewedVideo: retrievedVideo };
+  console.log(payload);
+
+         dispatch({ type: VIEW_VIDEO, payload });   
+
+        navigate("/play-video", {state:getState()});
+
+
+};
 
