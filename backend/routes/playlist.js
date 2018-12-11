@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const playlist = require('../services/Playlist');
 
-router.get('/playlists/all/:uuid', playlist.getAllPlayists);
+router.get('/all/:uuid', playlist.getAllPlayists);
 
-router.get('/playlists/:id', playlist.getPlaylist);
+router.get('/:id', playlist.getPlaylist);
 
 router.post('/playlist', playlist.addPlaylist);
 

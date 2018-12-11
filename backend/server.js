@@ -8,8 +8,10 @@ const logger = require('morgan');
 const knex = require('./db/knex');
 const session = require('express-session');
 const passport = require('passport');
+const jwtMiddleware = require('./middleware/jwtMiddleware');
 
 const users = require('./routes/users');
+const videos = require('./routes/videos');
 
 const app = express();
 
@@ -29,8 +31,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(jwtMiddleware);
+
 //routes
 app.use('/users', users);
+app.use('/videos', videos);
+app.use('/playlists', videos);
 
 app.listen(port, () => {
   console.log(`🌎  => API Server now listening on PORT ${port}!`);

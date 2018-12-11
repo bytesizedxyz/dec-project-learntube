@@ -1,10 +1,11 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('videos', table => {
     table.uuid('uuid').primary();
-    table.string('name');
+    table.string('title');
     table.string('url');
     table.integer('watch_count');
     table.integer('user_uuid').unsigned();
+    table.timestamp('created_at').defaultTo(knex.fn.now());
 
     table.foreign('user_uuid').references('users_pkey');
   });
