@@ -1,3 +1,10 @@
+/*
+ * For this to work you need a .env file with a jwtSecret = whatever-you-want-for-your-secret
+ *
+ * @TODO:
+ * Needs to handle the authentication of users better. Possible correlation against the db?
+ * 
+ */
 const jwt = require("jsonwebtoken");
 const secret = process.env.jwtSecret;
 
