@@ -40,7 +40,7 @@ const getPlaylist = (req, res, next) => {
 };
 
 // POST - add a playlist
-const createPlaylist = (req, res, next) => {
+const addPlaylist = (req, res, next) => {
   dao.create('playlists', req.body).then(playlists => {
     res.json(playlists[0]);
   });
@@ -77,7 +77,7 @@ const deletePlaylistVideo = (req, res, id) => {
 module.exports = {
   getAllPlayists,
   getPlaylist,
-  createPlaylist,
+  addPlaylist,
   addPlaylistVideo,
   updatePlaylist,
   deletePlaylist,

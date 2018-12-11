@@ -1,15 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const playlist = require('../services/Playlist');
-const {
-  getAllPlayists,
-  getPlaylist,
-  createPlaylist,
-  addPlaylistVideo,
-  updatePlaylist,
-  deletePlaylist,
-  deletePlaylistVideo
-} = require('../services/Playlist');
 
 router.get('/all/:uuid', playlist.getAllPlayists);
 
