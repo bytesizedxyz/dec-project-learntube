@@ -1,9 +1,10 @@
+require('dotenv').config();
 const connection = {
   host: process.env.DATABASE_HOST || '127.0.0.1',
-  user: process.env.DATABASE_USER || 'postgres',
-  port: process.env.DATABASE_PORT || 5433,
-  password: process.env.DATABASE_PASSWORD || 'pass',
-  database: process.env.DATABASE_NAME || 'testingDatabaseAgain'
+  user: process.env.DATABASE_USER || 'maverickg59',
+  port: process.env.DATABASE_PORT || 5432,
+  password: process.env.DATABASE_PASSWORD || 'password',
+  database: process.env.DATABASE_NAME || 'perntube'
 };
 
 console.log(connection);

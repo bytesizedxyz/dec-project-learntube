@@ -24,11 +24,11 @@ const createProduct = (knex, video, user) => {
   return knex('users')
     .where('username', user)
     .first()
-    .then(userRecord => {
+    .then(() => {
       return knex('videos').insert({
         url: video.url,
         title: video.title,
-        post_by: userRecord.uuid
+        user_uuid: user
       });
     });
 };

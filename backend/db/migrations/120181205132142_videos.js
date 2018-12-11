@@ -1,12 +1,15 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('videos', table => {
-    table.increments("id").primary();
+    table
+      .uuid('uuid')
+      .primary()
+      .defaultTo(knex.raw('uuid_generate_v4()'));
     table.string('title');
     table.string('url');
-    table.integer("watch_count");
-    table.integer('posted_by').unsigned();
-    table.foreign('posted_by').references('id').inTable('users');
+    table.integer('watch_count');
+    table.uuid('user_uuid').unsigned();
     table.timestamp('created_at').defaultTo(knex.fn.now());
+    table.foreign('user_uuid').references('users_pkey');
   });
 };
 
