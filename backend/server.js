@@ -12,7 +12,7 @@ const jwtMiddleware = require('./middleware/jwtMiddleware');
 
 const users = require('./routes/users');
 const videos = require('./routes/videos');
-const playlists = require('./routes/Playlist');
+const playlists = require('./routes/playlists');
 
 const app = express();
 
@@ -38,7 +38,7 @@ app.use(jwtMiddleware);
 
 //routes
 app.use('/videos', videos);
-app.use('/playlists', videos);
+app.use('/playlists', playlists);
 
 const server = app.listen(port, () => {
   console.log(`🌎  => API Server now listening on PORT ${port}!`);
