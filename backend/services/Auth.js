@@ -26,7 +26,6 @@ const insertUser = user => {
   return knex('users')
     .insert({ username, email, password, is_admin })
     .then(data => {
-      console.log('in auth, data is:', data);
       return data;
     })
     .catch(err => {
@@ -66,7 +65,6 @@ const checkPassword = (reqPassword, foundUser) => {
 
 //to test if user is sending valid data to make a user
 const testReqBody = async body => {
-  console.log('testReqBody', body);
   if (!body.username) {
     throw 'You are missing required fields';
   } else if (!body.email) {
@@ -74,7 +72,6 @@ const testReqBody = async body => {
   } else if (!body.password) {
     throw 'You are missing required fields';
   } else {
-    console.log(body);
     return body;
   }
 };
