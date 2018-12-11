@@ -30,6 +30,7 @@ app.use('/users', users);
 app.use(jwtMiddleware)
 app.use('/videos', videos);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`🌎  => API Server now listening on PORT ${port}!`);
 });
+module.exports = server;
