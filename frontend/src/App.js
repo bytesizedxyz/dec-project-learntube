@@ -9,7 +9,7 @@ import PernHubLogo from "./resources/pernhub.svg";
 import styled from "styled-components";
 
 const Img = styled.img`
-  width: 24rem;
+  width: 40rem;
 `;
 
 class Logo extends React.Component {
@@ -30,6 +30,9 @@ class Logo extends React.Component {
   }
 }
 
+// once we connect the redux store to App.
+// We can pass down the user's authentication status
+// as a prop to the Header component.
 class App extends Component {
   render() {
     return (
