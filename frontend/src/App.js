@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Router } from "@reach/router";
 import LandingPage from "./pages/LandingPage";
 import VideoPage from "./pages/VideoPage";
-import VideoUploadPage from "./pages/VideoUploadPage";
 import DashboardPage from "./pages/DashboardPage";
 import "./App.css";
 import LearnTubeLogo from "./resources/learntube.svg";
@@ -39,7 +38,6 @@ class App extends Component {
         <Router>
           <LandingPage path="/" />
           <VideoPage path="/play-video" />
-          <VideoUploadPage path="/video/upload" />
           <DashboardPage path="/dashboard" />
 
         </Router>
