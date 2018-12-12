@@ -1,12 +1,11 @@
 import React from "react";
 import Youtube from "react-youtube";
 import {connect} from "react-redux";
-import store from "../../state";
 import styled from "styled-components"
 
-const VideoPage = () => {
-    const {getState} = store;    
-    const {uuid, title} = getState().videoState.currentViewedVideo;
+const VideoPage = ({videoState}) => {
+   
+    const {uuid, title} = videoState.currentViewedVideo;
     const Main = styled.div`
     display:flex;
     div{
