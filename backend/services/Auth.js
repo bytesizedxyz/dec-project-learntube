@@ -1,4 +1,5 @@
-const { USERTABLE } = require("../SERVER_CONSTANTS").tableNames;
+const { USERTABLE } = require('../SERVER_CONSTANTS').tableNames;
+const jwt = require('jsonwebtoken');
 
 // bcrypt will encrypt passwords to be saved in db
 const bcrypt = require('bcrypt');
@@ -49,7 +50,14 @@ const checkPassword = (reqPassword, foundUser) => {
       if (err) {
         reject(err);
       } else if (response) {
-        resolve({ response, foundUser });
+        const { username, email, is_admin } = foundUser;
+        const token = jwt.sign(foundUser, process.env.jwtSecret);
+        const user = {
+          username: username,
+          email: email,
+          is_admin: is_admin
+        };
+        resolve({ user, token });
       } else {
         reject(new Error('Passwords do not match.'));
       }
@@ -71,17 +79,15 @@ const testReqBody = async user => {
 
 const makingUser = async user => {
   const result = await testReqBody(user);
-  if (err) return { body: null, error };
-  if (body) {
-    body.password = await hashPassword(body.password);
-    return await insertUser(body);
+  if (result) {
+    result.password = await hashPassword(result.password);
+    return await insertUser(result);
   }
 };
 
 const signingInUser = async user => {
-  console.log(user);
-  const foundUser = await signIn(user)
-  
+  const foundUser = await signIn(user);
+  return await checkPassword(user.password, foundUser);
 };
 
 module.exports = {
