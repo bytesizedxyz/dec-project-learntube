@@ -1,13 +1,15 @@
 const knex = require('../db/knex');
+const { PLAYLISTTABLE, PLAYLISTVIDEOTABLE } = require('../SERVER_CONSTANTS').tableNames;
+
 
 const dao = {
   get: id => {
-    return knex('playlists').where('user_uuid', id);
+    return knex(PLAYLISTTABLE).where('user_uuid', id);
   },
   getPlayist: id => {
-    return knex('playlist_video')
+    return knex(PLAYLISTVIDEOTABLE)
       .select()
-      .innerJoin('playlists', { 'playlists.uuid': 'videos.uuid' })
+      .innerJoin(PLAYLISTTABLE, { 'playlists.uuid': 'videos.uuid' })
       .where('playlists.uuid', '=', parseInt(id, 10));
   },
   create: (table, data) => {
@@ -56,7 +58,7 @@ const getPlaylist = (req, res, next) => {
 // POST - add a playlist
 const addPlaylist = (req, res, next) => {
   dao
-    .create('playlists', req.body)
+    .create('playlist', req.body)
     .then(playlists => {
       res.json(playlists[0]);
     })
@@ -70,7 +72,7 @@ const addPlaylist = (req, res, next) => {
 // POST - add a playlist video
 const addPlaylistVideo = (req, res, next) => {
   dao
-    .create('playlist_video', req.body)
+    .create(PLAYLISTVIDEOTABLE, req.body)
     .then(videos => {
       res.json(videos[0]);
     })
@@ -98,7 +100,7 @@ const updatePlaylist = (req, res, next) => {
 // DELETE - delete a playlist
 const deletePlaylist = (req, res, id) => {
   dao
-    .deletePlaylist(req.params.id, 'playlists')
+    .deletePlaylist(req.params.id, PLAYLISTTABLE)
     .then(() => {
       res.json({ deleted: true });
     })
@@ -112,7 +114,7 @@ const deletePlaylist = (req, res, id) => {
 // DELETE - delete a playlist video
 const deletePlaylistVideo = (req, res, id) => {
   dao
-    .deletePlaylist(req.params.id, 'playlist_video')
+    .deletePlaylist(req.params.id, PLAYLISTVIDEOTABLE)
     .then(() => {
       res.json({ deleted: true });
     })

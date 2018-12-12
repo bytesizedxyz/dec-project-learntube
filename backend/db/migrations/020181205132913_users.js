@@ -1,5 +1,7 @@
+const { USERTABLE } = require("../../SERVER_CONSTANTS").tableNames;
+
 exports.up = (knex, Promise) => {
-  return knex.schema.createTable('users', table => {
+  return knex.schema.createTable(USERTABLE, table => {
     table
       .uuid('uuid')
       .primary()
