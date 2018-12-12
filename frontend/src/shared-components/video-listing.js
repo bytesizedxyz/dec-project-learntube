@@ -1,6 +1,3 @@
-
-​
-
 /*
  * action types
  */

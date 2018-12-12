@@ -2,7 +2,7 @@ import {
   RETRIEVE_VIDEOS_FOR_LISTING,
   RETRIEVE_VIDEOS_FOR_DASHBOARD,
   VIEW_VIDEO
-} from "../actions/video-listing-actions";
+} from "../actions/video";
 
 const initialState = {
   // Will be an object containing the video details
@@ -13,8 +13,6 @@ const initialState = {
 };
 
 export const videoReducer = (state = initialState, action) => {
-  // For now, don't handle any actions
-  // and just return the state given to us.
   switch (action.type) {
     case RETRIEVE_VIDEOS_FOR_LISTING:
       return {
