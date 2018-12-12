@@ -1,3 +1,4 @@
+require('dotenv').config();
 const connection = {
   host: process.env.DATABASE_HOST || '127.0.0.1',
   user: process.env.DATABASE_USER || 'maverickg59',
