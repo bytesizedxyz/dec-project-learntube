@@ -4,7 +4,6 @@
 
 
 // In addition, this is needed in this file so it will read the .env file variables upon running the knex commands.
-
 require('dotenv').config();
 
 // Variables used in the knex commands.

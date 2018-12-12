@@ -15,7 +15,7 @@ const {
   CONFLICT,
   UNPROCESSABLE_ENTITY,
   INTERNAL_SERVER_ERROR
-} = require('../services/statusCodes');
+} = require('../SERVER_CONSTANTS').statusCodes;
 router.post('/', (req, res, next) => {
   const { username, email, is_admin, password } = req.body;
   let newUser = {
