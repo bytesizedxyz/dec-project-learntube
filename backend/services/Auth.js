@@ -11,20 +11,12 @@ const hashPassword = password => {
   );
 };
 
-// crypto ships with node - we're leveraging it to create a random, secure token
-const createToken = () => {
-  return new Promise((resolve, reject) => {
-    crypto.randomBytes(16, (err, data) => {
-      err ? reject(err) : resolve(data.toString('base64'));
-    });
-  });
-};
-
 // user will be saved to db - we're explicitly asking postgres to return back helpful info from the row created
 const insertUser = user => {
   const { username, email, password, is_admin } = user;
   return knex('users')
     .insert({ username, email, password, is_admin })
+    .returning('*')
     .then(data => {
       return data;
     })
@@ -64,16 +56,33 @@ const checkPassword = (reqPassword, foundUser) => {
 };
 
 //to test if user is sending valid data to make a user
-const testReqBody = async body => {
-  if (!body.username) {
-    throw 'You are missing required fields';
-  } else if (!body.email) {
-    throw 'You are missing required fields';
-  } else if (!body.password) {
-    throw 'You are missing required fields';
-  } else {
-    return body;
+const testReqBody = async user => {
+  const p = new Promise((res, rej) => {
+    if (!(user.email && user.password && user.username)) {
+      rej(Error('You are missing required fields'));
+    } else {
+      res(user);
+    }
+  });
+  return p;
+};
+
+const makingUser = async user => {
+  const result = await testReqBody(user);
+  if (err) return { body: null, error };
+  if (body) {
+    body.password = await hashPassword(body.password);
+    return await insertUser(body);
   }
 };
 
-module.exports = { hashPassword, insertUser, createToken, testReqBody, signIn, checkPassword };
+const signingInUser = async user => {
+  console.log(user);
+  const foundUser = await signIn(user)
+  
+};
+
+module.exports = {
+  makingUser,
+  signingInUser
+};

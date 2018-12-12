@@ -51,7 +51,6 @@ describe('Hitting the userRoutes, a User may', () => {
   test('create a user', async done => {
     const response = await postRequest(createdRequest, '/users/', newUser);
     const parsed = parseJson(response.text);
-    console.log('LKASDJLKASJDLKASJDLKAJSLD:J', parsed);
     expect(parsed.message).toBe('Successfully created a user.');
     done();
   });
@@ -59,16 +58,15 @@ describe('Hitting the userRoutes, a User may', () => {
   test('login a user', async done => {
     await postRequest(createdRequest, '/users/', newUser);
     const response = await getRequest(createdRequest, '/users/signIn', loginUserInput);
-    console.log(response.body.user);
     expect(response.status).toBe(SUCCESS);
     expect(response.body.user).toEqual(foundUser);
+    expect(response.body.token).toBeTruthy();
     done();
   });
 
   test('receive a message indicating bad login attempt', async done => {
     await postRequest(createdRequest, '/users/', newUser);
     const response = await getRequest(createdRequest, '/users/signIn', badLoginUserInput);
-    console.log(response.body);
     expect(response.status).toBe(BAD_REQUEST);
     expect(response.body).toEqual({ error: 'Password does not match.' });
     done();
