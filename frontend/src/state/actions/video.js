@@ -9,9 +9,9 @@ export const VIEW_VIDEO = "VIEW_VIDEO";
 
 // TEMP DUMMY DATA
 const videoList = [
-  { uuid:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
-  { uuid:"20vDj6oQ-pE", url:"https://www.youtube.com/watch?v=20vDj6oQ-pE", title:"Backstreet Boys - Chances (Behind The Scenes)" },
-  { uuid:"xOMmK9iFuE4", url:"https://www.youtube.com/watch?v=xOMmK9iFuE4", title:"Thirsty Gets Lucious Into The Poker Game | Season 5 Ep. 6 | EMPIRE" },
+  { videoId:"QaVXaMFc6gk", uuid:"345744", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
+  { videoId:"20vDj6oQ-pE",uuid:"53734336", url:"https://www.youtube.com/watch?v=20vDj6oQ-pE", title:"Backstreet Boys - Chances (Behind The Scenes)" },
+  { videoId:"xOMmK9iFuE4",uuid:"9789758967", url:"https://www.youtube.com/watch?v=xOMmK9iFuE4", title:"Thirsty Gets Lucious Into The Poker Game | Season 5 Ep. 6 | EMPIRE" },
 ];
 
 // redux thunk action creators
@@ -23,8 +23,8 @@ export const retrieveVideosForListing = () => (dispatch, getState) => {
   let videoIds = [];
   //replace videoList with results of an axios request to backend for videos later
   const videos = videoList.reduce((acc, curr, i) => {
-    videoIds.push(curr.uuid);
-    acc[curr.uuid] = curr;
+    videoIds.push(curr.videoId);
+    acc[curr.videoId] = curr;
     return acc;
   }, {});
 
