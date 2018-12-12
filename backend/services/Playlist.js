@@ -25,7 +25,7 @@ const dao = {
   }
 };
 
-// GET - return all of users playlists
+// GET - return all of a users playlists
 const getAllPlayists = (req, res) => {
   dao
     .get(req.params.id)

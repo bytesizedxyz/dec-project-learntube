@@ -6,7 +6,11 @@ exports.up = (knex, Promise) => {
       .defaultTo(knex.raw('uuid_generate_v4()'));
     table.string('title');
     table.uuid('user_uuid').unsigned();
-    table.foreign('user_uuid').references('users_pkey');
+
+    table
+      .foreign('user_uuid')
+      .references('uuid')
+      .inTable('users');
   });
 };
 
