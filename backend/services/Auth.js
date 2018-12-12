@@ -19,7 +19,6 @@ const insertUser = user => {
   const { username, email, password, is_admin } = user;
   return knex(USERTABLE)
     .insert({ username, email, password, is_admin })
-    .returning('*')
     .then(data => {
       return data;
     })
