@@ -2,7 +2,7 @@ process.env.TEST_SUITE = 'user-routes-test';
 const request = require('supertest');
 const server = require('../../server');
 const User = require('../../db/knex');
-const { UNPROCESSABLE_ENTITY, BAD_REQUEST, SUCCESS } = require('../../services/statusCodes');
+const { UNPROCESSABLE_ENTITY, BAD_REQUEST, SUCCESS } = require('../../SERVER_CONSTANTS').statusCodes;
 const { postRequest, getRequest, dropCollection, parseJson } = require('./mockRequests');
 const newUser = {
   username: 'NewUser',

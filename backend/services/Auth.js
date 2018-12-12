@@ -1,3 +1,5 @@
+const { USERTABLE } = require("../SERVER_CONSTANTS").tableNames;
+
 // bcrypt will encrypt passwords to be saved in db
 const bcrypt = require('bcrypt');
 const knex = require('../db/knex');
@@ -23,7 +25,7 @@ const createToken = () => {
 // user will be saved to db - we're explicitly asking postgres to return back helpful info from the row created
 const insertUser = user => {
   const { username, email, password, is_admin } = user;
-  return knex('users')
+  return knex(USERTABLE)
     .insert({ username, email, password, is_admin })
     .then(data => {
       return data;
@@ -38,7 +40,7 @@ const insertUser = user => {
 //getting user from database to sign in
 const signIn = user => {
   const { username, email, password } = user;
-  return knex('users')
+  return knex(USERTABLE)
     .where({ username: username })
     .then(data => {
       return data[0];
