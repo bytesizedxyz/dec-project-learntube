@@ -9,34 +9,13 @@ import Header from "./shared-components/header";
 
 import styled from "styled-components";
 
-const Img = styled.img`
-  width: 24rem;
-`;
 
-class Logo extends React.Component {
-  state = {
-    pg: true
-  };
-
-  render() {
-    return (
-      <div>
-        {this.state.pg ? (
-          <Img src={LearnTubeLogo} />
-        ) : (
-          <Img src={PernHubLogo} />
-        )}
-      </div>
-    );
-  }
-}
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Logo />
-            <Header />
+        <Header />
         
         <Router>
           
