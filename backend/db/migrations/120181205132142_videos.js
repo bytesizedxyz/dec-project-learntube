@@ -12,6 +12,7 @@ exports.up = (knex, Promise) => {
     table.uuid('user_uuid').unsigned();
     table.foreign('user_uuid').references('uuid').inTable(USERTABLE);
     table.timestamp('created_at').defaultTo(knex.fn.now());
+
   });
 };
 

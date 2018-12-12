@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.uuid('video_uuid').unsigned();
     table.foreign('playlist_uuid').references('uuid').inTable(PLAYLISTTABLE);
     table.foreign('video_uuid').references('uuid').inTable(VIDEOTABLE);
+
   });
 };
 

@@ -1,3 +1,4 @@
+
 // One note, if youre using postgres and this doesnt run because "function uuid_generate_v4()" does not exist
 // run this query in your database as it's needed to generate the uuid's for multiple tables:
 // CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
