@@ -15,7 +15,7 @@ const loginUserInput = {
   password: 'awesomePassword'
 };
 const badLoginUserInput = {
-  username: null,
+  username: 'NewUser',
   password: 'passworddwadawd',
   email: 'anEmail@email.com'
 };
@@ -67,6 +67,7 @@ describe('Hitting the userRoutes, a User may', () => {
   test('receive a message indicating bad login attempt', async done => {
     await postRequest(createdRequest, '/users/', newUser);
     const response = await getRequest(createdRequest, '/users/signIn', badLoginUserInput);
+    console.log(response)
     expect(response.status).toBe(BAD_REQUEST);
     expect(response.body).toEqual({ error: 'Password does not match.' });
     done();
