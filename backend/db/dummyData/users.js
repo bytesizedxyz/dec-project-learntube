@@ -74,6 +74,6 @@ module.exports = [
     email: 'Gerda.Konopelski@hotmail.com',
     password: 'PVGXzQpJpXXSEdv',
     is_admin: true,
-    uuid: '7746908-31fd-146a-78be-55218c7f4a31a'
+    uuid: '77469083-1fd1-46a7-8be5-5218c7f4a31a'
   }
 ];
