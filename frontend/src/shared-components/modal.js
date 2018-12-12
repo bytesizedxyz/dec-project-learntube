@@ -9,7 +9,6 @@ class Modal extends Component {
   constructor(props) {
     super(props);
     this.el = document.createElement("div");
-    this.el.style.display = "none";
   }
   formRef = React.createRef();
 

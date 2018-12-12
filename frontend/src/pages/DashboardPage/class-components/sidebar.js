@@ -12,7 +12,7 @@ const Aside = styled.aside`
 
 class Sidebar extends Component {
   state = {
-    modalExpanded: true
+    modalExpanded: false
   };
 
   toggleModal = e => {
