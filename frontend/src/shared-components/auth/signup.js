@@ -1,53 +1,13 @@
-<<<<<<< HEAD
-import React from "react";
-
-class SignUpForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: ""
-    };
-
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  render() {
-    return (
-      <form>
-        <h1> Register for PernHub! </h1>
-
-        <div className="SignUpForm">
-          <label className="control-label">Username</label>
-          <input
-            value={this.state.username}
-            onChange={this.onChange}
-            type="text"
-            name="username"
-            className="form-control"
-          />
-        </div>
-
-        <div className="form-group">
-          <button className="btn btn-primary btn-lg">Sign Up</button>
-        </div>
-      </form>
-    );
-  }
-}
-=======
 import React from 'react'
 import { connect } from 'react-redux'
-import {signup} from '../state/actions/auth'
+import {signup} from '../../state/actions/auth'
+import Form from '../fun-components/form'
 
-class SignUp extends React.Component {
+class SignUpPage extends React.Component {
     constructor(props) {
         super(props);
     
-        this.state = {
+        state = {
             username: '',
             password: '',
             passwordConfirmation: '',
@@ -56,7 +16,7 @@ class SignUp extends React.Component {
 
         this.onSubmit = this.onSubmit.bind(this);
     }
-
+}
 
 componentDidMount = () => this.props.signup()
 
@@ -74,12 +34,13 @@ render() {
     const {signup} = this.props;
     const {username, password, email, submitted} = this.state
     return (
-        <form onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmit}>
         <h1> Register for LearnTube! </h1>
 
             <div className="form-group">
                 <label className="control-label">Username</label>
                 <input
+                data-test-id='username'
                 value={this.state.username}
                 onChange={this.onChange}
                      type="text"
@@ -90,6 +51,7 @@ render() {
             <div className="form-group">
                 <label className="control-label">Password</label>
                 <input
+                data-test-id='password'
                 value={this.state.password}
                 onChange={this.onChange}
                     type="password"
@@ -100,6 +62,7 @@ render() {
             <div className="form-group">
                 <label className="control-label">Confirm Password</label>
                 <input
+                data-test-id='passwordConfirm'
                 value={this.state.passwordConfirmation}
                 onChange={this.onChange}
                     type="password"
@@ -110,6 +73,7 @@ render() {
             <div className="form-group">
                 <label className="control-label">Email Address</label>
                 <input
+                data-test-id='email'
                 value={this.state.email}
                 onChange={this.onChange}
                     type="text"
@@ -125,12 +89,15 @@ render() {
             <div>
                 <SignUpPage path="/signup" />
             </div>
-        </form>
+        </Form>
     
   )}
 };
 
-  const SignUpPage = connect(state => state, {signup})(SignUp);
+const mapStateToProps = () => {
+    return {signup}
+
+
+  const SignUpPage = connect(state => state, mapDispatchToProps)(SignUpPage)
   
-  export default SignUpPage;
->>>>>>> 5d32d0f31ddc4dd0606aec5dbd7ee46251bff36d
+  export default SignUpPage

@@ -1,3 +1,5 @@
+import { navigate } from "@reach/router"
+
 /*
  * action types
  */
@@ -7,9 +9,9 @@ export const VIEW_VIDEO = "VIEW_VIDEO";
 
 // TEMP DUMMY DATA
 const videoList = [
-  { uuid: "1234", title: "faketitle1", url: "youtube.com" },
-  { uuid: "5678", title: "faketitle2", url: "youtube.com" },
-  { uuid: "9101112", title: "faketitle3", url: "youtube.com" }
+  { videoId:"QaVXaMFc6gk", uuid:"345744", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" },
+  { videoId:"20vDj6oQ-pE",uuid:"53734336", url:"https://www.youtube.com/watch?v=20vDj6oQ-pE", title:"Backstreet Boys - Chances (Behind The Scenes)" },
+  { videoId:"xOMmK9iFuE4",uuid:"9789758967", url:"https://www.youtube.com/watch?v=xOMmK9iFuE4", title:"Thirsty Gets Lucious Into The Poker Game | Season 5 Ep. 6 | EMPIRE" },
 ];
 
 // redux thunk action creators
@@ -18,26 +20,37 @@ const videoList = [
 export const retrieveVideosForListing = () => (dispatch, getState) => {
   // call getState to retrieve a video from the redux store using the videoId argument
   // Then normalize the data
-  let videoIds;
-  const normalizedVideos = videoList.reduce((acc, curr, i) => {
-    // This ideally should be the video uuid from backend in the future
-    videoIds.push(i);
-    acc[i] = curr;
+  let videoIds = [];
+  //replace videoList with results of an axios request to backend for videos later
+  const videos = videoList.reduce((acc, curr, i) => {
+    videoIds.push(curr.videoId);
+    acc[curr.videoId] = curr;
     return acc;
   }, {});
 
-  console.log("THE NORMALIZED VIDEOS: ", normalizedVideos);
-
-  const payload = { videos: normalizedVideos, videoIds };
+  const payload = { videos, videoIds };
   // data for redux store is a boolean flag
   dispatch({ type: RETRIEVE_VIDEOS_FOR_LISTING, payload });
 };
 
 export const viewVideo = videoId => (dispatch, getState) => {
   // call getState to retrieve a video from the redux store using the videoId argument
-  let retrievedVideo = videoList[videoId];
-  const payload = { video: retrievedVideo };
+  //let retrievedVideo = getState().videoList[videoId];
+  let retrievedVideo;
+  if(getState().videoListingState.videos[videoId]){
+    retrievedVideo = getState().videoListingState.videos[videoId];
+  }else{
+    //simply handle unavailable/invalid videos in production
+    retrievedVideo = { uuid:"QaVXaMFc6gk", url:"https://www.youtube.com/watch?v=QaVXaMFc6gk", title:"CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami" };
+  }
+   
+  const payload = { currentViewedVideo: retrievedVideo };
+  console.log(payload);
 
-  // data for redux store is a boolean flag
-  dispatch({ type: VIEW_VIDEO, payload });
+         dispatch({ type: VIEW_VIDEO, payload });   
+
+        navigate("/play-video", {state:getState()});
+
+
 };
+

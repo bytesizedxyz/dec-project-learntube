@@ -23,8 +23,12 @@ code {
 #modal-root {
   position: absolute;
   top: 0;
+<<<<<<< HEAD
   z-index: -100;
   display: flex;
+=======
+  display: none;
+>>>>>>> 5d32d0f31ddc4dd0606aec5dbd7ee46251bff36d
   justify-content: center;
   align-items: center;
   width: 100vw;
