@@ -8,8 +8,7 @@ const {
   CONFLICT,
   UNPROCESSABLE_ENTITY,
   INTERNAL_SERVER_ERROR
-} = require('../services/statusCodes');
-
+} = require('../SERVER_CONSTANTS').statusCodes;
 router.post('/', (req, res, next) => {
   makingUser(req.body)
     .then(response => {
