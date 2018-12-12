@@ -10,9 +10,7 @@ const getVideos = (id) => {
   return knex("videos")
   .select("videos.id","videos.url","videos.watch_count", "users.username", "videos.title")
   .innerJoin("users", {'users.id': 'videos.posted_by'});
-
   // select v.url, v.watch_count, u.username as posted_by, v.title from videos v inner join users u on u.id = v.posted_by;
-
 }
 
 const createVideo = (params) => {
