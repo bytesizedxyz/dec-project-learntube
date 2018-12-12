@@ -12,39 +12,18 @@ import store from "./state";
 
 import styled from "styled-components";
 
-const Img = styled.img`
-  width: 24rem;
-`;
 
-class Logo extends React.Component {
-  state = {
-    pg: true
-  };
-
-  render() {
-    return (
-      <div>
-        {this.state.pg ? (
-          <Img src={LearnTubeLogo} />
-        ) : (
-          <Img src={PernHubLogo} />
-        )}
-      </div>
-    );
-  }
-}
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Logo />
+        
         <Header />
         <Router>
           <LandingPage path="/" />
           <VideoPage path="/play-video" />
           <DashboardPage path="/dashboard" />
-
         </Router>
       </Provider>
     );
