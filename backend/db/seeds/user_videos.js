@@ -10,25 +10,26 @@ exports.seed = (knex, Promise) => {
     .then(() => {
       return knex('users').insert(usersData);
     })
-    .then(res => {
-      console.log(res);
+    .then(() => {
       let videoPromises = [];
       videosData.forEach(video => {
-        let user = video.user_uuid;
-        videoPromises.push(createProduct(knex, video, user));
+        let userUUID = video.user_uuid;
+        videoPromises.push(createVideo(knex, video, userUUID));
       });
       return Promise.all(videoPromises);
     });
 };
-const createProduct = (knex, video, user) => {
+const createVideo = (knex, video, userUUID) => {
   return knex('users')
-    .where('username', user)
+    .where('uuid', userUUID)
     .first()
     .then(() => {
       return knex('videos').insert({
+        uuid: video.uuid,
         url: video.url,
+        watch_count: video.watch_count,
         title: video.title,
-        user_uuid: user
+        user_uuid: userUUID
       });
     });
 };

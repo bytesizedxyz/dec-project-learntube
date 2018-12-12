@@ -1,4 +1,4 @@
-module.export = [
+module.exports = [
   {
     uuid: '957e771a-2639-44e7-a838-00b9aa1cb9f6',
     title: 'Product Tactics Officer',
