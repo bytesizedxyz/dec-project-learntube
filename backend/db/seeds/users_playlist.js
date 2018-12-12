@@ -11,18 +11,18 @@ exports.seed = (knex, Promise) => {
   //   return Promise.all(playlistPromise);
   // });
 };
-const createPlaylist = (knex, playlist, playlistUserUUID) => {
-  return knex('users')
-    .where('uuid', playlistUserUUID)
-    .first()
-    .then(() => {
-      return knex('playlist').del();
-    })
-    .then(() => {
-      return knex('playlist').insert({
-        uuid: playlist.uuid,
-        title: playlist.title,
-        user_uuid: playlistUserUUID
-      });
-    });
-};
+// const createPlaylist = (knex, playlist, playlistUserUUID) => {
+//   return knex('users')
+//     .where('uuid', playlistUserUUID)
+//     .first()
+//     .then(() => {
+//       return knex('playlist').del();
+//     })
+//     .then(() => {
+//       return knex('playlist').insert({
+//         uuid: playlist.uuid,
+//         title: playlist.title,
+//         user_uuid: playlistUserUUID
+//       });
+//     });
+// };
