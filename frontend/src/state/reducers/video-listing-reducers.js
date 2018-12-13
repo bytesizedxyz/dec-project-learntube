@@ -12,8 +12,36 @@ const initialState = {
       postedBy: "banana",
       createdAt: "12/1/2018"
     },
+    "randomuuidstringfrombackend2": {
+      uuid: "randomuuidstringfrombackend2",
+      title: "faketitle1",
+      url: "QaVXaMFc6gk",
+      postedBy: "banana",
+      createdAt: "12/1/2018"
+    },
+    "randomuuidstringfrombackend3": {
+      uuid: "randomuuidstringfrombackend3",
+      title: "faketitle1",
+      url: "QaVXaMFc6gk",
+      postedBy: "banana",
+      createdAt: "12/1/2018"
+    },
+    "randomuuidstringfrombackend4": {
+      uuid: "randomuuidstringfrombackend4",
+      title: "faketitle1",
+      url: "QaVXaMFc6gk",
+      postedBy: "banana",
+      createdAt: "12/1/2018"
+    },
+    "randomuuidstringfrombackend5": {
+      uuid: "randomuuidstringfrombackend5",
+      title: "faketitle1",
+      url: "QaVXaMFc6gk",
+      postedBy: "banana",
+      createdAt: "12/1/2018"
+    },
   },
-  videoUuids: ["randomuuidstringfrombackend1"]
+  videoUuids: ["randomuuidstringfrombackend1", "randomuuidstringfrombackend2", "randomuuidstringfrombackend3", "randomuuidstringfrombackend4", "randomuuidstringfrombackend5"]
 };
 
 
