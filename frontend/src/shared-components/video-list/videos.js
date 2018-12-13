@@ -1,18 +1,21 @@
 import React, { Component } from "react";
-//import axios from "axios";
 
 import VideoList from "./VideoList";
-
+import { viewVideo, retrieveVideosForListing } from "../../state/actions/video";
+import { connect } from "react-redux";
 const videoList = [
   {
     uuid: "1234 ",
+    videoId: "QaVXaMFc6gk",
     title: "faketitle1 ",
     url: "youtube.com ",
     postedBy: "banana ",
     createdAt: "12/1/2018 "
   },
+
   {
     uuid: "5678 ",
+    videoId: "20vDj6oQ-pE",
     title: "faketitle2 ",
     url: "youtube.com ",
     postedBy: "Groot ",
@@ -20,6 +23,7 @@ const videoList = [
   },
   {
     uuid: "9101112 ",
+    videoId: "xOMmK9iFuE4",
     title: "faketitle3 ",
     url: "youtube.com ",
     postedBy: "Crampus ",
@@ -27,12 +31,13 @@ const videoList = [
   }
 ];
 
-export default class videos extends Component {
+class videos extends Component {
   state = { videos: [], selectedVideo: null };
 
   componentDidMount = () => {
-    //this is where the axios request goes when backend is connected
-    this.settingState(videoList);
+    this.props.retrieveVideosForListing();
+    //this.settingState(videoList);
+    console.log("THIS.PROPS.VIEWVIDEO: ", this.props.viewVideo);
   };
 
   settingState = videoList => {
@@ -43,7 +48,7 @@ export default class videos extends Component {
   };
 
   onVideoSelect = video => {
-    this.setState({ selectedVideo: video });
+    this.props.viewVideo(video);
   };
 
   render() {
@@ -51,9 +56,14 @@ export default class videos extends Component {
       <div>
         <VideoList
           onVideoSelect={this.onVideoSelect}
-          videos={this.state.videos}
+          videos={this.props.videoListingState}
         />
       </div>
     );
   }
 }
+
+export default connect(
+  state => state,
+  { viewVideo, retrieveVideosForListing }
+)(videos);

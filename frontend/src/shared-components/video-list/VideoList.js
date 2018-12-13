@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import VideoItem from "./VideoItem";
-import { retrieveVideosForListing } from "../../state/actions/video";
+import { retrieveVideosForListing, viewVideo } from "../../state/actions/video";
 
 const VideoList = ({ videos, onVideoSelect }) => {
-  const renderedList = videos.map(video => {
-    console.log(video);
+  const renderedList = videos.videoIds.map(videoId => {
+    const video = videos.videos[videoId];
     return (
       <VideoItem
-        videoId={video.uuid}
+        videoId={video.videoId}
         videoTitle={video.title}
         videoURL={video.url}
         postedBy={video.postedBy}
@@ -18,7 +18,7 @@ const VideoList = ({ videos, onVideoSelect }) => {
     );
   });
 
-  return <div>{renderedList}</div>;
+  return (<div style={{display:'flex', flexDirection:'row'}}>{renderedList}</div>);
 };
 
 export default VideoList;

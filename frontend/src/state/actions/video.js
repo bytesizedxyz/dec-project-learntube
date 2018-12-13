@@ -52,16 +52,17 @@ export const viewVideo = videoId => (dispatch, getState) => {
   // call getState to retrieve a video from the redux store using the videoId argument
   //let retrievedVideo = getState().videoList[videoId];
   let retrievedVideo;
-  if (getState().videoListingState.videos[videoId]) {
+  //if (getState().videoListingState.videos[videoId]) {
+    console.log(videoId);
     retrievedVideo = getState().videoListingState.videos[videoId];
-  } else {
+  /*} else {
     //simply handle unavailable/invalid videos in production
     retrievedVideo = {
       uuid: "QaVXaMFc6gk",
       url: "https://www.youtube.com/watch?v=QaVXaMFc6gk",
       title: "CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami"
     };
-  }
+  }*/
 
   const payload = { currentViewedVideo: retrievedVideo };
   console.log(payload);
