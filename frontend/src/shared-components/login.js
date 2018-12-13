@@ -2,32 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {login, logout} from '../state/actions/auth'
 
-class LoginPage extends React.Component {
-    constructor(props) {
-        super(props)
+class LoginForm extends React.Component {
+  state = {
+    username: '',
+    password: '',
+    submitted: false
+  }
 
-        //resets login status
-        
-        this.state = {
-            username: '',
-            password: '',
-            submitted: false
-        };
-        
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-}
-
-componentDidMount = () => this.props.logout()
-
-
-handleChange(e) {
+  handleChange = (e) => {
     const {name, value} = e.target;
     this.setState({ [name]: value});
-}
+  }
 
-handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     this.setState({ submitted: true})
@@ -35,13 +22,13 @@ handleSubmit(e) {
     if (username && password) {
         this.props.login(username, password);
     }
-}
+  }
 
-render() {
+  render() {
     const { login } = this.props;
     const { username, password, submitted } = this.state
     return (
-        <form handleSubmit={this.handleSubmit}
+        <form handleSubmit={this.handleSubmit}>
             <div className="form-group">
                 <label className="control-label"> Username </label>
                 <input
@@ -65,24 +52,16 @@ render() {
                 <div className="form-group">
                     <button className="btn btn-primary">Login</button>
             </div>
-            <div>
-                <Link to="/signup" className="btn btn-link">Signup</Link>)
-            </div>
         </form>
-    
-}
-
-const mapDispatchToProps = () => {
-    
-    return {login, logout}
-   
+    )
+  }
 };
 
+const mapDispatchToProps = () => {
+    return {login, logout}
 }
 
-const LoginPage = connect(state => state, mapDispatchToProps)(loggedIn)
+export default connect(state => state, mapDispatchToProps)(LoginForm)
 
-
-export default LoginPage
 //still trying to figure this out ^
 //dispatch is an event

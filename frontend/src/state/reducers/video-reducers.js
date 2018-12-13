@@ -10,7 +10,7 @@ import {
     console.log(action);
     switch (action.type) {
       case VIEW_VIDEO:
-        return { ...state, currentViewedVideo: action.payload.currentViewedVideo };
+        return { currentViewedVideo: action.payload.currentViewedVideo };
       default:
         return state;
     }
