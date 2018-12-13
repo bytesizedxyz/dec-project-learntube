@@ -7,25 +7,28 @@ import { BlurredBackground } from "../../../shared-styles";
 const Aside = styled.aside`
   height: 100vh;
   width: 20rem;
-  background: blue;
+  background: #224259;
 `;
 
 class Sidebar extends Component {
   state = {
-    toggleUploadVideo: true
+    modalExpanded: false
   };
 
-  toggle = e => {
-    const id = e.target.id;
-    this.toggleSetState(id);
+  toggleModal = e => {
+    console.log("IT WORKS: ", e);
+    // Would then need to pass in e.target.id to accomodate
+    // dynamically accessing state if there are additional links or state
+    // added in the future.
+    this.toggleModalSetState();
   };
 
-  // Dynamically accessing state just in case
+  // Can refactor to dynamically accessing state if
   // there are any additional links or state added in
   // the future.
-  toggleSetState = id => {
+  toggleModalSetState = () => {
     this.setState((state, props) => ({
-      [id]: !state[id]
+      modalExpanded: !state.modalExpanded
     }));
   };
 
@@ -34,20 +37,24 @@ class Sidebar extends Component {
   };
 
   render() {
-    const { toggle } = this;
-    const { toggleUploadVideo } = this.state;
+    const { toggleModal } = this;
+    const { modalExpanded } = this.state;
     return (
       <Aside>
         <ul>
-          <li id="toggleUploadVideo" onClick={toggle}>
-            Upload Video
-          </li>
+          <li onClick={toggleModal}>Upload Video</li>
         </ul>
         {/* Need to use a React portal here instead. */}
-        {toggleUploadVideo ? (
+        {modalExpanded ? (
           <Modal>
-            <BlurredBackground />
-            <VideoUpload />
+            {formRef => {
+              return (
+                <>
+                  <BlurredBackground />
+                  <VideoUpload formRef={formRef} toggleModal={toggleModal} />
+                </>
+              );
+            }}
           </Modal>
         ) : null}
       </Aside>

@@ -2,9 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Sidebar from "./class-components/sidebar";
 
+const Container = styled.div`
+  display: flex;
+`;
+
 const Main = styled.main`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -14,15 +17,17 @@ const Main = styled.main`
 const PlaceHolderVideoListingDiv = styled.div`
   width: 100%;
   height: 100%;
-  background: lime;
+  background: #fcfcfc;
 `;
 
 const index = () => {
   return (
-    <Main>
+    <Container>
       <Sidebar />
-      <PlaceHolderVideoListingDiv />
-    </Main>
+      <Main>
+        <PlaceHolderVideoListingDiv />
+      </Main>
+    </Container>
   );
 };
 
