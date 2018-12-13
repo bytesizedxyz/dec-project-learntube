@@ -34,8 +34,6 @@ app.use(passport.session());
 
 app.use('/users', users);
 
-// app.use(jwtMiddleware);
-
 //routes
 app.use('/videos', videos);
 app.use('/playlists', playlists);

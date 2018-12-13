@@ -16,8 +16,6 @@ const connection = {
   database: process.env.DATABASE_NAME
 };
 
-console.log(connection);
-
 const dbConfig = {
   client: 'pg',
   connection,
