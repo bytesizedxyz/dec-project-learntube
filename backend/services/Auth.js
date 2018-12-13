@@ -25,22 +25,27 @@ const insertUser = user => {
     })
     .catch(err => {
       console.log('error creating user in auth');
-      console.log(err);
       throw err;
     });
 };
 
 //getting user from database to sign in
 const signIn = user => {
-  const { username, email, password } = user;
-  return knex(USERTABLE)
-    .where({ username: username })
-    .then(data => {
-      return data[0];
-    })
-    .catch(err => {
-      console.log('err checking database', err);
-    });
+  const { username } = user;
+  return new Promise((res, rej) => {
+    knex(USERTABLE)
+      .where({ username: username })
+      .then(data => {
+        if (data.length === 1) {
+          res(data[0]);
+        } else {
+          rej({ error: 'No users.' });
+        }
+      })
+      .catch(err => {
+        rej({ err });
+      });
+  });
 };
 
 //checking wether the password sent matches the hashed password in the database
@@ -85,9 +90,17 @@ const makingUser = async user => {
   }
 };
 
-const signingInUser = async user => {
-  const foundUser = await signIn(user);
-  return await checkPassword(user.password, foundUser);
+const signingInUser = recUser => {
+  return new Promise((res, rej) => {
+    signIn(recUser)
+      .then(async user => {
+        let possErr = await checkPassword(recUser.password, user).catch(err => {
+          rej(err);
+        });
+        res(possErr);
+      })
+      .catch(err => rej(err));
+  });
 };
 
 module.exports = {
