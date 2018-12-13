@@ -81,7 +81,7 @@ class VideoUpload extends Component {
             <Icon name="close icon" />
           </span>
         </div>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} upload>
           <label htmlFor="title">Title</label>
           <input id="title" type="text" value={title} onChange={onChange} />
           <label htmlFor="url">URL</label>

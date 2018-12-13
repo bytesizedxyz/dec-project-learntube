@@ -8,6 +8,8 @@ import PernHubLogo from "../resources/pernhub.svg";
 import Modal from "./modal";
 import { BlurredBackground } from "../shared-styles";
 import LoginForm from './login'
+import LogoutForm from './logout'
+import SignupForm from './signup'
 
 const LogoContainer = styled.div`
   display: flex;
@@ -48,24 +50,33 @@ class Logo extends React.Component {
 
 
 class Header extends React.Component {
-  state = { toggleLoginForm: false }
+  state = { toggleFormModal: null }
  
-  handleClick = (event) => {
-    const id = event.target.id
-    switch(id) {
-      case 'login':
-        this.handleLoginClick()
-        break;
-      case 'logout':
-        this.handleLogoutClick()
-        break;
-      default:
-        return
-    }
-  }
+  // handleClick = (event) => {
+  //   const id = event.target.id
+  //   switch(id) {
+  //     case 'login':
+  //       this.handleLoginClick()
+  //       break;
+  //     case 'logout':
+  //       this.handleLogoutClick()
+  //       break;
+  //     default:
+  //       return
+  //   }
+  // }
 
-handleLoginClick = () => {
-  console.log("HANDLE LOGIN")
+  handleClick = e => {
+  console.log(this.state.toggleFormModal)
+  if(this.state.toggleFormModal) {
+    console.log("THIS SHOULD BE CALLED.")
+    this.setState({
+      toggleFormModal: null
+    })
+  }
+  console.log("HANDLE LOGIN: ", e.target.id)
+  const id = e.target.id
+  this.toggleModal(id);
   // Using the logged_in boolean from props to determine which action creator to fire off.
 
   // If a user is not logged in
@@ -75,6 +86,12 @@ handleLoginClick = () => {
 
   // if a user is logged in
   // then this should fire the log out action creator.
+}
+
+toggleModal = (id) => {
+  this.setState({
+    toggleFormModal: id
+  })
 }
 
 handleLogoutClick = () => {
@@ -89,7 +106,8 @@ fireOffLoginAction = (username, password) => {
 
 
   render() {
-    const { toggleLoginForm } = this.state
+    const { handleClick } = this
+    const { toggleFormModal } = this.state
     console.log(this.props)
     const { logged_in } = this.props.authenticationStatus;   //containerComponent
       
@@ -106,15 +124,23 @@ fireOffLoginAction = (username, password) => {
             </div>
             
             <div id="buttons">
-              <button id={!logged_in ? "login" : "logout"} onClick={this.handleClick}>{!logged_in ? "Sign In" : "Sign Out"}</button>
+              <button id={!logged_in ? "login" : "logout"} onClick={this.handleClick}>{!logged_in ? "Log In" : "Log Out"}</button>
+              <button id="signup" onClick={this.handleClick}>Sign Up</button>
             </div>
           </div>
-          {toggleLoginForm ? (
-          <Modal>
-            <BlurredBackground />
-            <LoginForm />
+          {toggleFormModal ? (
+            <Modal>
+            {formRef => {
+              return (
+                <>
+                  <BlurredBackground />
+                  {toggleFormModal === "login" && <LoginForm formRef={formRef} toggleModal={handleClick} />}
+                  {toggleFormModal === "signup" && <SignupForm formRef={formRef} toggleModal={handleClick} />}
+                </>
+              );
+            }}
           </Modal>
-        ) : null}
+          ) : null}
         </Nav>
     );
   }
