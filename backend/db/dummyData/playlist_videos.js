@@ -69,10 +69,6 @@ module.exports = [
   },
   {
     playlist_uuid: '19c74a16-d208-45b5-a243-9d4a171e0778',
-    video_uuid: '431b0dbb-4817-4fcd-b743-7a99978bdf97'
-  },
-  {
-    playlist_uuid: '19c74a16-d208-45b5-a243-9d4a171e0778',
     video_uuid: '4c96dfef-792c-4918-b823-5d8cae601633'
   },
   {

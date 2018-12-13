@@ -14,25 +14,21 @@ module.exports = [
     title: 'District Integration Administrator',
     user_uuid: 'd2dbb040a0ef4fdc93b71b84cf8ee75e'
   },
-  ,
   {
     uuid: 'a3a773ca-5154-4aee-b0a1-66f159fdf424',
     title: 'Senior Program Director',
     user_uuid: '53c576be36174746bcfccc1378918b64'
   },
-  ,
   {
     uuid: 'd9b12320-4833-41f8-897c-5a866218037b',
     title: 'Direct Assurance Associate',
     user_uuid: '664bbf54a9c548358d04be7afc2a1213'
   },
-  ,
   {
     uuid: '4d273796-62da-4a05-a678-c556a124b632',
     title: 'Lead Infrastructure Producer',
     user_uuid: '7ec1c4573b54448a9185c161edcf43db'
   },
-  ,
   {
     uuid: '516b2da3-b8a1-460b-afeb-81da0416eb0b',
     title: 'Human Identity Facilitator',
