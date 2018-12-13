@@ -7,6 +7,7 @@ const Container = styled.div`
   width: 20rem;
   height: 20rem;
   background: lime;
+  margin: 0px 40px 140px 40px;
 
   #video-image {
     width: 100%;
@@ -16,13 +17,27 @@ const Container = styled.div`
 
   #video-details {
     width: 100%;
-    height: 20%;
+    height: 30%;
     background: blue;
+    //padding-left: 5px;
 
     p {
       font-size: 0.8rem;
+      font-weight: normal;
+      color: white;
       margin-top: 0.2rem;
       margin-bottom: 0.2rem;
+     // letter-spacing: 0.5px;
+    }
+
+    p1 {
+      font-size: 25px;
+      font-weight: bold;
+      color: white;
+      margin-top: 0.2rem;
+      margin-bottom: 0.2rem;
+     //letter-spacing: 0.5px
+
     }
   }
 `;
@@ -39,7 +54,7 @@ const VideoItem = ({
     <Container id={videoUuid} onClick={() => onVideoSelect(videoUuid)}>
       <img src={`https://img.youtube.com/vi/${videoURL}/0.jpg`} />
      <div id="video-details">
-      <p>{videoTitle}</p>
+      <p1>{videoTitle}</p1>
       <p>{videoURL}</p>
       <p>{postedBy}</p>
       <p>{createdAt}</p>

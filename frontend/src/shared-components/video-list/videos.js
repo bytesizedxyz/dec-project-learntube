@@ -29,8 +29,12 @@ import { connect } from "react-redux";
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  background: #7EA5C2;
+  justify-content: space-between;
+  background-image: linear-gradient(-225deg, #FFF800 0%, #FF1361 29%, #44107A 80%, #231557 100%);
+ // background: lime;
+  padding-top: 20px;
+  padding-bottom: 60px;
+  
 `
 
 class videos extends Component {
