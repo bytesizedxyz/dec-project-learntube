@@ -105,5 +105,10 @@ const signingInUser = recUser => {
 
 module.exports = {
   makingUser,
-  signingInUser
+  signingInUser,
+  hashPassword,
+  insertUser,
+  signIn,
+  testReqBody,
+  checkPassword
 };

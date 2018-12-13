@@ -1,4 +1,3 @@
-process.env.TEST_SUITE = 'user-routes-test';
 const request = require('supertest');
 const server = require('../../server');
 const User = require('../../db/knex');
