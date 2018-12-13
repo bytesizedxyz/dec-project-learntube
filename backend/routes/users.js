@@ -10,12 +10,12 @@ const {
 } = require('../SERVER_CONSTANTS').statusCodes;
 router.post('/', (req, res, next) => {
   makingUser(req.body)
-    .then(response => {
-      console.log('back at routes', response);
+    .then(() => {
+      console.log('back at routes');
       res.status(SUCCESS).json({ message: 'Successfully created a user.' });
     })
     .catch(err => {
-      console.log(err);
+      console.log(err.message);
       if (err.code === 23505) {
         res.status(CONFLICT).json({ error: 'Email is already in use' });
       } else if (err.message === 'You are missing required fields') {

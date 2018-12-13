@@ -50,12 +50,12 @@ const checkPassword = (reqPassword, foundUser) => {
         reject(err);
       } else if (response) {
         const { username, email, is_admin } = foundUser;
-        const token = jwt.sign(foundUser, process.env.jwtSecret);
         const user = {
           username: username,
           email: email,
           is_admin: is_admin
         };
+        const token = jwt.sign(user, process.env.jwtSecret, { expiresIn: '1m' });
         resolve({ user, token });
       } else {
         reject(new Error('Passwords do not match.'));
