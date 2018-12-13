@@ -12,19 +12,19 @@ const videoList = [
   {
     videoId: "QaVXaMFc6gk",
     uuid: "345744",
-    url: "https://www.youtube.com/watch?v=QaVXaMFc6gk",
+    url: "QaVXaMFc6gk",
     title: "CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami"
   },
   {
     videoId: "20vDj6oQ-pE",
     uuid: "53734336",
-    url: "https://www.youtube.com/watch?v=20vDj6oQ-pE",
+    url: "20vDj6oQ-pE",
     title: "Backstreet Boys - Chances (Behind The Scenes)"
   },
   {
     videoId: "xOMmK9iFuE4",
     uuid: "9789758967",
-    url: "https://www.youtube.com/watch?v=xOMmK9iFuE4",
+    url: "xOMmK9iFuE4",
     title: "Thirsty Gets Lucious Into The Poker Game | Season 5 Ep. 6 | EMPIRE"
   }
 ];
@@ -43,7 +43,7 @@ export const retrieveVideosForListing = () => (dispatch, getState) => {
     return acc;
   }, {});
 
-  const payload = { videos, videoIds };
+  const payload = { videos, videoUuids:videoIds };
   // data for redux store is a boolean flag
   dispatch({ type: RETRIEVE_VIDEOS_FOR_LISTING, payload });
 };

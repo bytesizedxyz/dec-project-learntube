@@ -128,7 +128,7 @@ const Nav = styled.nav`
     height: 100%;
     justify-content: center;
     align-items: center;
-    background: #fbfbfb;
+    background: #224259;
     color: white;
   }
 

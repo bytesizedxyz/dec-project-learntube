@@ -19,7 +19,6 @@ const Container = styled.div`
     width: 100%;
     height: 30%;
     background: blue;
-    //padding-left: 5px;
 
     p {
       font-size: 0.8rem;
@@ -27,17 +26,15 @@ const Container = styled.div`
       color: white;
       margin-top: 0.2rem;
       margin-bottom: 0.2rem;
-     // letter-spacing: 0.5px;
     }
 
     p1 {
       font-size: 25px;
       font-weight: bold;
       color: white;
+      text-overflow: hidden;
       margin-top: 0.2rem;
       margin-bottom: 0.2rem;
-     //letter-spacing: 0.5px
-
     }
   }
 `;
