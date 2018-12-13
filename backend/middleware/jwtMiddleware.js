@@ -12,7 +12,6 @@ const secret = process.env.jwtSecret;
 module.exports = (req, res, next) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization.split(' ')[1];
-    console.log(token);
     jwt.verify(token, secret, { algorithms: ['HS256'] }, (err, decoded) => {
       if (err.message === 'jwt expired' && !decoded) {
         res.status(UNAUTHORIZED).json({ error: 'JWT has expired. Please log in.' });
