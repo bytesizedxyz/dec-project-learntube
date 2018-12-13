@@ -13,7 +13,6 @@ const validateVideo = (title, url) => {
 
 }
 
-
 const getVideos = (id) => {
   console.log("ID PASSED", !!id)
   return new Promise((res, rej) => {
@@ -32,10 +31,7 @@ const getVideos = (id) => {
       .then(data => res(data))
       .catch(err => rej(err))
     }
-
   })
-
-  // select v.url, v.watch_count, u.username as posted_by, v.title from videos v inner join users u on u.id = v.posted_by;
 }
 
 const createVideo = ({ url, posted_by, title }) => {
