@@ -123,6 +123,7 @@ fireOffLoginAction = (username, password) => {
 const Nav = styled.nav`
   #headerBg {
     display: flex;
+    flex-direction: ${props => props.col ? 'column' : 'row'}
     width: 100%;
     height: 100%;
     justify-content: center;
