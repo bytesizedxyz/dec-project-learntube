@@ -8,7 +8,6 @@ const logger = require('morgan');
 const knex = require('./db/knex');
 const session = require('express-session');
 const passport = require('passport');
-const jwtMiddleware = require('./middleware/jwtMiddleware');
 
 const users = require('./routes/users');
 const videos = require('./routes/videos');
@@ -33,8 +32,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/users', users);
-
-// app.use(jwtMiddleware);
 
 //routes
 app.use('/videos', videos);

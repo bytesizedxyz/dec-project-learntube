@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "test": "NODE_ENV=test jest --ci --verbose --detectOpenHandles --forceExit"
+    "test": "NODE_ENV=test jest --ci --verbose --detectOpenHandles --forceExit",
+    "test-mocha": "mocha"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -24,6 +25,8 @@
   },
   "devDependencies": {
     "jest": "^23.6.0",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }

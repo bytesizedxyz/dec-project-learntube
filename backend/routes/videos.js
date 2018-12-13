@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { SUCCESS, INTERNAL_SERVER_ERROR } = require('../SERVER_CONSTANTS').statusCodes;
 
+const JWTMiddleware = require("../middleware/jwtMiddleware")
+const { SUCCESS, INTERNAL_SERVER_ERROR } = require('../SERVER_CONSTANTS').statusCodes;
 const { getVideos, createVideo, updateVideo } = require("../services/Video");
 
 
@@ -12,18 +13,22 @@ router.get('/', (req, res, next) => {
     res.status(SUCCESS).json(data);
   })
   .catch(err => {
-    res.status(INTERNAL_SERVER_ERROR).send({err:"something happened on our end! Please try again later"})
+    res.status(INTERNAL_SERVER_ERROR).send({err})
   })
 });
 
 router.get('/:id', (req, res, next) => {
   getVideos(req.params.id).then(data => {
-    res.status(SUCCESS).json({body:"User successfully created"});
+    res.status(SUCCESS).json(data);
   })
   .catch(err => {
-    res.status(INTERNAL_SERVER_ERROR).send({err:"something happened on our end! Please try again later"})
+    res.status(INTERNAL_SERVER_ERROR).send({err})
   })
 });
+
+
+
+// router.use(JWTMiddleware);
 
 /* POST ROUTES */
 
@@ -36,6 +41,7 @@ router.get('/:id', (req, res, next) => {
  */
 
 router.post('/', (req, res, next) => {
+  console.log('req body', req.body)
   createVideo(req.body).then(data => {
     res.status(SUCCESS).json(data);
   })
@@ -58,7 +64,7 @@ router.patch('/:id', (req, res, next) => {
     res.status(SUCCESS).json(data);
   })
   .catch(err => {
-    res.status(INTERNAL_SERVER_ERROR).send({err:"something happened on our end! Please try again later"})
+    res.status(INTERNAL_SERVER_ERROR).send({err})
   })
 });
 
