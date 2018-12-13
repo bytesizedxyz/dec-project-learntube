@@ -1,43 +1,45 @@
 import React, { Component } from "react";
-
+import styled from 'styled-components';
 import VideoList from "./VideoList";
 import { viewVideo, retrieveVideosForListing } from "../../state/actions/video";
 import { connect } from "react-redux";
-const videoList = [
-  {
-    uuid: "1234 ",
-    videoId: "QaVXaMFc6gk",
-    title: "faketitle1 ",
-    url: "youtube.com ",
-    postedBy: "banana ",
-    createdAt: "12/1/2018 "
-  },
 
-  {
-    uuid: "5678 ",
-    videoId: "20vDj6oQ-pE",
-    title: "faketitle2 ",
-    url: "youtube.com ",
-    postedBy: "Groot ",
-    createdAt: "11/30/2018 "
-  },
-  {
-    uuid: "9101112 ",
-    videoId: "xOMmK9iFuE4",
-    title: "faketitle3 ",
-    url: "youtube.com ",
-    postedBy: "Crampus ",
-    createdAt: "10/31/2018 "
-  }
-];
+// NORMALIZED VIDEOS
+// this is videos on this.props
+// {
+//   'randomuuidstringfrombackend1': {
+//     uuid: "randomuuidstringfrombackend1 ",
+//     title: "faketitle1 ",
+//     url: "QaVXaMFc6gk",
+//     postedBy: "banana ",
+//     createdAt: "12/1/2018"
+//   },
+//   'randomuuidstringfrombackend1': {
+//     uuid: "randomuuidstringfrombackend1 ",
+//     title: "faketitle2 ",
+//     url: "20vDj6oQ-pE",
+//     postedBy: "Groot ",
+//     createdAt: "11/30/2018 "
+//   },
+// }
+
+// this videoUuids on this.props
+// ["randomuuidstringfrombackend1", "randomuuidstringfrombackend2"]
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: #7EA5C2;
+`
 
 class videos extends Component {
   state = { videos: [], selectedVideo: null };
 
   componentDidMount = () => {
-    this.props.retrieveVideosForListing();
+    // this.props.retrieveVideosForListing();
     //this.settingState(videoList);
-    console.log("THIS.PROPS.VIEWVIDEO: ", this.props.viewVideo);
+    console.log("VIDEOS THIS.PROPS: ", this.props);
   };
 
   settingState = videoList => {
@@ -47,23 +49,30 @@ class videos extends Component {
     });
   };
 
-  onVideoSelect = video => {
-    this.props.viewVideo(video);
+  onVideoSelect = videoUuid => {
+    console.log("THE VIDEO UUID ON CLICK: ", videoUuid)
+    this.props.viewVideo(videoUuid);
   };
 
   render() {
+    const { videos, videoUuids } = this.props
+    console.log("THE VIDEOS: ", videos)
     return (
-      <div>
+      <Container>
         <VideoList
           onVideoSelect={this.onVideoSelect}
-          videos={this.props.videoListingState}
+          videos={videos}
+          videoUuids={videoUuids}
         />
-      </div>
+      </Container>
     );
   }
 }
 
 export default connect(
-  state => state,
+  state => {
+    const {videoListingState} = state;
+    return videoListingState;
+  },
   { viewVideo, retrieveVideosForListing }
 )(videos);

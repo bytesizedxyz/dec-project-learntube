@@ -17,7 +17,7 @@ const Container = styled.div`
   #video-details {
     width: 100%;
     height: 20%;
-    background: orange;
+    background: blue;
 
     p {
       font-size: 0.8rem;
@@ -26,8 +26,9 @@ const Container = styled.div`
     }
   }
 `;
+
 const VideoItem = ({
-  videoId,
+  videoUuid,
   videoTitle,
   videoURL,
   postedBy,
@@ -35,8 +36,8 @@ const VideoItem = ({
   onVideoSelect
 }) => {
   return (
-    <Container id={videoId} onClick={() => onVideoSelect(videoId)}>
-      <img src={`https://img.youtube.com/vi/${videoId}/0.jpg`} />
+    <Container id={videoUuid} onClick={() => onVideoSelect(videoUuid)}>
+      <img src={`https://img.youtube.com/vi/${videoURL}/0.jpg`} />
      <div id="video-details">
       <p>{videoTitle}</p>
       <p>{videoURL}</p>

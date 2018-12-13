@@ -48,21 +48,17 @@ export const retrieveVideosForListing = () => (dispatch, getState) => {
   dispatch({ type: RETRIEVE_VIDEOS_FOR_LISTING, payload });
 };
 
-export const viewVideo = videoId => (dispatch, getState) => {
-  // call getState to retrieve a video from the redux store using the videoId argument
-  //let retrievedVideo = getState().videoList[videoId];
-  let retrievedVideo;
-  //if (getState().videoListingState.videos[videoId]) {
-    console.log(videoId);
-    retrievedVideo = getState().videoListingState.videos[videoId];
-  /*} else {
-    //simply handle unavailable/invalid videos in production
-    retrievedVideo = {
-      uuid: "QaVXaMFc6gk",
-      url: "https://www.youtube.com/watch?v=QaVXaMFc6gk",
-      title: "CHARLI XCX ft. Troye Sivan - 1999 | Kyle Hanagami"
-    };
-  }*/
+export const viewVideo = videoUuid => (dispatch, getState) => {
+  // call getState to retrieve a video from the redux store using the videoUuid argument
+    //console.log("THE VIDEO UUID IN viewVideo: "+videoUuid);
+    const reduxState = getState().videoListingState.videos
+    // console.log("REDUX STATE: ", reduxState)
+
+    const retrievedVideo = getState().videoListingState.videos[videoUuid];
+    // console.log("THE RETRIEVED VIDEO FROM REDUX STATE: ", retrievedVideo)
+    // How we'll use this in the video view component
+    // https://www.youtube.com/watch?v= + url
+  
 
   const payload = { currentViewedVideo: retrievedVideo };
   console.log(payload);
