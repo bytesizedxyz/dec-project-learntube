@@ -61,10 +61,10 @@ const updateVideo = (params, id) => {
   return new Promise((res, rej) => {
     knex(VIDEOTABLE)
     .update(params)
-    .where("videos.id", parseInt(id, 10))
+    .where(knex.raw('videos.uuid = ?', id))
     .returning("*")
     .then(data => res(data))
-    .catch(err =>rej(Error(err)))
+    .catch(err =>rej(err))
   })
 }
 

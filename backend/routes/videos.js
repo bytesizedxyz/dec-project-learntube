@@ -64,7 +64,7 @@ router.patch('/:id', (req, res, next) => {
     res.status(SUCCESS).json(data);
   })
   .catch(err => {
-    res.status(INTERNAL_SERVER_ERROR).send({err:"something happened on our end! Please try again later"})
+    res.status(INTERNAL_SERVER_ERROR).send({err})
   })
 });
 
