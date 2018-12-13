@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 const VideoPage = ({videoState}) => {
    
-    const {videoId, title} = videoState.currentViewedVideo;
+    const {videoUuid, title, url} = videoState.currentViewedVideo;
     const Main = styled.div`
     display:flex;
     div{
@@ -19,7 +19,7 @@ const VideoPage = ({videoState}) => {
             <Youtube
             opts={{height: '390',
             width: '400'}}
-            videoId={videoId}
+            videoId={url}
             />
             </div>
             <div>
