@@ -1,11 +1,9 @@
-
 // One note, if youre using postgres and this doesnt run because "function uuid_generate_v4()" does not exist
 // run this query in your database as it's needed to generate the uuid's for multiple tables:
 // CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-
 // In addition, this is needed in this file so it will read the .env file variables upon running the knex commands.
-require('dotenv').config();
+require("dotenv").config();
 
 // Variables used in the knex commands.
 const connection = {
@@ -17,25 +15,36 @@ const connection = {
 };
 
 const dbConfig = {
-  client: 'pg',
+  client: "pg",
   connection,
   migrations: {
-    directory: __dirname + '/db/migrations'
+    directory: __dirname + "/db/migrations"
   },
   seeds: {
-    directory: __dirname + '/db/seeds'
+    directory: __dirname + "/db/seeds"
+  }
+};
+
+const productionDbConfig = {
+  client: "pg",
+  connection: process.env.DATABASE_URL,
+  migrations: {
+    directory: __dirname + "/db/migrations"
   },
+  seeds: {
+    directory: __dirname + "/db/seeds"
+  }
 };
 
 const prodConfig = {
-  client: 'pg',
-  connection:process.env.DATABASE_URL,
+  client: "pg",
+  connection: process.env.DATABASE_URL,
   migrations: {
-    directory: __dirname + '/db/migrations'
+    directory: __dirname + "/db/migrations"
   },
   seeds: {
-    directory: __dirname + '/db/seeds'
-  },
+    directory: __dirname + "/db/seeds"
+  }
 };
 
 module.exports = {
