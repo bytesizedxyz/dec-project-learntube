@@ -13,7 +13,14 @@ import store from "./state";
 import styled from "styled-components";
 
 
+const Img = styled.img`
+  width: 40rem;
+`;
 
+
+// once we connect the redux store to App.
+// We can pass down the user's authentication status
+// as a prop to the Header component.
 class App extends Component {
   render() {
     return (
