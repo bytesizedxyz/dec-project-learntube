@@ -19,6 +19,7 @@ const insertUser = user => {
   const { username, email, password, is_admin } = user;
   return knex(USERTABLE)
     .insert({ username, email, password, is_admin })
+    .returning('*')
     .then(data => {
       return data;
     })
@@ -55,7 +56,7 @@ const checkPassword = (reqPassword, foundUser) => {
           email: email,
           is_admin: is_admin
         };
-        const token = jwt.sign(user, process.env.jwtSecret, { expiresIn: '1m' });
+        const token = jwt.sign(user, process.env.jwtSecret, { expiresIn: '2 days' });
         resolve({ user, token });
       } else {
         reject(new Error('Passwords do not match.'));
