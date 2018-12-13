@@ -5,20 +5,23 @@
  * Needs to handle the authentication of users better. Possible correlation against the db?
  *
  */
+const { UNPROCESSABLE_ENTITY, UNAUTHORIZED } = require('../SERVER_CONSTANTS').statusCodes;
 const jwt = require('jsonwebtoken');
 const secret = process.env.jwtSecret;
 
 module.exports = (req, res, next) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization.split(' ')[1];
-    jwt.verify(token, Buffer.from(secret, 'base64'), { algorithms: ['HS256'] }, (err, decoded) => {
-      if (err && !decoded) {
-        res.status(401).send({
-          err: 'Invalid token'
+    jwt.verify(token, secret, { algorithms: ['HS256'] }, (err, decoded) => {
+      if (err.message === 'jwt expired' && !decoded) {
+        res.status(UNAUTHORIZED).json({ error: 'JWT has expired. Please log in.' });
+      } else if (err.message === 'invalid token' && !decoded) {
+        res.status(UNAUTHORIZED).send({
+          error: 'Invalid token'
         });
       } else if (err && decoded) {
-        res.status(401).send({
-          err: 'token is decoded and theres an error'
+        res.status(UNAUTHORIZED).send({
+          error: 'token is decoded and theres an error'
         });
       } else if (!err && decoded) {
         req.user = decoded;
@@ -26,8 +29,8 @@ module.exports = (req, res, next) => {
       }
     });
   } else {
-    res.status(422).send({
-      err: 'no bearer token'
+    res.status(UNPROCESSABLE_ENTITY).send({
+      error: 'no bearer token'
     });
   }
 };

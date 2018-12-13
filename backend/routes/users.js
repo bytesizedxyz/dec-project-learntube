@@ -10,13 +10,14 @@ const {
 } = require('../SERVER_CONSTANTS').statusCodes;
 router.post('/', (req, res, next) => {
   makingUser(req.body)
-    .then(response => {
-      console.log('back at routes', response);
+    .then(() => {
+      console.log('back at routes');
       res.status(SUCCESS).json({ message: 'Successfully created a user.' });
     })
     .catch(err => {
-      console.log(err);
-      if (err.code === 23505) {
+      if (
+        err.message.includes('duplicate key value violates unique constraint "users_email_unique"')
+      ) {
         res.status(CONFLICT).json({ error: 'Email is already in use' });
       } else if (err.message === 'You are missing required fields') {
         res.status(UNPROCESSABLE_ENTITY).json({ error: err.message });
@@ -29,7 +30,7 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.get('/signIn', (req, res) => {
+router.get('/sign_in', (req, res) => {
   const { username, password } = req.body;
   const user = {
     username,
@@ -41,11 +42,16 @@ router.get('/signIn', (req, res) => {
       res.status(SUCCESS).json({ user, token });
     })
     .catch(error => {
-      console.log(error.message);
       if (error.message === 'Passwords do not match.') {
         res.status(BAD_REQUEST).json({ error: 'Password does not match.' });
+      } else if (error.error === 'No users.') {
+        res.status(BAD_REQUEST).json({ error: 'User does not exist.' });
+      } else if (
+        error.err.message ===
+        'Undefined binding(s) detected when compiling SELECT query: select * from "users" where "username" = ?'
+      ) {
+        res.status(BAD_REQUEST).json({ error: 'User does not exist.' });
       } else {
-        console.log('error happened');
         res.status(INTERNAL_SERVER_ERROR).json({
           error: 'Something went wrong on our end. Please try again later.'
         });
