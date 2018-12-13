@@ -1,9 +1,12 @@
-process.env.TEST_SUITE = 'user-routes-test';
 const request = require('supertest');
 const server = require('../../server');
 const User = require('../../db/knex');
-const { UNPROCESSABLE_ENTITY, BAD_REQUEST, SUCCESS } = require('../../SERVER_CONSTANTS').statusCodes;
-const { postRequest, getRequest, dropCollection, parseJson } = require('./mockRequests');
+const {
+  UNPROCESSABLE_ENTITY,
+  BAD_REQUEST,
+  SUCCESS
+} = require('../../SERVER_CONSTANTS').statusCodes;
+const { postRequest, getRequest, dropCollection, parseJson } = require('../mockRequests');
 const newUser = {
   username: 'NewUser',
   email: 'newUser@NewEmail.com',
@@ -57,7 +60,7 @@ describe('Hitting the userRoutes, a User may', () => {
 
   test('login a user', async done => {
     await postRequest(createdRequest, '/users/', newUser);
-    const response = await getRequest(createdRequest, '/users/signIn', loginUserInput);
+    const response = await getRequest(createdRequest, '/users/sign_in', loginUserInput);
     expect(response.status).toBe(SUCCESS);
     expect(response.body.user).toEqual(foundUser);
     expect(response.body.token).toBeTruthy();
@@ -66,8 +69,8 @@ describe('Hitting the userRoutes, a User may', () => {
 
   test('receive a message indicating bad login attempt', async done => {
     await postRequest(createdRequest, '/users/', newUser);
-    const response = await getRequest(createdRequest, '/users/signIn', badLoginUserInput);
-    console.log(response)
+    const response = await getRequest(createdRequest, '/users/sign_in', badLoginUserInput);
+    console.log(response.body);
     expect(response.status).toBe(BAD_REQUEST);
     expect(response.body).toEqual({ error: 'Password does not match.' });
     done();
