@@ -1,9 +1,7 @@
 exports.up = (knex, Promise) => {
-  const rawSql = 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";';
-  knex.raw(rawSql);
+  return knex.raw('create extension if not exists "uuid-ossp"');
 };
 
 exports.down = (knex, Promise) => {
-  const rawSql = 'DROP EXTENSION IF EXISTS "uuid-ossp";';
-  return knex.raw(rawSql);
+  return knex.raw('drop extension if not exists "uuid-ossp"');
 };
