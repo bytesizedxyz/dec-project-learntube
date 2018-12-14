@@ -41,7 +41,7 @@ class videos extends Component {
   state = { videos: [], selectedVideo: null };
 
   componentDidMount = () => {
-    // this.props.retrieveVideosForListing();
+     this.props.retrieveVideosForListing();
     //this.settingState(videoList);
     console.log("VIDEOS THIS.PROPS: ", this.props);
   };

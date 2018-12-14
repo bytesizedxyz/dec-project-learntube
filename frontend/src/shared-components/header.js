@@ -10,6 +10,9 @@ import { BlurredBackground } from "../shared-styles";
 import LoginForm from './login'
 import LogoutForm from './logout'
 import SignupForm from './signup'
+import {Lunr} from 'react-lunr'
+import lunr from 'lunr'
+import SearchBar from './searchBar'
 
 const LogoContainer = styled.div`
   display: flex;
@@ -109,15 +112,21 @@ fireOffLoginAction = (username, password) => {
     const { handleClick } = this
     const { toggleFormModal } = this.state
     console.log(this.props)
-    const { logged_in } = this.props.authenticationStatus;   //containerComponent
-      
-    // Going to need to include the login modal inside of
+    const { logged_in } = this.props.authenticationStatus;  
+   
+   
+    
     return (
         <Nav>
-          <div id="headerBg" >
+          <div id="headerBg"> 
+          <SearchBar id='searchbar' state={this.props.videoListingState}>
+              <div>{this.props.results}</div>
             <div id="searchbar">
-              <input type='text' placeholder='Search...'/>
+            <form  onSubmit={() =>{}}>
+            <input onChange={this.props.getResult} />
+            </form>
             </div>
+            </SearchBar>
             
             <div id="logo-container">
               <Link style={{color: 'white'}} to='/'><Logo /></Link>
@@ -127,7 +136,7 @@ fireOffLoginAction = (username, password) => {
               <button id={!logged_in ? "login" : "logout"} onClick={this.handleClick}>{!logged_in ? "Log In" : "Log Out"}</button>
               <button id="signup" onClick={this.handleClick}>Sign Up</button>
             </div>
-          </div>
+           
           {toggleFormModal ? (
             <Modal>
             {formRef => {
@@ -140,12 +149,12 @@ fireOffLoginAction = (username, password) => {
               );
             }}
           </Modal>
-          ) : null}
-        </Nav>
+          ) : <> </> }
+      </div>
+      </Nav>
     );
   }
-};
-
+}
 const Nav = styled.nav`
   #headerBg {
     display: flex;
@@ -176,6 +185,6 @@ const Nav = styled.nav`
 `
 
 
-export default connect(state => state)(Header)
+export default connect(state => state)(Header);
 
 
