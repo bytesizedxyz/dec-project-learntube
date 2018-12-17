@@ -1,20 +1,14 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import VideoList from "./VideoList";
-import { viewVideo, retrieveVideosForListing } from "../../state/actions/video";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import VideoList from './VideoList';
+import { viewVideo, retrieveVideosForListing } from '../../state/actions/video';
+import { connect } from 'react-redux';
 
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-image: linear-gradient(
-    -225deg,
-    #5391bd 0%,
-    #5e8cad 29%,
-    #44107a 80%,
-    #231557 100%
-  );
+  background-image: linear-gradient(-225deg, #5391bd 0%, #5e8cad 29%, #44107a 80%, #231557 100%);
   // background: lime;
   padding-top: 20px;
   padding-bottom: 60px;
@@ -46,11 +40,7 @@ class videos extends Component {
     // console.log("THE VIDEOS: ", videos);
     return (
       <Container>
-        <VideoList
-          onVideoSelect={this.onVideoSelect}
-          videos={videos}
-          videoUuids={videoUuids}
-        />
+        <VideoList onVideoSelect={this.onVideoSelect} videos={videos} videoUuids={videoUuids} />
       </Container>
     );
   }

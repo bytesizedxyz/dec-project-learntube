@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const icon = ({ name }) => {
-  if (name === "user icon") {
+  if (name === 'user icon') {
     return (
       <svg
         version="1.1"
@@ -11,8 +11,7 @@ const icon = ({ name }) => {
         width="28px"
         height="28px"
         viewBox="0 0 256 256"
-        enable-background="new 0 0 256 256"
-      >
+        enable-background="new 0 0 256 256">
         <g id="Слой_2" />
         <g id="Layer_1">
           <g id="_x35__19_">
@@ -34,7 +33,7 @@ const icon = ({ name }) => {
       </svg>
     );
   }
-  if (name === "login icon") {
+  if (name === 'login icon') {
     return (
       <svg
         version="1.1"
@@ -44,8 +43,7 @@ const icon = ({ name }) => {
         width="28px"
         height="28px"
         viewBox="0 0 256 256"
-        enable-background="new 0 0 256 256"
-      >
+        enable-background="new 0 0 256 256">
         <g id="Слой_2" />
         <g id="Layer_1">
           <g id="_x33__19_">
@@ -69,7 +67,7 @@ const icon = ({ name }) => {
       </svg>
     );
   }
-  if (name === "logout icon") {
+  if (name === 'logout icon') {
     return (
       <svg
         version="1.1"
@@ -79,8 +77,7 @@ const icon = ({ name }) => {
         width="28px"
         height="28px"
         viewBox="0 0 256 256"
-        enable-background="new 0 0 256 256"
-      >
+        enable-background="new 0 0 256 256">
         <g id="Слой_2" />
         <g id="Layer_1">
           <g id="_x34__19_">
@@ -105,7 +102,7 @@ const icon = ({ name }) => {
     );
   }
 
-  if (name === "close icon") {
+  if (name === 'close icon') {
     return (
       <svg
         version="1.1"
@@ -115,15 +112,14 @@ const icon = ({ name }) => {
         width="28px"
         height="28px"
         viewBox="0 0 256 256"
-        enable-background="new 0 0 256 256"
-      >
+        enableBackground="new 0 0 256 256">
         <g id="Слой_2" />
         <g id="Layer_1">
           <g id="_x31_1_1_">
             <g>
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M150.621,128.008c22.52-22.518,50.012-50.011,52.693-52.691
 				c6.248-6.248,6.248-16.381,0-22.629c-6.25-6.25-16.381-6.25-22.627,0c-2.684,2.681-30.172,30.171-52.693,52.691
 				C105.473,82.858,77.42,55.368,74.739,52.688c-6.246-6.25-16.377-6.25-22.627,0c-6.248,6.248-6.248,16.381,0,22.629
@@ -138,7 +134,7 @@ const icon = ({ name }) => {
     );
   }
 
-  if (name === "upload icon") {
+  if (name === 'upload icon') {
     return (
       <svg
         version="1.1"
@@ -149,13 +145,12 @@ const icon = ({ name }) => {
         width="14px"
         height="14px"
         viewBox="0 0 256 256"
-        enable-background="new 0 0 256 256"
-      >
+        enableBackground="new 0 0 256 256">
         <g id="_x31_">
           <g>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M246.627,153.37c-12.496-12.496-83.503-83.501-95.999-95.997
 			c-12.497-12.497-32.758-12.497-45.257,0C92.876,69.869,21.869,140.874,9.373,153.37c-12.497,12.498-12.497,32.759,0,45.257
 			c12.496,12.497,32.758,12.497,45.256,0c8.889-8.892,64.59-65.158,67.714-68.284c3.125-3.126,8.19-3.126,11.315,0
