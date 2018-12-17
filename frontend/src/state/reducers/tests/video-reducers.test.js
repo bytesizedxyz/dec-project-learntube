@@ -9,10 +9,9 @@ describe("video-actions integration tests", () => {
     currentViewedVideo = getState().videoState.currentViewedVideo;
     expect(currentViewedVideo).toBe(null);
 
-    viewVideo("QaVXaMFc6gk")(dispatch, getState);
-    
+    viewVideo("345744")(dispatch, getState);
+
     currentViewedVideo = getState().videoState.currentViewedVideo;
     expect(currentViewedVideo.url).toBe("QaVXaMFc6gk");
   });
 });
-  

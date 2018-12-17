@@ -27,15 +27,6 @@ const Container = styled.div`
       margin-top: 0.2rem;
       margin-bottom: 0.2rem;
     }
-
-    p1 {
-      font-size: 25px;
-      font-weight: bold;
-      color: white;
-      text-overflow: hidden;
-      margin-top: 0.2rem;
-      margin-bottom: 0.2rem;
-    }
   }
 `;
 
@@ -51,7 +42,7 @@ const VideoItem = ({
     <Container id={videoUuid} onClick={() => onVideoSelect(videoUuid)}>
       <img src={`https://img.youtube.com/vi/${videoURL}/0.jpg`} />
       <div id="video-details">
-        <p1>{videoTitle}</p1>
+        <p>{videoTitle}</p>
         <p>{videoURL}</p>
         <p>{postedBy}</p>
         <p>{createdAt}</p>

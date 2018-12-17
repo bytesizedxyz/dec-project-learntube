@@ -35,24 +35,28 @@ export const retrieveVideosForListing = () => (dispatch, getState) => {
   let videoIds = [];
   //replace videoList with results of an axios request to backend for videos later
   const videos = videoList.reduce((acc, curr, i) => {
-    videoIds.push(curr.videoId);
-    acc[curr.videoId] = curr;
+    videoIds.push(curr.uuid);
+    acc[curr.uuid] = curr;
     return acc;
   }, {});
 
   const payload = { videos, videoUuids: videoIds };
   // data for redux store is a boolean flag
   dispatch({ type: RETRIEVE_VIDEOS_FOR_LISTING, payload });
+  console.log(
+    "STATE AFTER VIDEOS PLACED ON STATE: ",
+    getState().videoListingState
+  );
 };
 
 export const viewVideo = videoUuid => (dispatch, getState) => {
   // call getState to retrieve a video from the redux store using the videoUuid argument
   //console.log("THE VIDEO UUID IN viewVideo: "+videoUuid);
   const reduxState = getState().videoListingState.videos;
-  // console.log("REDUX STATE: ", reduxState)
+  console.log("REDUX STATE: ", reduxState);
 
   const retrievedVideo = getState().videoListingState.videos[videoUuid];
-  // console.log("THE RETRIEVED VIDEO FROM REDUX STATE: ", retrievedVideo)
+  console.log("THE RETRIEVED VIDEO FROM REDUX STATE: ", retrievedVideo);
   // How we'll use this in the video view component
   // https://www.youtube.com/watch?v= + url
 
