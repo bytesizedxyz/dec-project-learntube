@@ -1,4 +1,5 @@
-import API from "../api";
+import axios from "axios";
+import BASE_URL from "../api";
 
 /*
  * action types
@@ -21,7 +22,7 @@ const normalizeData = resource => {
 
 // redux thunk action creators
 export const retrievePlaylists = uuid => (dispatch, getState) => {
-  const playlistList = API.get(`playlists/all/${uuid}`);
+  const playlistList = axios.get(`${BASE_URL}playlists/all/${uuid}`);
 
   const { items, itemUuids } = normalizeData(playlistList);
   const payload = { playlists: items, playlistUuids: itemUuids };
@@ -37,7 +38,10 @@ export const addNewPlaylist = title => async (dispatch, getState) => {
   //   user_uuid: String
   // }
   const postData = { title };
-  const newPlaylist = await API.post(`/playlists/playlist`, postData);
+  const newPlaylist = await axuis.post(
+    `${BASE_URL}/playlists/playlist`,
+    postData
+  );
   const playlistData = {
     [newPlaylist.uuid]: newPlaylist
   };
@@ -52,7 +56,7 @@ export const addNewPlaylist = title => async (dispatch, getState) => {
 export const retrievePlaylistVideos = uuid => async (dispatch, getState) => {
   // API request should return shape of:
   // an array of videos
-  const playlistVideos = await API.get(`/playlists/${uuid}`);
+  const playlistVideos = await axios.get(`${BASE_URL}/playlists/${uuid}`);
 
   const { items, itemUuids } = normalizeData(playlistVideos);
   const payload = { videos: items, videoUuids: itemUuids };
@@ -77,6 +81,6 @@ export const addVideoToPlaylist = data => async (dispatch, getState) => {
   //   "playlist_uuid": "957e771a-2639-44e7-a838-00b9aa1cb9f6",
   //   "video_uuid": "f026af75-5104-42d5-9a00-14a102b6fe6b"
   // }
-  await API.post(`/playlists/playlist_video`, data);
+  await axios.post(`${BASE_URL}/playlists/playlist_video`, data);
   return "Video Successfully added to playlist.";
 };
