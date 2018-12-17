@@ -38,7 +38,8 @@ module.exports = [
   {
     uuid: 'dd018218-8bbd-4932-a001-58132b21f3b0',
     url: 'https://youtu.be/kl8F-8tR8to',
-    title: 'Kingsman: The Secret Service | Official Trailer 2 [HD] | 20th Century FOX',
+    title:
+      'Kingsman: The Secret Service | Official Trailer 2 [HD] | 20th Century FOX',
     watch_count: 0,
     user_uuid: 'd2dbb040-a0ef-4fdc-93b7-1b84cf8ee75e'
   },
@@ -59,7 +60,8 @@ module.exports = [
   {
     uuid: '01926f72-7397-4906-bec4-5788534c1228',
     url: 'https://youtu.be/TivqZTq5u6Y',
-    title: 'The official full length TV launch trailer - Doctor Who Series 8 2014 - BBC One',
+    title:
+      'The official full length TV launch trailer - Doctor Who Series 8 2014 - BBC One',
     watch_count: 0,
     user_uuid: 'ef5cb2eb-f3ec-413c-b1f1-5021633b5ca8'
   },
@@ -94,7 +96,8 @@ module.exports = [
   {
     uuid: 'b9ee3066-905f-4561-8ffb-d1808d9dd6e2',
     url: 'https://youtu.be/U_pU9YDqQzk',
-    title: 'Exit of the final 9/11 search and rescue dog (Cy Fair, TX Fire Department).',
+    title:
+      'Exit of the final 9/11 search and rescue dog (Cy Fair, TX Fire Department).',
     watch_count: 0,
     user_uuid: '664bbf54-a9c5-4835-8d04-be7afc2a1213'
   },
@@ -122,7 +125,8 @@ module.exports = [
   {
     uuid: '4c96dfef-792c-4918-b823-5d8cae601633',
     url: 'https://youtu.be/G7WGIH35JBE',
-    title: 'Transient orca punts a seal 80 feet into the air near Victoria, BC!',
+    title:
+      'Transient orca punts a seal 80 feet into the air near Victoria, BC!',
     watch_count: 0,
     user_uuid: '7b691380-90e6-40d8-98b0-bd6bb7964a3d'
   },
@@ -143,7 +147,8 @@ module.exports = [
   {
     uuid: '72c9f94e-c9ce-47e8-97f7-8f4851069cd1',
     url: 'https://youtu.be/nckRlLlyfec',
-    title: 'Ahmed Mohamed talks about being arrested at Irving school over clock',
+    title:
+      'Ahmed Mohamed talks about being arrested at Irving school over clock',
     watch_count: 0,
     user_uuid: '7b691380-90e6-40d8-98b0-bd6bb7964a3d'
   },
@@ -178,7 +183,8 @@ module.exports = [
   {
     uuid: '3036dc50-d378-465b-b303-b3cc32e74ed7',
     url: 'https://youtu.be/C3Y-wK5E2Dw',
-    title: 'ハンモックで寛ぐまるとはな２。- Maru&Hana are relaxed on the hammock 2.-',
+    title:
+      'ハンモックで寛ぐまるとはな２。- Maru&Hana are relaxed on the hammock 2.-',
     watch_count: 0,
     user_uuid: '53c576be-3617-4746-bcfc-cc1378918b64'
   },
@@ -269,7 +275,8 @@ module.exports = [
   {
     uuid: 'a8a46b20-e634-4168-a108-7bc82f83cb6d',
     url: 'https://youtu.be/AXOa66-k9MA',
-    title: 'Exploding soda cans with electromagnets in SLOW MOTION ft Joe Hanson',
+    title:
+      'Exploding soda cans with electromagnets in SLOW MOTION ft Joe Hanson',
     watch_count: 0,
     user_uuid: '664bbf54a9c548358d04be7afc2a1213'
   },
@@ -381,7 +388,8 @@ module.exports = [
   {
     uuid: 'f54ca8f4-957e-4f29-9db5-486a22eea7c1',
     url: 'https://youtu.be/tOrbVMnqK2c',
-    title: 'Matt Damon’s Man Bun Gives Twitter a Lady Boner - The Graham Norton Show',
+    title:
+      'Matt Damon’s Man Bun Gives Twitter a Lady Boner - The Graham Norton Show',
     watch_count: 0,
     user_uuid: 'd131769329404e4e841de92cd88690a3'
   },
