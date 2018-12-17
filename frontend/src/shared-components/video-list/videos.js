@@ -26,7 +26,7 @@ class videos extends Component {
   componentDidMount = () => {
     this.props.retrieveVideosForListing();
     //this.settingState(videoList);
-    console.log("VIDEOS THIS.PROPS: ", this.props);
+    // console.log("VIDEOS THIS.PROPS: ", this.props);
   };
 
   settingState = videoList => {
@@ -37,13 +37,13 @@ class videos extends Component {
   };
 
   onVideoSelect = videoUuid => {
-    console.log("THE VIDEO UUID ON CLICK: ", videoUuid);
+    // console.log("THE VIDEO UUID ON CLICK: ", videoUuid);
     this.props.viewVideo(videoUuid);
   };
 
   render() {
     const { videos, videoUuids } = this.props;
-    console.log("THE VIDEOS: ", videos);
+    // console.log("THE VIDEOS: ", videos);
     return (
       <Container>
         <VideoList

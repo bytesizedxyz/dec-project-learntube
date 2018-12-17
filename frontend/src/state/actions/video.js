@@ -33,26 +33,21 @@ export const retrieveVideosForListing = () => async dispatch => {
   dispatch({ type: RETRIEVE_VIDEOS_FOR_LISTING, payload });
 };
 
+export const retrieveVideo = videoUuid => {
+  return async function(dispatch, getState) {
+    const response = await backend.get(`videos/${videoUuid}`);
+    const payload = {
+      currentViewedVideo: response.data
+    };
+    dispatch({ type: VIEW_VIDEO, payload });
+  };
+};
+
 //export const viewVideo = videoUuid => (dispatch, getState) => {
 //ES5 way:
 export const viewVideo = videoUuid => {
   return async function(dispatch, getState) {
-    const response = await backend.get("videos/:id");
-    // call getState to retrieve a video from the redux store using the videoUuid argument
-    //console.log("THE VIDEO UUID IN viewVideo: "+videoUuid);
-    const reduxState = getState().videoListingState.videos;
-    // console.log("REDUX STATE: ", reduxState)
-
-    const retrievedVideo = getState().videoListingState.videos[videoUuid];
-    // console.log("THE RETRIEVED VIDEO FROM REDUX STATE: ", retrievedVideo)
-    // How we'll use this in the video view component
-    // https://www.youtube.com/watch?v= + url
-
-    const payload = { currentViewedVideo: retrievedVideo };
-    console.log(payload);
-
-    dispatch({ type: VIEW_VIDEO, payload: response.data });
-
-    navigate("/play-video", { state: getState() });
+    await dispatch(retrieveVideo(videoUuid));
+    navigate(`/videos/${videoUuid}`, { state: getState() });
   };
 };
