@@ -1,42 +1,44 @@
-import React, { Component } from "react";
-import { uploadVideo } from "../../../state/actions/upload"
-import axios from "axios";
-import styled from "styled-components";
-import Form from "../../../shared-components/fun-components/form";
-import { Label, Input } from "../../../shared-styles/form-elements";
-import { AboveModalContainer } from "../../../shared-styles";
-import Icon from "../../../resources/icon";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { uploadVideo } from '../../../state/actions/upload';
+import axios from 'axios';
+import styled from 'styled-components';
+import Form from '../../../shared-components/fun-components/form';
+import { Label, Input } from '../../../shared-styles/form-elements';
+import { AboveModalContainer } from '../../../shared-styles';
+import Icon from '../../../resources/icon';
 
-axios.defaults.headers.common["Authorization"] =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmt5bWFyayIsImVtYWlsIjoic2h1dHVwQHNodXR1cC5jb20iLCJpc19hZG1pbiI6bnVsbCwiaWF0IjoxNTQ1MDY4NjM1LCJleHAiOjE1NDUyNDE0MzV9.FQQuG7UdzE1slqdwCfYCjCAFk9fkmEfnafgD0M7o5FE";
+axios.defaults.headers.common['Authorization'] =
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmt5bWFyayIsImVtYWlsIjoic2h1dHVwQHNodXR1cC5jb20iLCJpc19hZG1pbiI6bnVsbCwiaWF0IjoxNTQ1MDY4NjM1LCJleHAiOjE1NDUyNDE0MzV9.FQQuG7UdzE1slqdwCfYCjCAFk9fkmEfnafgD0M7o5FE';
 
 class VideoUpload extends Component {
-  state = { title: "", url: "", validationErrorMsg: null, uploadResult: null };
+  state = { title: '', url: '', validationErrorMsg: null, uploadResult: null };
 
   onSubmit = async e => {
     e.preventDefault();
     if (this.verifyValidInput()) {
       const { title, url } = this.state;
-      const posted_by = "d1317693-2940-4e4e-841d-e92cd88690a3";
-      uploadVideo(title, url, posted_by);
-    //   const result = await axios.post(
-    //     "https://dry-river-42897.herokuapp.com/videos",
-    //     { title, url, posted_by }
-    //   );
-    //   console.log(result, +" the onSubmit result");
-    //   this.setUploadResultSuccess(result);
-    //   setTimeout(this.setUploadResultNull, 1000);
-    // }
+      const posted_by = 'd1317693-2940-4e4e-841d-e92cd88690a3';
+      console.log('here');
+      // await uploadVideo(title, url, posted_by);
+      //   const result = await axios.post(
+      //     "https://dry-river-42897.herokuapp.com/videos",
+      //     { title, url, posted_by }
+      //   );
+      //   console.log(result, +" the onSubmit result");
+      //   this.setUploadResultSuccess(result);
+      //   setTimeout(this.setUploadResultNull, 1000);
+    }
   };
 
   verifyValidInput = () => {
     const { title, url } = this.state;
     if (title.length < 5) {
-      this.setStateValidationErrorMsg("title must be at least 5 characters.");
+      this.setStateValidationErrorMsg('title must be at least 5 characters.');
       return false;
     }
     if (url.length < 9) {
-      this.setStateValidationErrorMsg("URL must be at least 9 characters.");
+      this.setStateValidationErrorMsg('URL must be at least 9 characters.');
       return false;
     }
     return true;
