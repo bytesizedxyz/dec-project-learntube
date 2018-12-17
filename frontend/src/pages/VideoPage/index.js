@@ -1,9 +1,9 @@
-import React from "react";
-import Youtube from "react-youtube";
-import { Link } from "@reach/router";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import { retrieveVideo } from "../../state/actions/video";
+import React from 'react';
+import Youtube from 'react-youtube';
+import { Link } from '@reach/router';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { retrieveVideo } from '../../state/actions/video';
 
 const Main = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const Error = styled.div`
 const NoVideoError = () => (
   <Error>
     <h1>{"Couldn't find video :("}</h1>
-    <Link style={{ color: "white", paddingTop: "10px" }} to="/">
+    <Link style={{ color: 'white', paddingTop: '10px' }} to="/">
       Go home
     </Link>
   </Error>
@@ -43,12 +43,15 @@ class VideoPage extends React.Component {
     }
 
     const { videoUuid, title, url } = currentViewedVideo;
+    const videoId = `${url.match('([^/]+)/?$')[1]}`;
+
+    console.log(`video url: ${url}, video id: ${videoId}`);
 
     return (
       <Main>
         <div>
           <h1>{title}</h1>
-          <Youtube opts={{ height: "390", width: "400" }} videoId={url} />
+          <Youtube opts={{ height: '390', width: '400' }} videoId={videoId} />
         </div>
         <div>suggested videos column here</div>
       </Main>

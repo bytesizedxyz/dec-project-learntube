@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const Container = styled.div`
       margin-bottom: 0.2rem;
     }
 
-    p1 {
+    .title {
       font-size: 25px;
       font-weight: bold;
       color: white;
@@ -49,13 +49,17 @@ const VideoItem = ({
 }) => {
   return (
     <Container id={videoUuid} onClick={() => onVideoSelect(videoUuid)}>
-      <img src={`https://img.youtube.com/vi/${videoURL}/0.jpg`} />
-     <div id="video-details">
-      <p1>{videoTitle}</p1>
-      <p>{videoURL}</p>
-      <p>{postedBy}</p>
-      <p>{createdAt}</p>
-    </div>
+      <img
+        src={`https://img.youtube.com/vi/${
+          videoURL.match('([^/]+)/?$')[1]
+        }/0.jpg`}
+      />
+      <div id="video-details">
+        <p className="title">{videoTitle}</p>
+        <p>{videoURL}</p>
+        <p>{postedBy}</p>
+        <p>{createdAt}</p>
+      </div>
     </Container>
   );
 };
