@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import styled from "styled-components";
+// import styled from "styled-components";
 import Form from "../../../shared-components/fun-components/form";
 import InputField from "../../../shared-components/fun-components/inputField";
-import { Label, Input } from "../../../shared-styles/form-elements";
 import { AboveModalContainer } from "../../../shared-styles";
 import Icon from "../../../resources/icon";
 

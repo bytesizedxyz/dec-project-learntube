@@ -1,5 +1,4 @@
 import React from "react";
-import { LOGIN, SIGNUP, LOGOUT } from "../state/actions/auth";
 import { Link } from "@reach/router";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -8,11 +7,7 @@ import PernHubLogo from "../resources/pernhub.svg";
 import Modal from "./modal";
 import { BlurredBackground } from "../shared-styles";
 import LoginForm from "./login";
-import LogoutForm from "./logout";
 import SignupForm from "./signup";
-import { Lunr } from "react-lunr";
-import lunr from "lunr";
-import SearchBar from "./searchBar";
 
 const LogoContainer = styled.div`
   display: flex;
