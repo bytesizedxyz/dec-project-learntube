@@ -16,8 +16,9 @@ class VideoUpload extends Component {
     e.preventDefault();
     if (this.verifyValidInput()) {
       const { title, url } = this.state;
-      const posted_by = 'USERUUID';
+      const posted_by = 'd1317693-2940-4e4e-841d-e92cd88690a3';
       console.log('here');
+      console.log(title, url);
       const result = await axios.post(
         'https://dry-river-42897.herokuapp.com/videos',
         {
@@ -25,7 +26,11 @@ class VideoUpload extends Component {
           url,
           posted_by
         },
-        { headers: { Authorization: `Bearer ${userToken}` } }
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmt5bWFyayIsImVtYWlsIjoic2h1dHVwQHNodXR1cC5jb20iLCJpc19hZG1pbiI6bnVsbCwiaWF0IjoxNTQ1MDY4NjM1LCJleHAiOjE1NDUyNDE0MzV9.FQQuG7UdzE1slqdwCfYCjCAFk9fkmEfnafgD0M7o5FE`
+          }
+        }
       );
       console.log(result, +' the onSubmit result');
       retrieveVideo(result.data[0].uuid);
