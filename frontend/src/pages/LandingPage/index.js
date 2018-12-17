@@ -6,10 +6,7 @@ import Videos from "../../shared-components/video-list/videos";
 const index = ({ viewVideo }) => {
   return (
     <main>
-<<<<<<< HEAD
       <h1>Landing Page</h1>
-=======
->>>>>>> 29c1d1b95a433fc6acba693036d28c23fc0843a9
       <Videos />
     </main>
   );
