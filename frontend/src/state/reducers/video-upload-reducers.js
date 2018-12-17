@@ -1,8 +1,10 @@
-import { UPLOAD_VIDEO } from "../actions/video-upload-actions";
-
+import { UPLOAD_VIDEO } from "../actions/upload";
 
 const initialState = {
-  logged_in: false
+  logged_in: false,
+  title: "",
+  url: "",
+  posted_by: ""
 };
 
 export const authReducer = (state = initialState, action) => {
