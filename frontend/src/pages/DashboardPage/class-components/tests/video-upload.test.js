@@ -26,7 +26,7 @@ test("VideoUpload state updates on title input onChange.", async done => {
 
 test("VideoUpload state updates on url input onChange.", async done => {
   const { getByLabelText, debug } = render(<VideoUpload />);
-  inputChangeTestCase("URL", getByLabelText, "https://youtube.com");
+  inputChangeTestCase("Url", getByLabelText, "https://youtube.com");
   done();
 });
 
@@ -40,7 +40,7 @@ test("VideoUpload makes a post request onClick and UI reflects state accordingly
 
   // set up for allowing form to be submitted
   inputChange("Title", getByLabelText, "Woot!");
-  inputChange("URL", getByLabelText, "https://youtube.com");
+  inputChange("Url", getByLabelText, "https://youtube.com");
 
   // spy and trigger axios.post request
   const postSpy = jest.spyOn(axios, "post");
@@ -66,7 +66,7 @@ test("VideoUpload won't make a post request if title input length is less than 5
 
   // set up for preventing form from being submitted
   inputChange("Title", getByLabelText, "Woot");
-  inputChange("URL", getByLabelText, "https://youtube.com");
+  inputChange("Url", getByLabelText, "https://youtube.com");
 
   // spy and hopefully not trigger axios.post request
   const postSpy = jest.spyOn(axios, "noPost");
