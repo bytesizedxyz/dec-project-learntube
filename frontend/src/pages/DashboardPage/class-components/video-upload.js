@@ -12,7 +12,7 @@ class VideoUpload extends Component {
   state = { title: '', url: '', validationErrorMsg: null, uploadResult: null };
 
   onSubmit = async e => {
-    const userToken = localStorage.getItem(token);
+    const userToken = localStorage.getItem('token');
     e.preventDefault();
     if (this.verifyValidInput()) {
       const { title, url } = this.state;
