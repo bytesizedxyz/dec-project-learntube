@@ -12,11 +12,9 @@ import store from "./state";
 
 import styled from "styled-components";
 
-
 const Img = styled.img`
   width: 40rem;
 `;
-
 
 // once we connect the redux store to App.
 // We can pass down the user's authentication status
@@ -25,11 +23,10 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        
         <Header />
         <Router>
           <LandingPage path="/" />
-          <VideoPage path="/play-video" />
+          <VideoPage path="/videos/:id" />
           <DashboardPage path="/dashboard" />
         </Router>
       </Provider>
