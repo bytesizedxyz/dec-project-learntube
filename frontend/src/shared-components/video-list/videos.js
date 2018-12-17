@@ -8,18 +8,29 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 29c1d1b95a433fc6acba693036d28c23fc0843a9
   background-image: linear-gradient(-225deg, #5391BD 0%, #5E8CAD 29%, #44107A 80%, #231557 100%);
  // background: lime;
   padding-top: 20px;
   padding-bottom: 60px;
-  
 `
+<<<<<<< HEAD
+=======
+
+>>>>>>> 29c1d1b95a433fc6acba693036d28c23fc0843a9
 //background-image: linear-gradient(-225deg, #FFF800 0%, #FF1361 29%, #44107A 80%, #231557 100%);
 class videos extends Component {
   state = { videos: [], selectedVideo: null };
 
   componentDidMount = () => {
      this.props.retrieveVideosForListing();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 29c1d1b95a433fc6acba693036d28c23fc0843a9
     //this.settingState(videoList);
     // console.log("VIDEOS THIS.PROPS: ", this.props);
   };
