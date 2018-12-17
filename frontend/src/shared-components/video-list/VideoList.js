@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import VideoItem from "./VideoItem";
+import React, { Fragment } from 'react';
+import VideoItem from './VideoItem';
 
 const VideoList = ({ videoUuids, videos, onVideoSelect }) => {
   return videoUuids.map(uuid => {
@@ -13,6 +13,7 @@ const VideoList = ({ videoUuids, videos, onVideoSelect }) => {
           postedBy={video.username}
           createdAt={video.createdAt}
           onVideoSelect={onVideoSelect}
+          youTubeId={video.youtube_id}
         />
       </Fragment>
     );
