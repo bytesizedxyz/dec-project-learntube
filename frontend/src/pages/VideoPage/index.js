@@ -42,16 +42,18 @@ class VideoPage extends React.Component {
       return <NoVideoError />;
     }
 
-    const { videoUuid, title, url } = currentViewedVideo;
-    const videoId = `${url.match('([^/]+)/?$')[1]}`;
+    const { videoUuid, title, url, youtube_id } = currentViewedVideo;
 
-    console.log(`video url: ${url}, video id: ${videoId}`);
+    console.log(`video url: ${url}, video id: ${youtube_id}`);
 
     return (
       <Main>
         <div>
           <h1>{title}</h1>
-          <Youtube opts={{ height: '390', width: '400' }} videoId={videoId} />
+          <Youtube
+            opts={{ height: '390', width: '400' }}
+            videoId={youtube_id}
+          />
         </div>
         <div>suggested videos column here</div>
       </Main>

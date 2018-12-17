@@ -45,15 +45,12 @@ const VideoItem = ({
   videoURL,
   postedBy,
   createdAt,
-  onVideoSelect
+  onVideoSelect,
+  youTubeId
 }) => {
   return (
     <Container id={videoUuid} onClick={() => onVideoSelect(videoUuid)}>
-      <img
-        src={`https://img.youtube.com/vi/${
-          videoURL.match('([^/]+)/?$')[1]
-        }/0.jpg`}
-      />
+      <img src={`https://img.youtube.com/vi/${youTubeId}/0.jpg`} />
       <div id="video-details">
         <p className="title">{videoTitle}</p>
         <p>{videoURL}</p>
