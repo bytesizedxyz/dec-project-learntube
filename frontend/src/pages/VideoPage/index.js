@@ -1,5 +1,6 @@
 import React from "react";
 import Youtube from "react-youtube";
+import { Link } from "@reach/router";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { retrieveVideo } from "../../state/actions/video";
@@ -11,6 +12,25 @@ const Main = styled.div`
   }
 `;
 
+const Error = styled.div`
+  background: red;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  padding: 5rem;
+`;
+
+const NoVideoError = () => (
+  <Error>
+    <h1>Couldn't find video :(</h1>
+    <Link style={{ color: "white", paddingTop: "10px" }} to="/">
+      Go home
+    </Link>
+  </Error>
+);
+
 class VideoPage extends React.Component {
   componentDidMount = () => {
     this.props.retrieveVideo(this.props.id);
@@ -19,9 +39,7 @@ class VideoPage extends React.Component {
   render = () => {
     const { currentViewedVideo } = this.props.videoState;
     if (!currentViewedVideo) {
-      console.log("NO VIDEO FOUND");
-      return null;
-      // redirect to /
+      return <NoVideoError />;
     }
 
     const { videoUuid, title, url } = currentViewedVideo;
