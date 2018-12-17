@@ -24,7 +24,7 @@ const Error = styled.div`
 
 const NoVideoError = () => (
   <Error>
-    <h1>Couldn't find video :(</h1>
+    <h1>{"Couldn't find video :("}</h1>
     <Link style={{ color: "white", paddingTop: "10px" }} to="/">
       Go home
     </Link>
