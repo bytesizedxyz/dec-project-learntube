@@ -95,7 +95,7 @@ test("VideoUpload won't make a post request if url input length is less than 9."
 
   // set up for preventing form from being submitted
   inputChange("Title", getByLabelText, "Woot!");
-  inputChangeTestCase("URL", getByLabelText, "https://");
+  inputChangeTestCase("Url", getByLabelText, "https://");
 
   // spy and trigger axios.post request
   const postSpy = jest.spyOn(axios, "noPost");
