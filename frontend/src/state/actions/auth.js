@@ -1,3 +1,4 @@
+import axios from 'axios';
 /*
  * action types
  */
@@ -15,12 +16,21 @@ export const signup = () => (dispatch, getState) => {
   dispatch({ type: LOGOUT, payload });
 };
 
-export const login = () => async (dispatch, getState) => {
-  // axios request to login
-  //console.log("THE DISPATCH: ", dispatch);
-  const payload = { logged_in: true };
-  // data for redux store is a boolean flag
-  dispatch({ type: LOGIN, payload });
+export const login = (username, password) => async (dispatch, getState) => {
+      console.log(username, password)
+      // axios request to login
+      //console.log("THE DISPATCH: ", dispatch);
+      await axios.post(`https://dry-river-42897.herokuapp.com/users/sign_in`, {username, password}).then( ({data}) => {
+        console.log(data)
+        localStorage.setItem("token", data.token)
+        const payload = { 
+          logged_in: true,
+          username: data.user.username,
+          email: data.user.email
+        };
+        dispatch({ type: LOGIN, payload });console.log(data)
+      })  // data for redux store is a boolean flag
+  
 };
 
 export const logout = () => async (dispatch, getState) => {

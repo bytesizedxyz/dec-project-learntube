@@ -39,6 +39,7 @@ class Modal extends Component {
   }
 
   render() {
+    console.log("PROPSS",this.props)
     return ReactDOM.createPortal(this.props.children(this.formRef), this.el);
   }
 }

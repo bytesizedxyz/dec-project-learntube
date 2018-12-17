@@ -119,14 +119,14 @@ fireOffLoginAction = (username, password) => {
     return (
         <Nav>
           <div id="headerBg"> 
-          <SearchBar id='searchbar' state={this.props.videoListingState}>
+          {/* <SearchBar id='searchbar' state={this.props.videoListingState}>
               <div>{this.props.results}</div>
             <div id="searchbar">
             <form  onSubmit={() =>{}}>
             <input onChange={this.props.getResult} />
             </form>
             </div>
-            </SearchBar>
+            </SearchBar> */}
             
             <div id="logo-container">
               <Link style={{color: 'white'}} to='/'><Logo /></Link>

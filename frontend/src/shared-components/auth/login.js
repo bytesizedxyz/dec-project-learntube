@@ -25,6 +25,7 @@ componentDidMount = () => this.props.logout()
 
 handleChange(e) {
     const {name, value} = e.target;
+    console.log(name, value);
     this.setState({ [name]: value});
 }
 
@@ -42,7 +43,7 @@ render() {
     const { login } = this.props;
     const { username, password, submitted } = this.state
     return (
-        <Form handleSubmit={this.handleSubmit}
+        <Form>
             <div className="form-group">
                 <label className="control-label"> Username </label>
                 <input
@@ -65,13 +66,14 @@ render() {
                 className="form-conrol"
                 />
             </div>
-                <div className="form-group">
-                    <button className="btn btn-primary">Login</button>
+            <div className="form-group">
+                <button className="btn btn-primary" onClick={this.handleSubmit}>Login</button>
             </div>
             <div>
-                <Link to="/signup" className="btn btn-link">Signup</Link>)
+                <Link to="/signup" className="btn btn-link">Signup</Link>
             </div>
         </Form>
+    )
     
 }
 
@@ -80,8 +82,6 @@ const mapDispatchToProps = () => {
     return {login, logout}
    
 };
-
-}
 
 const LoginPage = connect(state => state, mapDispatchToProps)(loggedIn)
 

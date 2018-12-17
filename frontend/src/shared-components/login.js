@@ -6,25 +6,34 @@ import Form from '../shared-components/fun-components/form'
 import Icon from '../resources/icon'
 
 class LoginForm extends React.Component {
-  state = {
-    username: '',
-    password: '',
-    submitted: false,
-    validationErrorMsg: null
+  constructor(){
+    super()
+    this.state = {
+      username: '',
+      password: '',
+      submitted: false,
+      validationErrorMsg: null
+    }
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = (e) => {
+
+  handleChange(e) {
     const {name, value} = e.target;
+    console.log(name, value)
+
     this.setState({ [name]: value});
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    this.setState({ submitted: true})
+    // this.setState({ submitted: true})
     const { username, password } = this.state;
     if (username && password) {
-        this.props.login(username, password);
+      console.log("USERNAME AND PASSWORD");
+      console.log(this.props)
+      this.props.login(username, password);
     }
   }
 
@@ -47,29 +56,29 @@ class LoginForm extends React.Component {
         <Form>
             <label className="control-label"> Username </label>
             <input
-                value={this.state.username}
-                handleChange={this.handleChange}
+                defaultValue={this.state.username}
+                onChange={this.handleChange}
                 type="text"
                 name="username"
                 className="form-conrol"
             />
             <label className="control-label"> Password </label>
             <input
-                value={this.state.password}
-                handleChange={this.handleChange}
+                defaultValue={this.state.password}
+                onChange={this.handleChange}
                 type="password"
                 name="password"
                 className="form-conrol"
             />
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-primary" onClick={this.handleSubmit}>Login</button>
         </Form>
         </AboveModalContainer>
     )
   }
 };
 
-const mapDispatchToProps = () => {
-    return {login, logout}
+const mapDispatchToProps ={
+login, logout
 }
 
 export default connect(state => state, mapDispatchToProps)(LoginForm)
