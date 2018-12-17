@@ -7,13 +7,13 @@ const index = ({ viewVideo }) => {
   return (
     <main>
       <h1>Landing Page</h1>
-      <button
+      {/* <button
         onClick={() => {
-          viewVideo("QaVXaMFc6gk");
+          viewVideo();
         }}
       >
         watch a video
-      </button>
+      </button> */}
       <Videos />
     </main>
   );
