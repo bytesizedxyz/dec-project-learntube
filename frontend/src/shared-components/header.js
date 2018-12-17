@@ -10,9 +10,6 @@ import { BlurredBackground } from "../shared-styles";
 import LoginForm from './login'
 import LogoutForm from './logout'
 import SignupForm from './signup'
-import {Lunr} from 'react-lunr'
-import lunr from 'lunr'
-import SearchBar from './searchBar'
 
 const LogoContainer = styled.div`
   display: flex;
@@ -136,7 +133,7 @@ fireOffLoginAction = (username, password) => {
               <button id={!logged_in ? "login" : "logout"} onClick={this.handleClick}>{!logged_in ? "Log In" : "Log Out"}</button>
               <button id="signup" onClick={this.handleClick}>Sign Up</button>
             </div>
-           
+          </div>
           {toggleFormModal ? (
             <Modal>
             {formRef => {
@@ -149,9 +146,8 @@ fireOffLoginAction = (username, password) => {
               );
             }}
           </Modal>
-          ) : <> </> }
-      </div>
-      </Nav>
+          ) : null}
+        </Nav>
     );
   }
 }

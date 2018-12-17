@@ -1,18 +1,39 @@
-import React, { Component } from "react";
-import axios from "axios";
-import styled from "styled-components";
-import Form from "../../../shared-components/fun-components/form";
-import { Label, Input } from "../../../shared-styles/form-elements";
-import { AboveModalContainer } from "../../../shared-styles";
-import Icon from "../../../resources/icon";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { retrieveVideo } from '../../../state/actions/video';
+import axios from 'axios';
+import styled from 'styled-components';
+import Form from '../../../shared-components/fun-components/form';
+import { Label, Input } from '../../../shared-styles/form-elements';
+import { AboveModalContainer } from '../../../shared-styles';
+import Icon from '../../../resources/icon';
 
 class VideoUpload extends Component {
-  state = { title: "", url: "", validationErrorMsg: null, uploadResult: null };
+  state = { title: '', url: '', validationErrorMsg: null, uploadResult: null };
 
   onSubmit = async e => {
+    const userToken = localStorage.getItem('token');
     e.preventDefault();
     if (this.verifyValidInput()) {
-      const result = await axios.post("/upload");
+      const { title, url } = this.state;
+      const posted_by = 'd1317693-2940-4e4e-841d-e92cd88690a3';
+      console.log('here');
+      console.log(title, url);
+      const result = await axios.post(
+        'https://dry-river-42897.herokuapp.com/videos',
+        {
+          title,
+          url,
+          posted_by
+        },
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmt5bWFyayIsImVtYWlsIjoic2h1dHVwQHNodXR1cC5jb20iLCJpc19hZG1pbiI6bnVsbCwiaWF0IjoxNTQ1MDY4NjM1LCJleHAiOjE1NDUyNDE0MzV9.FQQuG7UdzE1slqdwCfYCjCAFk9fkmEfnafgD0M7o5FE`
+          }
+        }
+      );
+      console.log(result, +' the onSubmit result');
+      retrieveVideo(result.data[0].uuid);
       this.setUploadResultSuccess(result);
       setTimeout(this.setUploadResultNull, 1000);
     }
@@ -21,11 +42,11 @@ class VideoUpload extends Component {
   verifyValidInput = () => {
     const { title, url } = this.state;
     if (title.length < 5) {
-      this.setStateValidationErrorMsg("title must be at least 5 characters.");
+      this.setStateValidationErrorMsg('title must be at least 5 characters.');
       return false;
     }
     if (url.length < 9) {
-      this.setStateValidationErrorMsg("URL must be at least 9 characters.");
+      this.setStateValidationErrorMsg('URL must be at least 9 characters.');
       return false;
     }
     return true;
