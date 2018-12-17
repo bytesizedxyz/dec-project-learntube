@@ -1,30 +1,8 @@
 import React, { Component } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import VideoList from "./VideoList";
 import { viewVideo, retrieveVideosForListing } from "../../state/actions/video";
 import { connect } from "react-redux";
-
-// NORMALIZED VIDEOS
-// this is videos on this.props
-// {
-//   'randomuuidstringfrombackend1': {
-//     uuid: "randomuuidstringfrombackend1 ",
-//     title: "faketitle1 ",
-//     url: "QaVXaMFc6gk",
-//     postedBy: "banana ",
-//     createdAt: "12/1/2018"
-//   },
-//   'randomuuidstringfrombackend1': {
-//     uuid: "randomuuidstringfrombackend1 ",
-//     title: "faketitle2 ",
-//     url: "20vDj6oQ-pE",
-//     postedBy: "Groot ",
-//     createdAt: "11/30/2018 "
-//   },
-// }
-
-// this videoUuids on this.props
-// ["randomuuidstringfrombackend1", "randomuuidstringfrombackend2"]
 
 const Container = styled.div`
   display: flex;
@@ -43,7 +21,7 @@ class videos extends Component {
   componentDidMount = () => {
      this.props.retrieveVideosForListing();
     //this.settingState(videoList);
-    console.log("VIDEOS THIS.PROPS: ", this.props);
+    // console.log("VIDEOS THIS.PROPS: ", this.props);
   };
 
   settingState = videoList => {
@@ -54,13 +32,13 @@ class videos extends Component {
   };
 
   onVideoSelect = videoUuid => {
-    console.log("THE VIDEO UUID ON CLICK: ", videoUuid)
+    // console.log("THE VIDEO UUID ON CLICK: ", videoUuid);
     this.props.viewVideo(videoUuid);
   };
 
   render() {
-    const { videos, videoUuids } = this.props
-    console.log("THE VIDEOS: ", videos)
+    const { videos, videoUuids } = this.props;
+    // console.log("THE VIDEOS: ", videos);
     return (
       <Container>
         <VideoList
@@ -73,9 +51,14 @@ class videos extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return { videos: state.videos };
+};
+
 export default connect(
+  //mapStateToProps,
   state => {
-    const {videoListingState} = state;
+    const { videoListingState } = state;
     return videoListingState;
   },
   { viewVideo, retrieveVideosForListing }

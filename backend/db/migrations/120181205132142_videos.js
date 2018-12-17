@@ -1,5 +1,7 @@
+const { VIDEOTABLE, USERTABLE } = require('../../SERVER_CONSTANTS').tableNames;
+
 exports.up = (knex, Promise) => {
-  return knex.schema.createTable('videos', table => {
+  return knex.schema.createTable(VIDEOTABLE, table => {
     table
       .uuid('uuid')
       .primary()
@@ -8,9 +10,11 @@ exports.up = (knex, Promise) => {
     table.string('url');
     table.integer('watch_count');
     table.uuid('user_uuid').unsigned();
+    table
+      .foreign('user_uuid')
+      .references('uuid')
+      .inTable(USERTABLE);
     table.timestamp('created_at').defaultTo(knex.fn.now());
-
-    table.foreign('user_uuid').references('users_pkey');
   });
 };
 
