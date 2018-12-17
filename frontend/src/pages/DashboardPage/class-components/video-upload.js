@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { uploadVideo } from '../../../state/actions/upload';
+import { retrieveVideo } from '../../../state/actions/video';
 import axios from 'axios';
 import styled from 'styled-components';
 import Form from '../../../shared-components/fun-components/form';
@@ -20,14 +20,15 @@ class VideoUpload extends Component {
       const { title, url } = this.state;
       const posted_by = 'd1317693-2940-4e4e-841d-e92cd88690a3';
       console.log('here');
-      // await uploadVideo(title, url, posted_by);
-      //   const result = await axios.post(
-      //     "https://dry-river-42897.herokuapp.com/videos",
-      //     { title, url, posted_by }
-      //   );
-      //   console.log(result, +" the onSubmit result");
-      //   this.setUploadResultSuccess(result);
-      //   setTimeout(this.setUploadResultNull, 1000);
+      const result = await axios.post('https://dry-river-42897.herokuapp.com/videos', {
+        title,
+        url,
+        posted_by
+      });
+      console.log(result, +' the onSubmit result');
+      retrieveVideo(result.data[0].uuid);
+      this.setUploadResultSuccess(result);
+      setTimeout(this.setUploadResultNull, 1000);
     }
   };
 
