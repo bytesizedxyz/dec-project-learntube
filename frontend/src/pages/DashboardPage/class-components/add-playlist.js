@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { addNewPlaylist } from "../../../state/actions/playlist";
 import Form from "../../../shared-components/fun-components/form";
+import InputField from "../../../shared-components/fun-components/inputField";
 import { Label, Input } from "../../../shared-styles/form-elements";
 import { AboveModalContainer } from "../../../shared-styles";
 import Icon from "../../../resources/icon";
@@ -15,7 +16,7 @@ class AddPlaylist extends Component {
     e.preventDefault();
     if (this.verifyValidInput()) {
       // To add a playlist
-      const result = await this.addNewPlaylist(title);
+      const result = await this.props.addNewPlaylist(title);
       this.setUploadResultSuccess(result);
       setTimeout(this.setUploadResultNull, 1000);
     }
@@ -61,7 +62,7 @@ class AddPlaylist extends Component {
 
   render() {
     const { onSubmit, onChange } = this;
-    const { toggleModal } = this.props;
+    const { toggleModal, videoView } = this.props;
     const { title, validationErrorMsg, uploadResult } = this.state;
     return (
       <AboveModalContainer ref={this.props.formRef}>
@@ -81,12 +82,23 @@ class AddPlaylist extends Component {
           </span>
         </div>
         <Form onSubmit={e => onSubmit(e, title)}>
-          <label htmlFor="title">Title</label>
-          <input id="title" type="text" value={title} onChange={onChange} />
-          <button type="submit" data-testid="upload-submit">
-            <Icon name="upload icon" />
-            Upload
-          </button>
+          <InputField
+            field="title"
+            type="text"
+            value={title}
+            onChange={onChange}
+          />
+          <div id="button-row">
+            <button type="submit" data-testid="upload-submit">
+              <Icon name="upload icon" />
+              Upload
+            </button>
+            {videoView && (
+              <button id="playlist-select" onClick={toggleModal}>
+                Back
+              </button>
+            )}
+          </div>
         </Form>
       </AboveModalContainer>
     );

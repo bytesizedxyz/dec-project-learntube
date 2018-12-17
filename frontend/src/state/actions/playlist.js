@@ -77,6 +77,6 @@ export const addVideoToPlaylist = data => async (dispatch, getState) => {
   //   "playlist_uuid": "957e771a-2639-44e7-a838-00b9aa1cb9f6",
   //   "video_uuid": "f026af75-5104-42d5-9a00-14a102b6fe6b"
   // }
-  const addedVideo = await API.post(`/playlists/playlist_video`, data);
+  await API.post(`/playlists/playlist_video`, data);
   return "Video Successfully added to playlist.";
 };

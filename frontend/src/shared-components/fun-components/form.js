@@ -23,13 +23,22 @@ const Form = styled.form`
     }
   }
 
-  button {
+  #button-row {
     display: flex;
     justify-content: flex-start;
+
+    button + button {
+      margin-left: 1rem;
+    }
+  }
+
+  button {
+    display: flex;
+    justify-content: ${props => (props.upload ? "flex-start" : "center")};
     width: 8rem;
     height: 2.8rem;
     margin-top: 1.4rem;
-    padding-left: 1.3rem;
+    justify-content: ${props => (props.upload ? "1.3rem" : null)};
     font-size: 1.3rem;
     font-family: "Bangers", cursive;
     border: 2px solid black;

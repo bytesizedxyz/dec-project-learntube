@@ -5,7 +5,7 @@ import { AboveModalContainer } from '../shared-styles'
 import Form from '../shared-components/fun-components/form'
 import Icon from '../resources/icon'
 
-class LoginForm extends React.Component {
+class LogoutForm extends React.Component {
   state = {
     username: '',
     password: '',
@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
         <AboveModalContainer ref={this.props.formRef}>
         <div>
           <span>
-          <h3 data-testid="header-one">Login</h3>
+          <h3 data-testid="header-one">Log</h3>
             {validationErrorMsg ? (
               <p data-testid="validation-err-msg">{validationErrorMsg}</p>
             ) : null}
@@ -72,7 +72,7 @@ const mapDispatchToProps = () => {
     return {login, logout}
 }
 
-export default connect(state => state, mapDispatchToProps)(LoginForm)
+export default connect(state => state, mapDispatchToProps)(LogoutForm)
 
 //still trying to figure this out ^
 //dispatch is an event

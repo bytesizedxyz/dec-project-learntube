@@ -2,9 +2,21 @@ import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Form from "../../../shared-components/fun-components/form";
+import InputField from "../../../shared-components/fun-components/inputField";
 import { Label, Input } from "../../../shared-styles/form-elements";
 import { AboveModalContainer } from "../../../shared-styles";
 import Icon from "../../../resources/icon";
+
+const inputFieldsObj = [
+  {
+    field: "title",
+    type: "text"
+  },
+  {
+    field: "url",
+    type: "text"
+  }
+];
 
 class VideoUpload extends Component {
   state = { title: "", url: "", validationErrorMsg: null, uploadResult: null };
@@ -81,11 +93,14 @@ class VideoUpload extends Component {
             <Icon name="close icon" />
           </span>
         </div>
-        <Form onSubmit={onSubmit}>
-          <label htmlFor="title">Title</label>
-          <input id="title" type="text" value={title} onChange={onChange} />
-          <label htmlFor="url">URL</label>
-          <input id="url" type="text" value={url} onChange={onChange} />
+        <Form onSubmit={onSubmit} upload>
+          <InputField
+            field="title"
+            type="text"
+            value={title}
+            onChange={onChange}
+          />
+          <InputField field="url" type="text" value={url} onChange={onChange} />
           <button type="submit" data-testid="upload-submit">
             <Icon name="upload icon" />
             Upload

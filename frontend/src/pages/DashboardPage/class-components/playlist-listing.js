@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { retrievePlaylists } from "../../../state/actions/playlist";
 import { connect } from "react-redux";
-import PlaylistDisplay from "../fun-components/playlist-display";
+import PlaylistItem from "../fun-components/playlist-item";
 
 class PlaylistListing extends Component {
   componentDidMount = () => {
@@ -18,7 +18,7 @@ class PlaylistListing extends Component {
     return (
       <div>
         <h1>Playlist Listing</h1>
-        <PlaylistDisplay
+        <PlaylistItem
           playlists={playlists}
           playlistIds={playlistUuids}
           fetchDetails={fetchDetails}

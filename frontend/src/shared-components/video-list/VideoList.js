@@ -1,24 +1,24 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import VideoItem from "./VideoItem";
-import { retrieveVideosForListing } from "../../state/actions/video";
+import { retrieveVideosForListing, viewVideo } from "../../state/actions/video";
 
-const VideoList = ({ videos, onVideoSelect }) => {
-  const renderedList = videos.map(video => {
-    console.log(video);
+const VideoList = ({ videoUuids, videos, onVideoSelect }) => {
+  return videoUuids.map(uuid => {
+    const video = videos[uuid];
     return (
-      <VideoItem
-        videoId={video.uuid}
-        videoTitle={video.title}
-        videoURL={video.url}
-        postedBy={video.postedBy}
-        createdAt={video.createdAt}
-        onVideoSelect={onVideoSelect}
-      />
+      <Fragment key={uuid}>
+        <VideoItem
+          videoUuid={video.uuid}
+          videoTitle={video.title}
+          videoURL={video.url}
+          postedBy={video.postedBy}
+          createdAt={video.createdAt}
+          onVideoSelect={onVideoSelect}
+        />
+      </Fragment>
     );
   });
-
-  return <div>{renderedList}</div>;
 };
 
 export default VideoList;

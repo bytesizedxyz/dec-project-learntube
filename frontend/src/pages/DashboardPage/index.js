@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Sidebar from "./class-components/sidebar";
-import PlaylistListing from "./class-components/playlistListing";
+import PlaylistListing from "./class-components/playlist-listing";
 
 const Container = styled.div`
   display: flex;

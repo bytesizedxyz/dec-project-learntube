@@ -8,7 +8,28 @@ import { BlurredBackground } from "../../../shared-styles";
 const Aside = styled.aside`
   height: 100vh;
   width: 20rem;
-  background: #224259;
+  background: #fcfcfc;
+  padding-top: 1.4rem;
+  padding-left: 1.4rem;
+  box-shadow: 0px 0px 10px 2px rgba(10, 10, 10, 0.15);
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+
+    li {
+      margin-bottom: 1.4rem;
+      font-size: 1.6rem;
+      font-family: "Bangers", cursive;
+      color: #224259;
+      cursor: pointer;
+
+      &:hover {
+        color: #aaa;
+      }
+    }
+  }
 `;
 
 class Sidebar extends Component {
@@ -17,16 +38,11 @@ class Sidebar extends Component {
   };
 
   toggleModal = e => {
-    // Would then need to pass in e.target.id to accomodate
-    // dynamically accessing state if there are additional links or state
-    // added in the future.
+    // id will be upload-video or add-playlist
     const id = e.target.id;
     this.toggleModalSetState(id);
   };
 
-  // Can refactor to dynamically accessing state if
-  // there are any additional links or state added in
-  // the future.
   toggleModalSetState = id => {
     if (!this.state.modalExpanded) {
       this.setState({
@@ -56,7 +72,6 @@ class Sidebar extends Component {
             Add Playlist
           </li>
         </ul>
-        {/* Need to use a React portal here instead. */}
         {modalExpanded ? (
           <Modal>
             {formRef => {
