@@ -30,7 +30,7 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.get('/sign_in', (req, res) => {
+router.post('/sign_in', (req, res) => {
   const { username, password } = req.body;
   const user = {
     username,
