@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Modal from "../../../shared-components/modal";
 import VideoUpload from "./video-upload";
+import AddPlaylist from "./add-playlist";
 import { BlurredBackground } from "../../../shared-styles";
 
 const Aside = styled.aside`
@@ -16,24 +17,30 @@ class Sidebar extends Component {
   };
 
   toggleModal = e => {
-    console.log("IT WORKS: ", e);
     // Would then need to pass in e.target.id to accomodate
     // dynamically accessing state if there are additional links or state
     // added in the future.
-    this.toggleModalSetState();
+    const id = e.target.id;
+    this.toggleModalSetState(id);
   };
 
   // Can refactor to dynamically accessing state if
   // there are any additional links or state added in
   // the future.
-  toggleModalSetState = () => {
-    this.setState((state, props) => ({
-      modalExpanded: !state.modalExpanded
-    }));
+  toggleModalSetState = id => {
+    if (!this.state.modalExpanded) {
+      this.setState({
+        modalExpanded: id
+      });
+    } else {
+      this.setStateModalExpandedNull();
+    }
   };
 
-  componentDidUpdate = () => {
-    console.log("THE NEW STATE: ", this.state);
+  setStateModalExpandedNull = () => {
+    this.setState({
+      modalExpanded: null
+    });
   };
 
   render() {
@@ -42,7 +49,12 @@ class Sidebar extends Component {
     return (
       <Aside>
         <ul>
-          <li onClick={toggleModal}>Upload Video</li>
+          <li id="upload-video" onClick={toggleModal}>
+            Upload Video
+          </li>
+          <li id="add-playlist" onClick={toggleModal}>
+            Add Playlist
+          </li>
         </ul>
         {/* Need to use a React portal here instead. */}
         {modalExpanded ? (
@@ -51,7 +63,12 @@ class Sidebar extends Component {
               return (
                 <>
                   <BlurredBackground />
-                  <VideoUpload formRef={formRef} toggleModal={toggleModal} />
+                  {modalExpanded === "upload-video" && (
+                    <VideoUpload formRef={formRef} toggleModal={toggleModal} />
+                  )}
+                  {modalExpanded === "add-playlist" && (
+                    <AddPlaylist formRef={formRef} toggleModal={toggleModal} />
+                  )}
                 </>
               );
             }}
