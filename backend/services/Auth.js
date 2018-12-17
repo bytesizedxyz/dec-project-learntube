@@ -55,8 +55,9 @@ const checkPassword = (reqPassword, foundUser) => {
       if (err) {
         reject(err);
       } else if (response) {
-        const { username, email, is_admin } = foundUser;
+        const { username, email, is_admin, uuid } = foundUser;
         const user = {
+          uuid: uuid,
           username: username,
           email: email,
           is_admin: is_admin
