@@ -1,5 +1,4 @@
 import React from "react";
-import { Lunr } from "react-lunr";
 import { connect } from "react-redux";
 import { render } from "react-testing-library";
 import PropTypes from "prop-types";
