@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { login, logout } from "../../state/actions/auth";
+import { Link } from "react-router";
 import Form from "../fun-components/form";
 
 class LoginPage extends React.Component {
@@ -47,7 +48,7 @@ class LoginPage extends React.Component {
     const { login } = this.props;
     const { username, password, submitted } = this.state;
     return (
-      <Form handleSubmit={this.handleSubmit}>
+      <Form>
         <div className="form-group">
           <label className="control-label"> Username </label>
           <input
@@ -71,26 +72,23 @@ class LoginPage extends React.Component {
           />
         </div>
         <div className="form-group">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary" onClick={this.handleSubmit}>
+            Login
+          </button>
         </div>
         <div>
           <Link to="/signup" className="btn btn-link">
             Signup
           </Link>
-          )
         </div>
       </Form>
     );
   }
 }
 
-const mapDispatchToProps = () => {
-  return { login, logout };
-};
+const mapDispatchToProps = { login, logout };
 
-const LoginPage = connect(
+export default connect(
   state => state,
   mapDispatchToProps
-)(loggedIn);
-
-export default LoginPage;
+)(LoginPage);

@@ -7,7 +7,7 @@ class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
 
-    state = {
+    this.state = {
       username: "",
       password: "",
       passwordConfirmation: "",
@@ -40,7 +40,6 @@ class SignUpPage extends React.Component {
     return (
       <Form onSubmit={this.onSubmit}>
         <h1> Register for LearnTube! </h1>
-
         <div className="form-group">
           <label className="control-label">Username</label>
           <input

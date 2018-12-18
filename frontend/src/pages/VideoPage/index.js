@@ -7,8 +7,25 @@ import AddToPlaylistController from "./class-components/add-to-playlist-controll
 import { addVideoToPlaylist } from "../../state/actions/playlist";
 import { retrieveVideo } from "../../state/actions/video";
 
-const Main = styled.main`
+const Main = styled.div`
+  background-image: linear-gradient(
+    -225deg,
+    #5391bd 0%,
+    #5e8cad 29%,
+    #44107a 80%,
+    #231557 100%
+  );
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+
+  #box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+  }
 `;
 
 const Error = styled.div`
@@ -56,11 +73,18 @@ class VideoPage extends React.Component {
         </div>
         <AddToPlaylistController video_uuid={videoUuid} />
         <div>suggested videos column here</div>
+        <div id="box">
+          <Youtube
+            opts={{ height: "800", width: "900" }}
+            videoId={youtube_id}
+          />
+        </div>
       </Main>
     );
   };
 }
 
+// 390, 400
 export default connect(
   state => state,
   { retrieveVideo, addVideoToPlaylist }
