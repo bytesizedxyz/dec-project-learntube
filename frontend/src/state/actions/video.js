@@ -1,12 +1,12 @@
-import { navigate } from '@reach/router';
-import backend from '../apis/backend';
+import { navigate } from "@reach/router";
+import backend from "../apis/backend";
 
 /*
  * action types
  */
-export const RETRIEVE_VIDEOS_FOR_LISTING = 'RETRIEVE_VIDEOS_FOR_LISTING';
-export const RETRIEVE_VIDEOS_FOR_DASHBOARD = 'RETRIEVE_VIDEOS_FOR_DASHBOARD';
-export const VIEW_VIDEO = 'VIEW_VIDEO';
+export const RETRIEVE_VIDEOS_FOR_LISTING = "RETRIEVE_VIDEOS_FOR_LISTING";
+export const RETRIEVE_VIDEOS_FOR_DASHBOARD = "RETRIEVE_VIDEOS_FOR_DASHBOARD";
+export const VIEW_VIDEO = "VIEW_VIDEO";
 
 // TEMP DUMMY DATA
 
@@ -16,11 +16,12 @@ export const VIEW_VIDEO = 'VIEW_VIDEO';
 //export const retrieveVideosForListing = () => (dispatch, getState) => {
 const updateVideo = video =>
   Object.assign({}, video, {
-    youtube_id: video.url.match('([^/]+)/?$')[1]
+    //youtube_id: video.url.match('([^/]+)/?$')[1]
+    youtube_id: video.url.slice(-11)
   });
 
 export const retrieveVideosForListing = () => async dispatch => {
-  const response = await backend.get('/videos');
+  const response = await backend.get("/videos");
   // console.log("retrieveVideosForListing; ", response.data);
   // call getState to retrieve a video from the redux store using the videoId argument
   // Then normalize the data
