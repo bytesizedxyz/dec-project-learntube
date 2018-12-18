@@ -1,12 +1,12 @@
-import { navigate } from '@reach/router';
-import backend from '../apis/backend';
+import { navigate } from "@reach/router";
+import backend from "../apis/backend";
 
 /*
  * action types
  */
-export const RETRIEVE_VIDEOS_FOR_LISTING = 'RETRIEVE_VIDEOS_FOR_LISTING';
-export const RETRIEVE_VIDEOS_FOR_DASHBOARD = 'RETRIEVE_VIDEOS_FOR_DASHBOARD';
-export const VIEW_VIDEO = 'VIEW_VIDEO';
+export const RETRIEVE_VIDEOS_FOR_LISTING = "RETRIEVE_VIDEOS_FOR_LISTING";
+export const RETRIEVE_VIDEOS_FOR_DASHBOARD = "RETRIEVE_VIDEOS_FOR_DASHBOARD";
+export const VIEW_VIDEO = "VIEW_VIDEO";
 
 // TEMP DUMMY DATA
 const videoList = [
@@ -33,11 +33,11 @@ const videoList = [
 //export const retrieveVideosForListing = () => (dispatch, getState) => {
 const updateVideo = video =>
   Object.assign({}, video, {
-    youtube_id: video.url.match('([^/]+)/?$')[1]
+    youtube_id: video.url.match("([^/]+)/?$")[1]
   });
 
 export const retrieveVideosForListing = () => async dispatch => {
-  const response = await backend.get('/videos');
+  const response = await backend.get("/videos");
   // console.log("retrieveVideosForListing; ", response.data);
   // call getState to retrieve a video from the redux store using the videoId argument
   // Then normalize the data
@@ -66,23 +66,23 @@ export const retrieveVideosForListing = () => async dispatch => {
   );
 };
 
-export const viewVideo = videoUuid => (dispatch, getState) => {
-  // call getState to retrieve a video from the redux store using the videoUuid argument
-  //console.log("THE VIDEO UUID IN viewVideo: "+videoUuid);
-  const reduxState = getState().videoListingState.videos;
-  console.log("REDUX STATE: ", reduxState);
+// export const viewVideo = videoUuid => (dispatch, getState) => {
+//   // call getState to retrieve a video from the redux store using the videoUuid argument
+//   //console.log("THE VIDEO UUID IN viewVideo: "+videoUuid);
+//   const reduxState = getState().videoListingState.videos;
+//   console.log("REDUX STATE: ", reduxState);
 
-  const retrievedVideo = getState().videoListingState.videos[videoUuid];
-  console.log("THE RETRIEVED VIDEO FROM REDUX STATE: ", retrievedVideo);
-  // How we'll use this in the video view component
-  // https://www.youtube.com/watch?v= + url
+//   const retrievedVideo = getState().videoListingState.videos[videoUuid];
+//   console.log("THE RETRIEVED VIDEO FROM REDUX STATE: ", retrievedVideo);
+//   // How we'll use this in the video view component
+//   // https://www.youtube.com/watch?v= + url
 
-  const payload = { currentViewedVideo: retrievedVideo };
+//   const payload = { currentViewedVideo: retrievedVideo };
 
-  dispatch({ type: VIEW_VIDEO, payload });
+//   dispatch({ type: VIEW_VIDEO, payload });
 
-  navigate("/play-video");
-}
+//   navigate("/play-video");
+// }
 
 export const retrieveVideo = videoUuid => {
   return async function(dispatch, getState) {
