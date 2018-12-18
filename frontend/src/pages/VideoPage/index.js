@@ -1,8 +1,10 @@
 import React from "react";
 import Youtube from "react-youtube";
-import { Link } from "@reach/router";
 import { connect } from "react-redux";
+import { Link } from "@reach/router";
 import styled from "styled-components";
+import AddToPlaylistController from "./class-components/add-to-playlist-controller";
+import { addVideoToPlaylist } from "../../state/actions/playlist";
 import { retrieveVideo } from "../../state/actions/video";
 
 const Main = styled.div`
@@ -64,19 +66,26 @@ class VideoPage extends React.Component {
       <Main>
         <div>
           <h1>{title}</h1>
-          <div id="box">
-            <Youtube
-              opts={{ height: "800", width: "900" }}
-              videoId={youtube_id}
-            />
-          </div>
+          <Youtube
+            opts={{ height: "390", width: "400" }}
+            videoId={youtube_id}
+          />
+        </div>
+        <AddToPlaylistController video_uuid={videoUuid} />
+        <div>suggested videos column here</div>
+        <div id="box">
+          <Youtube
+            opts={{ height: "800", width: "900" }}
+            videoId={youtube_id}
+          />
         </div>
       </Main>
     );
   };
 }
+
 // 390, 400
 export default connect(
   state => state,
-  { retrieveVideo }
+  { retrieveVideo, addVideoToPlaylist }
 )(VideoPage);
