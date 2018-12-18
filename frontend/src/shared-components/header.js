@@ -9,6 +9,35 @@ import { BlurredBackground } from "../shared-styles";
 import LoginForm from "./login";
 import SignupForm from "./signup";
 
+const Nav = styled.nav`
+  #headerBg {
+    display: flex;
+    flex-direction: ${props => (props.col ? "column" : "row")};
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #224259;
+    color: white;
+  }
+
+  #searchbar {
+    flex: 1;
+    padding-left: 10px;
+  }
+
+  #logo-container {
+    flex: 1;
+  }
+
+  #buttons {
+    flex: 1;
+    text-align: right;
+    padding-right: 20px;
+    color: black;
+  }
+`;
+
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -155,34 +184,5 @@ class Header extends React.Component {
     );
   }
 }
-
-const Nav = styled.nav`
-  #headerBg {
-    display: flex;
-    flex-direction: ${props => (props.col ? "column" : "row")};
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    background: #224259;
-    color: white;
-  }
-
-  #searchbar {
-    flex: 1;
-    padding-left: 10px;
-  }
-
-  #logo-container {
-    flex: 1;
-  }
-
-  #buttons {
-    flex: 1;
-    text-align: right;
-    padding-right: 20px;
-    color: black;
-  }
-`;
 
 export default connect(state => state)(Header);
