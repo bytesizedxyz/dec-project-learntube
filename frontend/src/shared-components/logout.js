@@ -73,6 +73,3 @@ const mapDispatchToProps = () => {
 }
 
 export default connect(state => state, mapDispatchToProps)(LogoutForm)
-
-//still trying to figure this out ^
-//dispatch is an event

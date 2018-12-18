@@ -21,30 +21,27 @@ class LoginForm extends React.Component {
 
   handleChange(e) {
     const {name, value} = e.target;
-    // console.log(name, value)
 
     this.setState({ [name]: value});
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
-    // this.setState({ submitted: true})
     const { username, password } = this.state;
     if (username && password) {
-      console.log("USERNAME AND PASSWORD");
-      console.log(this.props)
       this.props.login(username, password);
     }
-  }
+  };
 
   render() {
     const { login, formRef, toggleModal } = this.props;
-    const { username, password, submitted, validationErrorMsg } = this.state
+    console.log(this.props);
+    const { username, password, submitted, validationErrorMsg } = this.state;
     return (
-        <AboveModalContainer ref={this.props.formRef}>
+      <AboveModalContainer ref={this.props.formRef}>
         <div>
           <span>
-          <h3 data-testid="header-one">Login</h3>
+            <h3 data-testid="header-one">Login</h3>
             {validationErrorMsg ? (
               <p data-testid="validation-err-msg">{validationErrorMsg}</p>
             ) : null}
@@ -72,16 +69,19 @@ class LoginForm extends React.Component {
             />
             <button className="btn btn-primary" onClick={this.handleSubmit}>Login</button>
         </Form>
-        </AboveModalContainer>
-    )
+      </AboveModalContainer>
+    );
   }
-};
+}
 
 const mapDispatchToProps ={
 login
 }
 
-export default connect(state => state, mapDispatchToProps)(LoginForm)
+export default connect(
+  state => state,
+  mapDispatchToProps
+)(LoginForm);
 
 //still trying to figure this out ^
 //dispatch is an event

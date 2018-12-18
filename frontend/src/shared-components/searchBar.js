@@ -1,58 +1,72 @@
-import React from 'react'
-import { Lunr } from 'react-lunr'
-import {connect} from 'react-redux'
-import { render } from 'react-testing-library';
-import PropTypes from 'prop-types';
-import  lunr from 'lunr';
-
-
+import React from "react";
+import { connect } from "react-redux";
+import { render } from "react-testing-library";
+import PropTypes from "prop-types";
+import lunr from "lunr";
 
 class searchBar extends React.Component {
-    constructor(props) {
-    super(props)
-    const {videos, videoUuids} = props.state
-    console.log('loggin props')
-    console.log(props)
+  state = { index: null, filter: "", finishedIndexing: false, results: null };
+
+  handleChange = e => {
+    this.setState({ filter: e.target.value });
+  };
+
+  componentDidMount() {
+    setTimeout(this.makeMap, 2000);
+  }
+
+  makeMap = () => {
+    const { videos, videoUuids } = this.props.state;
     const index = lunr(function() {
-        this.field('title')
-        console.log(videoUuids)
-        videoUuids.forEach(id => this.add(videos[id]))
-    })
-    this.state = {index, videos}
-}
+      //what fields to look for
+      this.field("title");
+      this.field("url");
+      this.field("username");
+      this.field("watch_count");
 
+      this.ref("uuid");
 
-getResult = (filter) => {
-    if(!filter) return []
-    const results = this.state.index
-    .search(filter) 
-    .map(({field, ...rest}) => ({
-        field,
-        item: this.state.videos.find(v => v.id == field),
-        ...rest
-    }))
-    return results
-}
-
-
-
-render = () => {
-    const results = this.getResult(this.props.filter)
-    const childrenWithProps = React.Children.map(this.props.children, function(child) {
-        return React.cloneElement(child, {results, getResult: this.getResult})
-    
+      //adding videos by id to the index to search by
+      videoUuids.forEach(id => this.add(videos[id]), this);
     });
-    return <div>{childrenWithProps}</div>
-}}
+    //setting lunr functions to the index, while also storing the indexed videos there too??
+    this.setState({ index, finishedIndexing: true });
+  };
 
+  handleSubmit = e => {
+    this.setState({ results: null });
+    const { updateList } = this.props;
+    const { videos } = this.props.state;
+    const { filter, index } = this.state;
+    e.preventDefault();
+    if (!filter) return [];
+    const results = index.search(filter);
+    this.setState({ results });
+    updateList(results);
+    this.setState({ filter: "" });
+  };
 
-searchBar.protoTypes = { 
-    fields: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-    filter: PropTypes.string,
-    children: PropTypes.func
+  render() {
+    const { filter, finishedIndexing } = this.state;
+    return (
+      <div>
+        {finishedIndexing ? (
+          <div id="searchbar">
+            <form onSubmit={this.handleSubmit}>
+              <input name="filter" value={filter} onChange={this.handleChange} />
+            </form>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
 }
 
-export default searchBar
+searchBar.protoTypes = {
+  fields: PropTypes.arrayOf(PropTypes.string),
+  title: PropTypes.string,
+  filter: PropTypes.string,
+  children: PropTypes.func
+};
 
-//export connect(state => state)(searchBar)
+export default searchBar;
