@@ -20,16 +20,16 @@ export const login = (username, password) => async (dispatch, getState) => {
       console.log(username, password)
       // axios request to login
       //console.log("THE DISPATCH: ", dispatch);
-      await axios.post(`https://dry-river-42897.herokuapp.com/users/sign_in`, {username, password}).then( ({data}) => {
-        console.log(data)
-        localStorage.setItem("token", data.token)
+      const blah = await axios.post(`https://dry-river-42897.herokuapp.com/users/sign_in`, {username, password})
+      const { token, user } = blah.data
+      
+        localStorage.setItem("token", token)
         const payload = { 
           logged_in: true,
-          username: data.user.username,
-          email: data.user.email
+          username: user.username,
+          email: user.email
         };
-        dispatch({ type: LOGIN, payload });console.log(data)
-      })  // data for redux store is a boolean flag
+        dispatch({ type: LOGIN, payload });console.log(blah) // data for redux store is a boolean flag
   
 };
 
