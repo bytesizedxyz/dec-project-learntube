@@ -1,5 +1,7 @@
 import React from 'react'
-import { LOGIN, SIGNUP, LOGOUT } from "../state/actions/auth";
+import { 
+  login, signup, logout
+ } from "../state/actions/auth";
 import { Link } from '@reach/router';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
@@ -71,7 +73,7 @@ class Header extends React.Component {
 
   handleClick = e => {
   console.log(this.state.toggleFormModal)
-  if(this.state.toggleFormModal) {
+  if(this.state.toggleFormModal || this.state.toggleFormModal === "logout") {
     console.log("THIS SHOULD BE CALLED.")
     this.setState({
       toggleFormModal: null
@@ -98,7 +100,7 @@ toggleModal = (id) => {
 }
 
 handleLogoutClick = () => {
-  console.log("HANDLE LOGOUT")
+  this.props.logout()
 }
 
 // this gets passed to 
@@ -113,6 +115,7 @@ fireOffLoginAction = (username, password) => {
     const { toggleFormModal } = this.state
     console.log(this.props)
     const { logged_in } = this.props.authenticationStatus;  
+    console.log("loggedin",logged_in)
    
    
     
@@ -133,7 +136,9 @@ fireOffLoginAction = (username, password) => {
             </div>
             
             <div id="buttons">
-              <button id={!logged_in ? "login" : "logout"} onClick={this.handleClick}>{!logged_in ? "Log In" : "Log Out"}</button>
+              {logged_in? <button id={"logout"} onClick={this.handleLogoutClick}>{"Log Out"}</button>:<button id={"logout"} onClick={this.handleLogoutClick}>{"Log Out"}</button>}
+              
+              {/* <button id={!logged_in ? "login" : "logout"} onClick={logged_in? () => this.handleClick() : () => this.handleLogoutClick()}>{!logged_in ? "Log In" : "Log Out"}</button> */}
               <button id="signup" onClick={this.handleClick}>Sign Up</button>
             </div>
            
@@ -149,12 +154,14 @@ fireOffLoginAction = (username, password) => {
               );
             }}
           </Modal>
-          ) : <> </> }
+          ) :<span></span> }
       </div>
       </Nav>
     );
   }
 }
+
+const mapDispatchToProps = {logout}
 const Nav = styled.nav`
   #headerBg {
     display: flex;
@@ -185,6 +192,6 @@ const Nav = styled.nav`
 `
 
 
-export default connect(state => state)(Header);
+export default connect(state => state, mapDispatchToProps)(Header);
 
 
