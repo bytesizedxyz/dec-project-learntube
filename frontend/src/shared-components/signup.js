@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
+
 import { signup } from "../state/actions/auth";
 import { AboveModalContainer } from '../shared-styles'
 import Form from '../shared-components/fun-components/form'
@@ -17,18 +19,24 @@ class SignUp extends React.Component {
       validationErrorMsg: null
     };
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.oneSubmit = this.oneSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount = () => this.props.signup();
 
   onChange(e) {
     const { name, value } = e.target;
+    console.log(name, value)
     this.setState({ [name]: value });
   }
-  onSubmit(e) {
-    this.setState();
-    //send a sign up request later
+  oneSubmit(e) {
+    e.preventDefault();
+    // this.setState();
+    const {username, password, email} = this.state;
+    axios.post(`//dry-river-42897.herokuapp.com/users`, {username, password, email}).then(data => {
+      console.log(data)
+    })
   }
 
   render() {
@@ -80,7 +88,7 @@ class SignUp extends React.Component {
             name="email"
             className="form-control"
           />
-          <button className="btn btn-primary btn-lg">Sign Up</button>
+          <button className="btn btn-primary btn-lg" onClick={this.oneSubmit}>Sign Up</button>
         </Form>
         </AboveModalContainer>
     );

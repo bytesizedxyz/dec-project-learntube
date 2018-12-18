@@ -1,5 +1,7 @@
 import React from 'react'
-import { LOGIN, SIGNUP, LOGOUT } from "../state/actions/auth";
+import { 
+  login, signup, logout
+ } from "../state/actions/auth";
 import { Link } from '@reach/router';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
@@ -10,6 +12,9 @@ import { BlurredBackground } from "../shared-styles";
 import LoginForm from './login'
 import LogoutForm from './logout'
 import SignupForm from './signup'
+import {Lunr} from 'react-lunr'
+import lunr from 'lunr'
+import SearchBar from './searchBar'
 
 const LogoContainer = styled.div`
   display: flex;
@@ -68,13 +73,11 @@ class Header extends React.Component {
 
   handleClick = e => {
   console.log(this.state.toggleFormModal)
-  if(this.state.toggleFormModal) {
-    console.log("THIS SHOULD BE CALLED.")
+  if(this.state.toggleFormModal || this.state.toggleFormModal === "logout") {
     this.setState({
       toggleFormModal: null
     })
   }
-  console.log("HANDLE LOGIN: ", e.target.id)
   const id = e.target.id
   this.toggleModal(id);
   // Using the logged_in boolean from props to determine which action creator to fire off.
@@ -95,7 +98,7 @@ toggleModal = (id) => {
 }
 
 handleLogoutClick = () => {
-  console.log("HANDLE LOGOUT")
+  this.props.logout()
 }
 
 // this gets passed to 
@@ -108,26 +111,34 @@ fireOffLoginAction = (username, password) => {
   render() {
     const { handleClick } = this
     const { toggleFormModal } = this.state
-    console.log(this.props)
-    const { logged_in } = this.props.authenticationStatus;   //containerComponent
-      
-    // Going to need to include the login modal inside of
+    const { logged_in } = this.props.authenticationStatus;  
+
+   
+   
+    
     return (
         <Nav>
-          <div id="headerBg" >
+          <div id="headerBg"> 
+          {/* <SearchBar id='searchbar' state={this.props.videoListingState}>
+              <div>{this.props.results}</div>
             <div id="searchbar">
-              <input type='text' placeholder='Search...'/>
+            <form  onSubmit={() =>{}}>
+            <input onChange={this.props.getResult} />
+            </form>
             </div>
+            </SearchBar> */}
             
             <div id="logo-container">
               <Link style={{color: 'white'}} to='/'><Logo /></Link>
             </div>
             
             <div id="buttons">
-              <button id={!logged_in ? "login" : "logout"} onClick={this.handleClick}>{!logged_in ? "Log In" : "Log Out"}</button>
+              {logged_in? <button id={"logout"} onClick={this.handleLogoutClick}>{"Log Out"}</button>:<button id={"login"} onClick={this.handleClick}>{"Log In"}</button>}
+              
+              {/* <button id={!logged_in ? "login" : "logout"} onClick={logged_in? () => this.handleClick() : () => this.handleLogoutClick()}>{!logged_in ? "Log In" : "Log Out"}</button> */}
               <button id="signup" onClick={this.handleClick}>Sign Up</button>
             </div>
-          </div>
+           
           {toggleFormModal ? (
             <Modal>
             {formRef => {
@@ -140,12 +151,14 @@ fireOffLoginAction = (username, password) => {
               );
             }}
           </Modal>
-          ) : null}
-        </Nav>
+          ) :<span></span> }
+      </div>
+      </Nav>
     );
   }
-};
+}
 
+const mapDispatchToProps = {logout}
 const Nav = styled.nav`
   #headerBg {
     display: flex;
@@ -176,6 +189,6 @@ const Nav = styled.nav`
 `
 
 
-export default connect(state => state)(Header)
+export default connect(state => state, mapDispatchToProps)(Header);
 
 
