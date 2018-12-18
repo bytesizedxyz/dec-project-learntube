@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-// import { TimelineMax } from "gsap";
-
-// import React, { Component } from 'react';
-// import TweenMax, {Power4} from 'gsap/src/uncompressed/TweenMax';
-// import EasePack from 'gsap/src/uncompressed/easing/EasePack';
-import TimelineMax from "gsap/TimelineMax";
+import { TimelineMax } from "gsap";
 
 const modalRoot = document.getElementById("modal-root");
 console.log("GOT THE MODAL ROOT: ", modalRoot);
