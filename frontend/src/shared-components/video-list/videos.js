@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import VideoList from './VideoList';
-import { viewVideo, retrieveVideosForListing } from '../../state/actions/video';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import styled from "styled-components";
+import VideoList from "./VideoList";
+import { viewVideo, retrieveVideosForListing } from "../../state/actions/video";
+import { connect } from "react-redux";
 
 const Container = styled.div`
   display: flex;

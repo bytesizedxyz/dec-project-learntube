@@ -1,8 +1,10 @@
-import React from "react";
-import { LOGIN, SIGNUP, LOGOUT } from "../state/actions/auth";
-import { Link } from "@reach/router";
-import { connect } from "react-redux";
-import styled from "styled-components";
+import React from 'react'
+import { 
+  login, signup, logout
+ } from "../state/actions/auth";
+import { Link } from '@reach/router';
+import {connect} from 'react-redux';
+import styled from 'styled-components';
 import LearnTubeLogo from "../resources/learntube.svg";
 import PernHubLogo from "../resources/pernhub.svg";
 import Modal from "./modal";
@@ -59,27 +61,24 @@ class Header extends React.Component {
   // }
 
   handleClick = e => {
-    console.log(this.state.toggleFormModal);
-    if (this.state.toggleFormModal) {
-      console.log("THIS SHOULD BE CALLED.");
-      this.setState({
-        toggleFormModal: null
-      });
-    }
-    console.log("HANDLE LOGIN: ", e.target.id);
-    const id = e.target.id;
-    this.toggleModal(id);
+  console.log(this.state.toggleFormModal)
+  if(this.state.toggleFormModal || this.state.toggleFormModal === "logout") {
+    this.setState({
+      toggleFormModal: null
+    })
+  }
+  const id = e.target.id
+  this.toggleModal(id);
+  // Using the logged_in boolean from props to determine which action creator to fire off.
 
-    // Using the logged_in boolean from props to determine which action creator to fire off.
+  // If a user is not logged in
+  // then this should toggle a boolean that will open the login modal
+  //  -> Furthermore, the login modal will contain the state necessary for
+  //     logging in a user, i.e. username/password, and it can
 
-    // If a user is not logged in
-    // then this should toggle a boolean that will open the login modal
-    //  -> Furthermore, the login modal will contain the state necessary for
-    //     logging in a user, i.e. username/password, and it can
-
-    // if a user is logged in
-    // then this should fire the log out action creator.
-  };
+  // if a user is logged in
+  // then this should fire the log out action creator.
+}
 
   handleSearch = () => {
     if (this.state.toggleSearchModal) {
@@ -93,6 +92,9 @@ class Header extends React.Component {
   clearResults = () => {
     this.setState({ searchResults: [] });
   };
+handleLogoutClick = () => {
+  this.props.logout()
+}
 
   toggleModal = id => {
     this.setState({
@@ -129,32 +131,29 @@ class Header extends React.Component {
     const { toggleFormModal, toggleSearchModal, searchResults } = this.state;
     console.log("header props", this.props);
     const { logged_in } = this.props.authenticationStatus;
-    return (
+    return(
       <Nav>
-        <div id="headerBg">
-          <SearchBar
-            id="searchbar"
-            updateList={this.updateVideoList}
-            state={this.props.videoListingState}
-          />
+      <div id="headerBg">
+        <SearchBar
+          id="searchbar"
+          updateList={this.updateVideoList}
+          state={this.props.videoListingState}
+        />
 
-          <div id="logo-container">
-            <Link style={{ color: "white" }} to="/">
-              <Logo />
-            </Link>
-          </div>
-
-          <div id="buttons">
-            <button id={!logged_in ? "login" : "logout"} onClick={this.handleClick}>
-              {!logged_in ? "Log In" : "Log Out"}
-            </button>
-            <button id="signup" onClick={this.handleClick}>
-              Sign Up
-            </button>
-          </div>
+        <div id="logo-container">
+          <Link style={{ color: "white" }} to="/">
+            <Logo />
+          </Link>
         </div>
-        {toggleFormModal ? (
-          <Modal>
+        <div id="buttons">
+              {logged_in? <button id={"logout"} onClick={this.handleLogoutClick}>{"Log Out"}</button>:<button id={"login"} onClick={this.handleClick}>{"Log In"}</button>}
+              
+              {/* <button id={!logged_in ? "login" : "logout"} onClick={logged_in? () => this.handleClick() : () => this.handleLogoutClick()}>{!logged_in ? "Log In" : "Log Out"}</button> */}
+              <button id="signup" onClick={this.handleClick}>Sign Up</button>
+            </div>
+           
+          {toggleFormModal ? (
+            <Modal>
             {formRef => {
               return (
                 <>
@@ -190,10 +189,12 @@ class Header extends React.Component {
             }}
           </Modal>
         ) : null}
+        </div>
       </Nav>
-    );
-  }
+    )}
 }
+
+const mapDispatchToProps = {logout}
 const Nav = styled.nav`
   #headerBg {
     display: flex;
@@ -223,4 +224,6 @@ const Nav = styled.nav`
   }
 `;
 
-export default connect(state => state)(Header);
+export default connect(state => state, mapDispatchToProps)(Header);
+
+
