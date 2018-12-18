@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import Modal from "../../../shared-components/modal";
-import VideoUpload from "./video-upload";
-import { BlurredBackground } from "../../../shared-styles";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Modal from '../../../shared-components/modal';
+import VideoUploadModal from './video-upload';
+import { BlurredBackground } from '../../../shared-styles';
 
 const Aside = styled.aside`
   height: 100vh;
@@ -16,7 +16,7 @@ class Sidebar extends Component {
   };
 
   toggleModal = e => {
-    console.log("IT WORKS: ", e);
+    console.log('IT WORKS: ', e);
     // Would then need to pass in e.target.id to accomodate
     // dynamically accessing state if there are additional links or state
     // added in the future.
@@ -33,7 +33,7 @@ class Sidebar extends Component {
   };
 
   componentDidUpdate = () => {
-    console.log("THE NEW STATE: ", this.state);
+    console.log('THE NEW STATE: ', this.state);
   };
 
   render() {
@@ -51,7 +51,7 @@ class Sidebar extends Component {
               return (
                 <>
                   <BlurredBackground />
-                  <VideoUpload formRef={formRef} toggleModal={toggleModal} />
+                  <VideoUploadModal formRef={formRef} toggleModal={toggleModal} />
                 </>
               );
             }}

@@ -1,12 +1,12 @@
-import { navigate } from "@reach/router";
-import backend from "../apis/backend";
+import { navigate } from '@reach/router';
+import backend from '../apis/backend';
 
 /*
  * action types
  */
-export const RETRIEVE_VIDEOS_FOR_LISTING = "RETRIEVE_VIDEOS_FOR_LISTING";
-export const RETRIEVE_VIDEOS_FOR_DASHBOARD = "RETRIEVE_VIDEOS_FOR_DASHBOARD";
-export const VIEW_VIDEO = "VIEW_VIDEO";
+export const RETRIEVE_VIDEOS_FOR_LISTING = 'RETRIEVE_VIDEOS_FOR_LISTING';
+export const RETRIEVE_VIDEOS_FOR_DASHBOARD = 'RETRIEVE_VIDEOS_FOR_DASHBOARD';
+export const VIEW_VIDEO = 'VIEW_VIDEO';
 
 // TEMP DUMMY DATA
 
@@ -14,8 +14,13 @@ export const VIEW_VIDEO = "VIEW_VIDEO";
 // Perhaps this function can take a number as a range for the videos we'd like to retrieve
 // from the backend.
 //export const retrieveVideosForListing = () => (dispatch, getState) => {
+const updateVideo = video =>
+  Object.assign({}, video, {
+    youtube_id: video.url.match('([^/]+)/?$')[1]
+  });
+
 export const retrieveVideosForListing = () => async dispatch => {
-  const response = await backend.get("/videos");
+  const response = await backend.get('/videos');
   // console.log("retrieveVideosForListing; ", response.data);
   // call getState to retrieve a video from the redux store using the videoId argument
   // Then normalize the data
@@ -24,7 +29,7 @@ export const retrieveVideosForListing = () => async dispatch => {
   //replace videoList with results of an axios request to backend for videos later
   const videos = response.data.reduce((acc, curr, i) => {
     videoUuids.push(curr.uuid);
-    acc[curr.uuid] = curr;
+    acc[curr.uuid] = updateVideo(curr);
     return acc;
   }, {});
 
@@ -37,7 +42,7 @@ export const retrieveVideo = videoUuid => {
   return async function(dispatch, getState) {
     const response = await backend.get(`videos/${videoUuid}`);
     const payload = {
-      currentViewedVideo: response.data
+      currentViewedVideo: updateVideo(response.data)
     };
     dispatch({ type: VIEW_VIDEO, payload });
   };
