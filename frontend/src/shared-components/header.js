@@ -136,7 +136,7 @@ fireOffLoginAction = (username, password) => {
             </div>
             
             <div id="buttons">
-              {logged_in? <button id={"logout"} onClick={this.handleLogoutClick}>{"Log Out"}</button>:<button id={"logout"} onClick={this.handleLogoutClick}>{"Log Out"}</button>}
+              {logged_in? <button id={"logout"} onClick={this.handleLogoutClick}>{"Log Out"}</button>:<button id={"login"} onClick={this.handleClick}>{"Log In"}</button>}
               
               {/* <button id={!logged_in ? "login" : "logout"} onClick={logged_in? () => this.handleClick() : () => this.handleLogoutClick()}>{!logged_in ? "Log In" : "Log Out"}</button> */}
               <button id="signup" onClick={this.handleClick}>Sign Up</button>
