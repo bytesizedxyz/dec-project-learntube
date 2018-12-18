@@ -23,10 +23,16 @@ class SignUpPage extends React.Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
+
   onSubmit(e) {
     this.setState();
     //send a sign up request later
   }
+
+  onChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
 
   render() {
     const { signup } = this.props;
@@ -90,7 +96,7 @@ class SignUpPage extends React.Component {
   }
 }
 
-const mapStateToProps = () => {
+const mapDispatchToProps = () => {
   return { signup };
 };
 

@@ -1,13 +1,9 @@
-import { fireEvent, waitForElement } from "react-testing-library";
+import { fireEvent, waitForElement } from 'react-testing-library';
 
-export const inputChangeTestCase = async (
-  inputField,
-  getByLabelText,
-  value
-) => {
+export const inputChangeTestCase = async (inputField, getByLabelText, value) => {
   let input;
   input = getByLabelText(inputField);
-  expect(input.value).toBe("");
+  expect(input.value).toBe('');
   fireEvent.change(input, {
     target: { value }
   });

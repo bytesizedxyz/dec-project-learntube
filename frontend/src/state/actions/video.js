@@ -1,11 +1,12 @@
-import { navigate } from "@reach/router";
+import { navigate } from '@reach/router';
+import backend from '../apis/backend';
 
 /*
  * action types
  */
-export const RETRIEVE_VIDEOS_FOR_LISTING = "RETRIEVE_VIDEOS_FOR_LISTING";
-export const RETRIEVE_VIDEOS_FOR_DASHBOARD = "RETRIEVE_VIDEOS_FOR_DASHBOARD";
-export const VIEW_VIDEO = "VIEW_VIDEO";
+export const RETRIEVE_VIDEOS_FOR_LISTING = 'RETRIEVE_VIDEOS_FOR_LISTING';
+export const RETRIEVE_VIDEOS_FOR_DASHBOARD = 'RETRIEVE_VIDEOS_FOR_DASHBOARD';
+export const VIEW_VIDEO = 'VIEW_VIDEO';
 
 // TEMP DUMMY DATA
 const videoList = [
@@ -29,10 +30,19 @@ const videoList = [
 // redux thunk action creators
 // Perhaps this function can take a number as a range for the videos we'd like to retrieve
 // from the backend.
-export const retrieveVideosForListing = () => (dispatch, getState) => {
+//export const retrieveVideosForListing = () => (dispatch, getState) => {
+const updateVideo = video =>
+  Object.assign({}, video, {
+    youtube_id: video.url.match('([^/]+)/?$')[1]
+  });
+
+export const retrieveVideosForListing = () => async dispatch => {
+  const response = await backend.get('/videos');
+  // console.log("retrieveVideosForListing; ", response.data);
   // call getState to retrieve a video from the redux store using the videoId argument
   // Then normalize the data
-  let videoIds = [];
+  let videoUuids = [];
+
   //replace videoList with results of an axios request to backend for videos later
   const videos = videoList.reduce((acc, curr, i) => {
     videoIds.push(curr.uuid);
@@ -41,6 +51,13 @@ export const retrieveVideosForListing = () => (dispatch, getState) => {
   }, {});
 
   const payload = { videos, videoUuids: videoIds };
+  const videos = response.data.reduce((acc, curr, i) => {
+    videoUuids.push(curr.uuid);
+    acc[curr.uuid] = updateVideo(curr);
+    return acc;
+  }, {});
+
+  const payload = { videos, videoUuids };
   // data for redux store is a boolean flag
   dispatch({ type: RETRIEVE_VIDEOS_FOR_LISTING, payload });
   console.log(
@@ -65,4 +82,23 @@ export const viewVideo = videoUuid => (dispatch, getState) => {
   dispatch({ type: VIEW_VIDEO, payload });
 
   navigate("/play-video");
+}
+
+export const retrieveVideo = videoUuid => {
+  return async function(dispatch, getState) {
+    const response = await backend.get(`videos/${videoUuid}`);
+    const payload = {
+      currentViewedVideo: updateVideo(response.data)
+    };
+    dispatch({ type: VIEW_VIDEO, payload });
+  };
+};
+
+//export const viewVideo = videoUuid => (dispatch, getState) => {
+//ES5 way:
+export const viewVideo = videoUuid => {
+  return async function(dispatch, getState) {
+    await dispatch(retrieveVideo(videoUuid));
+    navigate(`/videos/${videoUuid}`, { state: getState() });
+  };
 };

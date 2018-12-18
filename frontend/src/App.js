@@ -24,7 +24,7 @@ class App extends Component {
         <Header />
         <Router>
           <LandingPage path="/" />
-          <VideoPage path="/play-video" />
+          <VideoPage path="/videos/:id" />
           <DashboardPage path="/dashboard" />
         </Router>
       </Provider>

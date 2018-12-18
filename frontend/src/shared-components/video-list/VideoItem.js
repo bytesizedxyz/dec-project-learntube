@@ -27,6 +27,15 @@ const Container = styled.div`
       margin-top: 0.2rem;
       margin-bottom: 0.2rem;
     }
+
+    .title {
+      font-size: 25px;
+      font-weight: bold;
+      color: white;
+      text-overflow: hidden;
+      margin-top: 0.2rem;
+      margin-bottom: 0.2rem;
+    }
   }
 `;
 
@@ -36,13 +45,14 @@ const VideoItem = ({
   videoURL,
   postedBy,
   createdAt,
-  onVideoSelect
+  onVideoSelect,
+  youTubeId
 }) => {
   return (
     <Container id={videoUuid} onClick={() => onVideoSelect(videoUuid)}>
-      <img src={`https://img.youtube.com/vi/${videoURL}/0.jpg`} />
+      <img src={`https://img.youtube.com/vi/${youTubeId}/0.jpg`} />
       <div id="video-details">
-        <p>{videoTitle}</p>
+        <p className="title">{videoTitle}</p>
         <p>{videoURL}</p>
         <p>{postedBy}</p>
         <p>{createdAt}</p>

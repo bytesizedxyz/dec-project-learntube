@@ -1,7 +1,5 @@
-import React, { Fragment } from "react";
-import { connect } from "react-redux";
-import VideoItem from "./VideoItem";
-import { retrieveVideosForListing, viewVideo } from "../../state/actions/video";
+import React, { Fragment } from 'react';
+import VideoItem from './VideoItem';
 
 const VideoList = ({ videoUuids, videos, onVideoSelect }) => {
   return videoUuids.map(uuid => {
@@ -10,11 +8,12 @@ const VideoList = ({ videoUuids, videos, onVideoSelect }) => {
       <Fragment key={uuid}>
         <VideoItem
           videoUuid={video.uuid}
-          videoTitle={video.title}
           videoURL={video.url}
-          postedBy={video.postedBy}
+          videoTitle={video.title}
+          postedBy={video.username}
           createdAt={video.createdAt}
           onVideoSelect={onVideoSelect}
+          youTubeId={video.youtube_id}
         />
       </Fragment>
     );
