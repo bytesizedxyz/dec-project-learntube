@@ -36,14 +36,13 @@ const updateVideo = video =>
     youtube_id: video.url.match("([^/]+)/?$")[1]
   });
 
-export const retrieveVideosForListing = () => async dispatch => {
+export const retrieveVideosForListing = () => async (dispatch, getState) => {
   const response = await backend.get("/videos");
   // console.log("retrieveVideosForListing; ", response.data);
   // call getState to retrieve a video from the redux store using the videoId argument
   // Then normalize the data
   let videoUuids = [];
 
-  const payload = { videos, videoUuids: videoIds };
   const videos = response.data.reduce((acc, curr, i) => {
     videoUuids.push(curr.uuid);
     acc[curr.uuid] = updateVideo(curr);

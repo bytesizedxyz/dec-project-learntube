@@ -1,10 +1,15 @@
 import React from "react";
 import Youtube from "react-youtube";
 import { connect } from "react-redux";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 import AddToPlaylistController from "./class-components/add-to-playlist-controller";
 import { addVideoToPlaylist } from "../../state/actions/playlist";
 import { retrieveVideo } from "../../state/actions/video";
+
+const Main = styled.main`
+  display: flex;
+`;
 
 const Error = styled.div`
   background: red;
@@ -49,7 +54,7 @@ class VideoPage extends React.Component {
             videoId={youtube_id}
           />
         </div>
-        <AddToPlaylistController video_uuid={uuid} />
+        <AddToPlaylistController video_uuid={videoUuid} />
         <div>suggested videos column here</div>
       </Main>
     );

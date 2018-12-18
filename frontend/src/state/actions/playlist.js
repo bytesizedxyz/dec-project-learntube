@@ -1,5 +1,5 @@
 import axios from "axios";
-import BASE_URL from "../api";
+import { BASE_URL } from "../api";
 
 /*
  * action types
@@ -38,7 +38,7 @@ export const addNewPlaylist = title => async (dispatch, getState) => {
   //   user_uuid: String
   // }
   const postData = { title };
-  const newPlaylist = await axuis.post(
+  const newPlaylist = await axios.post(
     `${BASE_URL}/playlists/playlist`,
     postData
   );

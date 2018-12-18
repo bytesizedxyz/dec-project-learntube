@@ -4,7 +4,7 @@ import { retrieveVideo } from "../../../state/actions/video";
 import axios from "axios";
 import styled from "styled-components";
 import Form from "../../../shared-components/fun-components/form";
-import { Label, Input } from "../../../shared-styles/form-elements";
+import InputField from "../../../shared-components/fun-components/inputField";
 import { AboveModalContainer } from "../../../shared-styles";
 import Icon from "../../../resources/icon";
 
