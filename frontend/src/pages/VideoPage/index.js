@@ -19,6 +19,8 @@ const Main = styled.div`
   justify-items: center;
 
   #box {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-items: center;
   }
