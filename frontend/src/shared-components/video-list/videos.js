@@ -8,11 +8,11 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-image: linear-gradient(-225deg, #5391bd 0%, #5e8cad 29%, #44107a 80%, #231557 100%);
-  // background: lime;
+  background-image: linear-gradient(-225deg, #5391BD 0%, #5E8CAD 29%, #44107A 80%, #231557 100%);
+ // background: lime;
   padding-top: 20px;
   padding-bottom: 60px;
-`;
+  `
 //background-image: linear-gradient(-225deg, #FFF800 0%, #FF1361 29%, #44107A 80%, #231557 100%);
 class videos extends Component {
   state = { videos: [], selectedVideo: null };
