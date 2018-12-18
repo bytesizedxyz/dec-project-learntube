@@ -74,12 +74,10 @@ class Header extends React.Component {
   handleClick = e => {
   console.log(this.state.toggleFormModal)
   if(this.state.toggleFormModal || this.state.toggleFormModal === "logout") {
-    console.log("THIS SHOULD BE CALLED.")
     this.setState({
       toggleFormModal: null
     })
   }
-  console.log("HANDLE LOGIN: ", e.target.id)
   const id = e.target.id
   this.toggleModal(id);
   // Using the logged_in boolean from props to determine which action creator to fire off.
@@ -113,9 +111,8 @@ fireOffLoginAction = (username, password) => {
   render() {
     const { handleClick } = this
     const { toggleFormModal } = this.state
-    console.log(this.props)
     const { logged_in } = this.props.authenticationStatus;  
-    console.log("loggedin",logged_in)
+
    
    
     
