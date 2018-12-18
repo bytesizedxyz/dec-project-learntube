@@ -16,7 +16,6 @@ export const VIEW_VIDEO = "VIEW_VIDEO";
 //export const retrieveVideosForListing = () => (dispatch, getState) => {
 const updateVideo = video =>
   Object.assign({}, video, {
-    //youtube_id: video.url.match('([^/]+)/?$')[1]
     youtube_id: video.url.slice(-11)
   });
 
