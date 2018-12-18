@@ -43,13 +43,6 @@ export const retrieveVideosForListing = () => async dispatch => {
   // Then normalize the data
   let videoUuids = [];
 
-  //replace videoList with results of an axios request to backend for videos later
-  const videos = videoList.reduce((acc, curr, i) => {
-    videoIds.push(curr.uuid);
-    acc[curr.uuid] = curr;
-    return acc;
-  }, {});
-
   const payload = { videos, videoUuids: videoIds };
   const videos = response.data.reduce((acc, curr, i) => {
     videoUuids.push(curr.uuid);
