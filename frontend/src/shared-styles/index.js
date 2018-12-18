@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const BlurredBackground = styled.div`
   position: absolute;
@@ -60,5 +60,28 @@ export const AboveModalContainer = styled.div`
         color: #d40;
       }
     }
+  }
+`;
+
+export const Button = styled.button`
+  display: flex;
+  justify-content: ${props => (props.upload ? "flex-start" : "center")};
+  width: 8rem;
+  height: 2.8rem;
+  margin-top: 1.4rem;
+  justify-content: ${props => (props.upload ? "1.3rem" : null)};
+  font-size: 1.3rem;
+  font-family: "Bangers", cursive;
+  border: 2px solid black;
+
+  &:hover {
+    background: #00fff0;
+    border: 2px solid #00fff0;
+  }
+
+  &:focus {
+    background: #00fff0;
+    outline-color: #fcfcfc;
+    border: 2px solid #00fff0;
   }
 `;

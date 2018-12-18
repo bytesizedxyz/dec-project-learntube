@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { Provider } from "react-redux";
 import { Router } from "@reach/router";
 import LandingPage from "./pages/LandingPage";
 import VideoPage from "./pages/VideoPage";
 import DashboardPage from "./pages/DashboardPage";
 import "./App.css";
 import Header from "./shared-components/header";
-import { Provider } from "react-redux";
 import store from "./state";
 
 import styled from "styled-components";

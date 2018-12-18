@@ -5,20 +5,14 @@ import PlaylistListing from "./class-components/playlist-listing";
 
 const Container = styled.div`
   display: flex;
+  height: 100%;
 `;
 
 const Main = styled.main`
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100vw;
-  height: 100vh;
-`;
-
-const PlaceHolderVideoListingDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  background: #fcfcfc;
+  height: ${props => `calc(100vh - ${props.theme.headerHeight})`};
 `;
 
 const index = () => {

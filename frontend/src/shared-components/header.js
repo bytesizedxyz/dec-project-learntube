@@ -14,7 +14,7 @@ const Nav = styled.nav`
     display: flex;
     flex-direction: ${props => (props.col ? "column" : "row")};
     width: 100%;
-    height: 100%;
+    height: ${props => props.theme.headerHeight};
     justify-content: center;
     align-items: center;
     background: #224259;

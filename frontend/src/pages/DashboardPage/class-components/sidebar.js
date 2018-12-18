@@ -6,8 +6,10 @@ import AddPlaylist from "./add-playlist";
 import { BlurredBackground } from "../../../shared-styles";
 
 const Aside = styled.aside`
-  height: 100vh;
-  width: 20rem;
+  position: relative;
+  z-index: 100;
+  width: ${props => props.theme.sidebarWidth};
+  min-width: ${props => props.theme.sidebarWidth};
   background: #fcfcfc;
   padding-top: 1.4rem;
   padding-left: 1.4rem;
@@ -26,7 +28,7 @@ const Aside = styled.aside`
       cursor: pointer;
 
       &:hover {
-        color: #aaa;
+        color: ${props => props.theme.grey};
       }
     }
   }

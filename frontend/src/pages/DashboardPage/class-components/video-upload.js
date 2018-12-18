@@ -8,17 +8,6 @@ import InputField from "../../../shared-components/fun-components/inputField";
 import { AboveModalContainer } from "../../../shared-styles";
 import Icon from "../../../resources/icon";
 
-const inputFieldsObj = [
-  {
-    field: "title",
-    type: "text"
-  },
-  {
-    field: "url",
-    type: "text"
-  }
-];
-
 class VideoUpload extends Component {
   state = { title: "", url: "", validationErrorMsg: null, uploadResult: null };
 

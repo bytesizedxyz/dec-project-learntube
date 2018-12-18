@@ -29,9 +29,19 @@ class AddToPlaylistController extends Component {
     });
   };
 
+  addVideoToPlaylist = e => {
+    const id = e.target.id;
+    console.log("The id: ", id);
+    const data = {
+      video_uuid: this.state.video_uuid,
+      playlist_uuid: id
+    };
+    // make axios post to add video to playlist
+  };
+
   // PlaylistSelect will need to be passed a
   render() {
-    const { toggleModal } = this;
+    const { addVideoToPlaylist, toggleModal } = this;
     const { modalExpanded } = this.state;
 
     return (
@@ -49,6 +59,8 @@ class AddToPlaylistController extends Component {
                     <PlaylistSelect
                       formRef={formRef}
                       toggleModal={toggleModal}
+                      addVideoToPlaylist={addVideoToPlaylist}
+                      videoView
                     />
                   )}
                   {modalExpanded === "add-playlist" && (

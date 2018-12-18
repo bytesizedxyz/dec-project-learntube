@@ -4,13 +4,38 @@ import {
   RETRIEVE_PLAYLIST_VIDEOS
 } from "../actions/playlist";
 
+// State used for local dev
+// playlists: {
+//   "1": {
+//     title: "Woot"
+//   },
+//   "2": {
+//     title: "Boom"
+//   },
+//   "3": {
+//     title: "Poof"
+//   },
+//   "4": {
+//     title: "Poof"
+//   },
+//   "5": {
+//     title: "Poof"
+//   },
+//   "6": {
+//     title: "Poof"
+//   },
+//   "7": {
+//     title: "Poof"
+//   },
+//   "8": {
+//     title: "Poof"
+//   }
+// },
+// playlistUuids: ["1", "2", "3", "4", "5", "6", "7", "8"],
+
 const initialState = {
-  playlists: {
-    "1": {
-      title: "Woot"
-    }
-  },
-  playlistUuids: ["1"],
+  playlists: {},
+  playlistUuids: [],
   videos: {},
   videoUuids: []
 };
