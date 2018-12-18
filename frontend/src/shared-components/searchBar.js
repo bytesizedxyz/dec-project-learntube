@@ -17,7 +17,6 @@ class searchBar extends React.Component {
 
   makeMap = () => {
     const { videos, videoUuids } = this.props.state;
-    console.log(this.props.state);
     const index = lunr(function() {
       //what fields to look for
       this.field("title");
@@ -32,8 +31,6 @@ class searchBar extends React.Component {
     });
     //setting lunr functions to the index, while also storing the indexed videos there too??
     this.setState({ index, finishedIndexing: true });
-    console.log(index);
-    console.log("finished indexing");
   };
 
   handleSubmit = e => {
@@ -44,23 +41,13 @@ class searchBar extends React.Component {
     e.preventDefault();
     if (!filter) return [];
     const results = index.search(filter);
-    // .map(  ({ field, ...rest }) => console.log(field)
-    //   ({
-    //     field,
-    //     item: stringVideos.find(v => v.id === field),
-    //     ...rest
-    //   })
-    // );
-    console.log(results);
     this.setState({ results });
     updateList(results);
     this.setState({ filter: "" });
   };
 
   render() {
-    const { videos, videoUuids } = this.props.state;
     const { filter, finishedIndexing } = this.state;
-
     return (
       <div>
         {finishedIndexing ? (
@@ -83,11 +70,3 @@ searchBar.protoTypes = {
 };
 
 export default searchBar;
-
-//export connect(state => state)(searchBar)
-
-// const results = this.getResult(filter);
-
-// const childrenWithProps = React.Children.map(this.props.children, child => {
-//   return React.cloneElement(child, { results, getResult: this.getResult });
-// });

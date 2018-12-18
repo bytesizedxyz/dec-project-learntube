@@ -5,11 +5,9 @@ import { navigate } from "@reach/router";
 
 const SearchResultsModal = props => {
   const redirect = id => {
-    console.log(id);
     props.toggleModal();
     return navigate(`/videos/${id}`);
   };
-  console.log(props);
   const { searchResults } = props;
   return (
     <AboveModalContainer
@@ -26,7 +24,6 @@ const SearchResultsModal = props => {
       <span onClick={props.toggleModal}>
         <Icon name="close icon" />
       </span>
-
       {searchResults.map(result => (
         <div onClick={() => redirect(result.uuid)} key={result.uuid}>
           <img

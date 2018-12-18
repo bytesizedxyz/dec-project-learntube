@@ -1,10 +1,8 @@
-import React from 'react'
-import { 
-  login, signup, logout
- } from "../state/actions/auth";
-import { Link } from '@reach/router';
-import {connect} from 'react-redux';
-import styled from 'styled-components';
+import React from "react";
+import { login, signup, logout } from "../state/actions/auth";
+import { Link } from "@reach/router";
+import { connect } from "react-redux";
+import styled from "styled-components";
 import LearnTubeLogo from "../resources/learntube.svg";
 import PernHubLogo from "../resources/pernhub.svg";
 import Modal from "./modal";
@@ -21,7 +19,6 @@ const LogoContainer = styled.div`
 `;
 
 //use Connect: dispatching actions with mapDispatchToProps
-
 const HeaderBar = ({ title }) => <header>{title}</header>;
 
 const Img = styled.img`
@@ -33,7 +30,6 @@ class Logo extends React.Component {
   state = {
     pg: true
   };
-
   render() {
     return (
       <LogoContainer>
@@ -46,39 +42,25 @@ class Logo extends React.Component {
 class Header extends React.Component {
   state = { toggleFormModal: null, toggleSearchModal: null, searchResults: [] };
 
-  // handleClick = (event) => {
-  //   const id = event.target.id
-  //   switch(id) {
-  //     case 'login':
-  //       this.handleLoginClick()
-  //       break;
-  //     case 'logout':
-  //       this.handleLogoutClick()
-  //       break;
-  //     default:
-  //       return
-  //   }
-  // }
-
   handleClick = e => {
-  console.log(this.state.toggleFormModal)
-  if(this.state.toggleFormModal || this.state.toggleFormModal === "logout") {
-    this.setState({
-      toggleFormModal: null
-    })
-  }
-  const id = e.target.id
-  this.toggleModal(id);
-  // Using the logged_in boolean from props to determine which action creator to fire off.
+    console.log(this.state.toggleFormModal);
+    if (this.state.toggleFormModal || this.state.toggleFormModal === "logout") {
+      this.setState({
+        toggleFormModal: null
+      });
+    }
+    const id = e.target.id;
+    this.toggleModal(id);
+    // Using the logged_in boolean from props to determine which action creator to fire off.
 
-  // If a user is not logged in
-  // then this should toggle a boolean that will open the login modal
-  //  -> Furthermore, the login modal will contain the state necessary for
-  //     logging in a user, i.e. username/password, and it can
+    // If a user is not logged in
+    // then this should toggle a boolean that will open the login modal
+    //  -> Furthermore, the login modal will contain the state necessary for
+    //     logging in a user, i.e. username/password, and it can
 
-  // if a user is logged in
-  // then this should fire the log out action creator.
-}
+    // if a user is logged in
+    // then this should fire the log out action creator.
+  };
 
   handleSearch = () => {
     if (this.state.toggleSearchModal) {
@@ -92,9 +74,9 @@ class Header extends React.Component {
   clearResults = () => {
     this.setState({ searchResults: [] });
   };
-handleLogoutClick = () => {
-  this.props.logout()
-}
+  handleLogoutClick = () => {
+    this.props.logout();
+  };
 
   toggleModal = id => {
     this.setState({
@@ -113,9 +95,6 @@ handleLogoutClick = () => {
   };
 
   updateVideoList = videos => {
-    //grab the video from props
-    //use video.ref as id for that video
-    //set it to the search results in the state
     this.setState({ toggleSearchModal: "searchResults" });
     videos.map(video => {
       this.setState({
@@ -131,70 +110,77 @@ handleLogoutClick = () => {
     const { toggleFormModal, toggleSearchModal, searchResults } = this.state;
     console.log("header props", this.props);
     const { logged_in } = this.props.authenticationStatus;
-    return(
+    return (
       <Nav>
-      <div id="headerBg">
-        <SearchBar
-          id="searchbar"
-          updateList={this.updateVideoList}
-          state={this.props.videoListingState}
-        />
-
-        <div id="logo-container">
-          <Link style={{ color: "white" }} to="/">
-            <Logo />
-          </Link>
-        </div>
-        <div id="buttons">
-              {logged_in? <button id={"logout"} onClick={this.handleLogoutClick}>{"Log Out"}</button>:<button id={"login"} onClick={this.handleClick}>{"Log In"}</button>}
-              
-              {/* <button id={!logged_in ? "login" : "logout"} onClick={logged_in? () => this.handleClick() : () => this.handleLogoutClick()}>{!logged_in ? "Log In" : "Log Out"}</button> */}
-              <button id="signup" onClick={this.handleClick}>Sign Up</button>
-            </div>
-           
+        <div id="headerBg">
+          <SearchBar
+            id="searchbar"
+            updateList={this.updateVideoList}
+            state={this.props.videoListingState}
+          />
+          <div id="logo-container">
+            <Link style={{ color: "white" }} to="/">
+              <Logo />
+            </Link>
+          </div>
+          <div id="buttons">
+            {logged_in ? (
+              <button id={"logout"} onClick={this.handleLogoutClick}>
+                {"Log Out"}
+              </button>
+            ) : (
+              <button id={"login"} onClick={this.handleClick}>
+                {"Log In"}
+              </button>
+            )}
+            <button id="signup" onClick={this.handleClick}>
+              Sign Up
+            </button>
+          </div>
           {toggleFormModal ? (
             <Modal>
-            {formRef => {
-              return (
-                <>
-                  <BlurredBackground />
-                  {toggleFormModal === "login" && (
-                    <LoginForm formRef={formRef} toggleModal={handleClick} />
-                  )}
-                  {toggleFormModal === "signup" && (
-                    <SignupForm formRef={formRef} toggleModal={handleClick} />
-                  )}
-                </>
-              );
-            }}
-          </Modal>
-        ) : null}
-        {toggleSearchModal ? (
-          <Modal>
-            {formRef => {
-              console.log(formRef);
-              return (
-                <>
-                  <BlurredBackground />
-                  {toggleSearchModal === "searchResults" && (
-                    <SearchResultsModal
-                      history={this.props.history}
-                      formRef={formRef}
-                      toggleModal={handleSearch}
-                      searchResults={searchResults}
-                    />
-                  )}
-                </>
-              );
-            }}
-          </Modal>
-        ) : null}
+              {formRef => {
+                return (
+                  <>
+                    <BlurredBackground />
+                    {toggleFormModal === "login" && (
+                      <LoginForm formRef={formRef} toggleModal={handleClick} />
+                    )}
+                    {toggleFormModal === "signup" && (
+                      <SignupForm formRef={formRef} toggleModal={handleClick} />
+                    )}
+                  </>
+                );
+              }}
+            </Modal>
+          ) : null}
+          {toggleSearchModal ? (
+            <Modal>
+              {formRef => {
+                console.log(formRef);
+                return (
+                  <>
+                    <BlurredBackground />
+                    {toggleSearchModal === "searchResults" && (
+                      <SearchResultsModal
+                        history={this.props.history}
+                        formRef={formRef}
+                        toggleModal={handleSearch}
+                        searchResults={searchResults}
+                      />
+                    )}
+                  </>
+                );
+              }}
+            </Modal>
+          ) : null}
         </div>
       </Nav>
-    )}
+    );
+  }
 }
 
-const mapDispatchToProps = {logout}
+const mapDispatchToProps = { logout };
 const Nav = styled.nav`
   #headerBg {
     display: flex;
@@ -224,6 +210,7 @@ const Nav = styled.nav`
   }
 `;
 
-export default connect(state => state, mapDispatchToProps)(Header);
-
-
+export default connect(
+  state => state,
+  mapDispatchToProps
+)(Header);
