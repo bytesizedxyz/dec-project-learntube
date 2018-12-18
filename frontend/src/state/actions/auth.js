@@ -26,17 +26,8 @@ export const login = (username, password) => async (dispatch, getState) => {
   console.log(username, password)
   // axios request to login
   //console.log("THE DISPATCH: ", dispatch);
-  // const blah = await api.post("/users/sign_in",{username, password})
-  const blah = await Promise.resolve({
-    "data": {
-      "user": {
-        "username": "mmmm",
-        "email": "mmmm",
-        "is_admin": null
-      },
-      "token": "8"
-    }
-  })
+  const blah = await api.post("/users/sign_in",{username, password})
+
   const {
     token,
     user
