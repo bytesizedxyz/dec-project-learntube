@@ -1,50 +1,21 @@
 import React, { Component } from "react";
+// import axios from "axios";
 import { connect } from "react-redux";
-import { retrieveVideo } from "../../../state/actions/video";
-import axios from "axios";
-import styled from "styled-components";
+// import styled from "styled-components";
+import { addNewPlaylist } from "../../../state/actions/playlist";
 import Form from "../../../shared-components/fun-components/form";
 import InputField from "../../../shared-components/fun-components/inputField";
 import { AboveModalContainer } from "../../../shared-styles";
 import Icon from "../../../resources/icon";
 
-const inputFieldsObj = [
-  {
-    field: "title",
-    type: "text"
-  },
-  {
-    field: "url",
-    type: "text"
-  }
-];
+class AddPlaylist extends Component {
+  state = { title: "", validationErrorMsg: null, uploadResult: null };
 
-class VideoUpload extends Component {
-  state = { title: "", url: "", validationErrorMsg: null, uploadResult: null };
-
-  onSubmit = async e => {
-    const userToken = localStorage.getItem("token");
+  onSubmit = async (e, title) => {
     e.preventDefault();
     if (this.verifyValidInput()) {
-      const { title, url } = this.state;
-      const posted_by = "d1317693-2940-4e4e-841d-e92cd88690a3";
-      console.log("here");
-      console.log(title, url);
-      const result = await axios.post(
-        "https://dry-river-42897.herokuapp.com/videos",
-        {
-          title,
-          url,
-          posted_by
-        },
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmt5bWFyayIsImVtYWlsIjoic2h1dHVwQHNodXR1cC5jb20iLCJpc19hZG1pbiI6bnVsbCwiaWF0IjoxNTQ1MDY4NjM1LCJleHAiOjE1NDUyNDE0MzV9.FQQuG7UdzE1slqdwCfYCjCAFk9fkmEfnafgD0M7o5FE`
-          }
-        }
-      );
-      console.log(result, +" the onSubmit result");
-      retrieveVideo(result.data[0].uuid);
+      // To add a playlist
+      const result = await this.props.addNewPlaylist(title);
       this.setUploadResultSuccess(result);
       setTimeout(this.setUploadResultNull, 1000);
     }
@@ -54,10 +25,6 @@ class VideoUpload extends Component {
     const { title, url } = this.state;
     if (title.length < 5) {
       this.setStateValidationErrorMsg("title must be at least 5 characters.");
-      return false;
-    }
-    if (url.length < 9) {
-      this.setStateValidationErrorMsg("URL must be at least 9 characters.");
       return false;
     }
     return true;
@@ -94,16 +61,16 @@ class VideoUpload extends Component {
 
   render() {
     const { onSubmit, onChange } = this;
-    const { toggleModal } = this.props;
-    const { title, url, validationErrorMsg, uploadResult } = this.state;
+    const { toggleModal, videoView } = this.props;
+    const { title, validationErrorMsg, uploadResult } = this.state;
     return (
       <AboveModalContainer ref={this.props.formRef}>
         <div>
           <span>
             {!uploadResult ? (
-              <h3 data-testid="header-one">Upload a video</h3>
+              <h3 data-testid="header-one">Add a new Playlist</h3>
             ) : (
-              <h3 data-testid="header-two">Video Successfully Uploaded!</h3>
+              <h3 data-testid="header-two">Playlist Successfully Created!</h3>
             )}
             {validationErrorMsg ? (
               <p data-testid="validation-err-msg">{validationErrorMsg}</p>
@@ -113,22 +80,33 @@ class VideoUpload extends Component {
             <Icon name="close icon" />
           </span>
         </div>
-        <Form onSubmit={onSubmit} upload>
+        <Form onSubmit={e => onSubmit(e, title)}>
           <InputField
             field="title"
             type="text"
             value={title}
             onChange={onChange}
           />
-          <InputField field="url" type="text" value={url} onChange={onChange} />
-          <button type="submit" data-testid="upload-submit">
-            <Icon name="upload icon" />
-            Upload
-          </button>
+          <div id="button-row">
+            <button type="submit" data-testid="upload-submit">
+              <Icon name="upload icon" />
+              Upload
+            </button>
+            {videoView && (
+              <button id="playlist-select" onClick={toggleModal}>
+                Back
+              </button>
+            )}
+          </div>
         </Form>
       </AboveModalContainer>
     );
   }
 }
 
-export default VideoUpload;
+// export default VideoUpload;
+
+export default connect(
+  state => null,
+  { addNewPlaylist }
+)(AddPlaylist);

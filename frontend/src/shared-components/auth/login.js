@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { login, logout } from '../../state/actions/auth';
-import Form from '../fun-components/form';
+import React from "react";
+import { connect } from "react-redux";
+import { login, logout } from "../../state/actions/auth";
+import Form from "../fun-components/form";
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -10,10 +10,20 @@ class LoginPage extends React.Component {
     //resets login status
 
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
       submitted: false
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount = () => this.props.logout();
+
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   }
 
   componentDidMount = () => this.props.logout();

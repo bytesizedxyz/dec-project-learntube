@@ -1,29 +1,37 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { signup } from '../../state/actions/auth';
-import Form from '../fun-components/form';
+import React from "react";
+import { connect } from "react-redux";
+import { signup } from "../../state/actions/auth";
+import Form from "../fun-components/form";
 
 class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
 
     state = {
-      username: '',
-      password: '',
-      passwordConfirmation: '',
-      email: ''
+      username: "",
+      password: "",
+      passwordConfirmation: "",
+      email: ""
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount = () => this.props.signup();
 
+  onChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  onSubmit(e) {
+    this.setState();
+    //send a sign up request later
+  }
+
   onChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-  };
-  onSubmit = e => {
-    // this.setState()
-    //send a sign up request later
   };
 
   render() {
