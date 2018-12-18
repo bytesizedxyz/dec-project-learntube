@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import lunr from "lunr";
 
 class searchBar extends React.Component {
-  state = { index: null, filter: "", results: [] };
+  state = { index: null, filter: "", finishedIndexing: false, results: null };
 
   handleChange = e => {
     this.setState({ filter: e.target.value });
@@ -32,17 +32,18 @@ class searchBar extends React.Component {
       videoUuids.forEach(id => this.add(videos[id]), this);
     });
     //setting lunr functions to the index, while also storing the indexed videos there too??
-    this.setState({ index });
-    console.log("finished running");
+    this.setState({ index, finishedIndexing: true });
+    console.log(index);
+    console.log("finished indexing");
   };
 
   handleSubmit = e => {
+    this.setState({ results: null });
+    const { updateList } = this.props;
     const { videos } = this.props.state;
-    const stringVideos = JSON.stringify(videos);
-    e.preventDefault();
     const { filter, index } = this.state;
+    e.preventDefault();
     if (!filter) return [];
-
     const results = index.search(filter);
     // .map(  ({ field, ...rest }) => console.log(field)
     //   ({
@@ -53,25 +54,23 @@ class searchBar extends React.Component {
     // );
     console.log(results);
     this.setState({ results });
+    updateList(results);
+    this.setState({ filter: "" });
   };
 
   render() {
-    const { updateList } = this.props;
     const { videos, videoUuids } = this.props.state;
-    const { filter, results } = this.state;
+    const { filter, finishedIndexing } = this.state;
 
     return (
       <div>
-        <div id="searchbar">
-          <form onSubmit={this.handleSubmit}>
-            <input name="filter" value={filter} onChange={this.handleChange} />
-          </form>
-        </div>
-        <div>
-          {results.map(result => {
-            updateList(result);
-          })}
-        </div>
+        {finishedIndexing ? (
+          <div id="searchbar">
+            <form onSubmit={this.handleSubmit}>
+              <input name="filter" value={filter} onChange={this.handleChange} />
+            </form>
+          </div>
+        ) : null}
       </div>
     );
   }

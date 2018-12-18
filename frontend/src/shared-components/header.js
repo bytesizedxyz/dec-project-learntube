@@ -11,6 +11,7 @@ import LoginForm from "./login";
 import LogoutForm from "./logout";
 import SignupForm from "./signup";
 import SearchBar from "./searchBar";
+import SearchResultsModal from "./searchResultsModal";
 
 const LogoContainer = styled.div`
   display: flex;
@@ -41,7 +42,7 @@ class Logo extends React.Component {
 }
 
 class Header extends React.Component {
-  state = { toggleFormModal: null };
+  state = { toggleFormModal: null, toggleSearchModal: null, searchResults: [] };
 
   // handleClick = (event) => {
   //   const id = event.target.id
@@ -68,6 +69,7 @@ class Header extends React.Component {
     console.log("HANDLE LOGIN: ", e.target.id);
     const id = e.target.id;
     this.toggleModal(id);
+
     // Using the logged_in boolean from props to determine which action creator to fire off.
 
     // If a user is not logged in
@@ -77,6 +79,19 @@ class Header extends React.Component {
 
     // if a user is logged in
     // then this should fire the log out action creator.
+  };
+
+  handleSearch = () => {
+    if (this.state.toggleSearchModal) {
+      this.setState({
+        toggleSearchModal: null
+      });
+    }
+    this.clearResults();
+  };
+
+  clearResults = () => {
+    this.setState({ searchResults: [] });
   };
 
   toggleModal = id => {
@@ -95,22 +110,25 @@ class Header extends React.Component {
     // this.props.login(username, password)
   };
 
-  updateVideoList = video => {
-    console.log(video);
-    if (video.length === 0 || null) return;
-    const initialState = this.props.videoListingState.videos;
-    console.log(initialState);
-    this.props.videoListingState.videos = this.props.videoListingState.videos[video.ref];
-    // this.props.videoListingState.videos = this.props.videoListingState.videos[video.ref];
-    console.log(this.props.videoListingState.videos);
+  updateVideoList = videos => {
+    //grab the video from props
+    //use video.ref as id for that video
+    //set it to the search results in the state
+    this.setState({ toggleSearchModal: "searchResults" });
+    videos.map(video => {
+      this.setState({
+        searchResults: this.state.searchResults.concat(
+          this.props.videoListingState.videos[video.ref]
+        )
+      });
+    });
   };
 
   render() {
-    const { handleClick } = this;
-    const { toggleFormModal, filter } = this.state;
+    const { handleClick, handleSearch } = this;
+    const { toggleFormModal, toggleSearchModal, searchResults } = this.state;
     console.log("header props", this.props);
     const { logged_in } = this.props.authenticationStatus;
-
     return (
       <Nav>
         <div id="headerBg">
@@ -146,6 +164,26 @@ class Header extends React.Component {
                   )}
                   {toggleFormModal === "signup" && (
                     <SignupForm formRef={formRef} toggleModal={handleClick} />
+                  )}
+                </>
+              );
+            }}
+          </Modal>
+        ) : null}
+        {toggleSearchModal ? (
+          <Modal>
+            {formRef => {
+              console.log(formRef);
+              return (
+                <>
+                  <BlurredBackground />
+                  {toggleSearchModal === "searchResults" && (
+                    <SearchResultsModal
+                      history={this.props.history}
+                      formRef={formRef}
+                      toggleModal={handleSearch}
+                      searchResults={searchResults}
+                    />
                   )}
                 </>
               );

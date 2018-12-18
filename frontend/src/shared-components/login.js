@@ -1,41 +1,41 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {login, logout} from '../state/actions/auth'
-import { AboveModalContainer } from '../shared-styles'
-import Form from '../shared-components/fun-components/form'
-import Icon from '../resources/icon'
+import React from "react";
+import { connect } from "react-redux";
+import { login, logout } from "../state/actions/auth";
+import { AboveModalContainer } from "../shared-styles";
+import Form from "../shared-components/fun-components/form";
+import Icon from "../resources/icon";
 
 class LoginForm extends React.Component {
   state = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
     submitted: false,
     validationErrorMsg: null
-  }
+  };
 
-  handleChange = (e) => {
-    const {name, value} = e.target;
-    this.setState({ [name]: value});
-  }
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
-
-    this.setState({ submitted: true})
+    this.setState({ submitted: true });
     const { username, password } = this.state;
     if (username && password) {
-        this.props.login(username, password);
+      this.props.login(username, password);
     }
-  }
+  };
 
   render() {
     const { login, formRef, toggleModal } = this.props;
-    const { username, password, submitted, validationErrorMsg } = this.state
+    console.log(this.props);
+    const { username, password, submitted, validationErrorMsg } = this.state;
     return (
-        <AboveModalContainer ref={this.props.formRef}>
+      <AboveModalContainer ref={this.props.formRef}>
         <div>
           <span>
-          <h3 data-testid="header-one">Login</h3>
+            <h3 data-testid="header-one">Login</h3>
             {validationErrorMsg ? (
               <p data-testid="validation-err-msg">{validationErrorMsg}</p>
             ) : null}
@@ -45,34 +45,37 @@ class LoginForm extends React.Component {
           </span>
         </div>
         <Form>
-            <label className="control-label"> Username </label>
-            <input
-                value={this.state.username}
-                handleChange={this.handleChange}
-                type="text"
-                name="username"
-                className="form-conrol"
-            />
-            <label className="control-label"> Password </label>
-            <input
-                value={this.state.password}
-                handleChange={this.handleChange}
-                type="password"
-                name="password"
-                className="form-conrol"
-            />
-            <button className="btn btn-primary">Login</button>
+          <label className="control-label"> Username </label>
+          <input
+            value={this.state.username}
+            handleChange={this.handleChange}
+            type="text"
+            name="username"
+            className="form-conrol"
+          />
+          <label className="control-label"> Password </label>
+          <input
+            value={this.state.password}
+            handleChange={this.handleChange}
+            type="password"
+            name="password"
+            className="form-conrol"
+          />
+          <button className="btn btn-primary">Login</button>
         </Form>
-        </AboveModalContainer>
-    )
+      </AboveModalContainer>
+    );
   }
-};
-
-const mapDispatchToProps = () => {
-    return {login, logout}
 }
 
-export default connect(state => state, mapDispatchToProps)(LoginForm)
+const mapDispatchToProps = () => {
+  return { login, logout };
+};
+
+export default connect(
+  state => state,
+  mapDispatchToProps
+)(LoginForm);
 
 //still trying to figure this out ^
 //dispatch is an event
