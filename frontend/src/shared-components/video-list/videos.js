@@ -62,4 +62,4 @@ export default connect(
     return videoListingState;
   },
   { viewVideo, retrieveVideosForListing }
-)(Videos);
+)(videos);
