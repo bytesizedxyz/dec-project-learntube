@@ -20,7 +20,7 @@ const Container = styled.div`
   padding-bottom: 60px;
 `;
 //
-class Videos extends Component {
+class videos extends Component {
   state = { videos: [], selectedVideo: null };
 
   componentDidMount = () => {
