@@ -45,7 +45,7 @@ const NoVideoError = () => (
   </Error>
 );
 
-class VideoPage extends React.Component {
+class VideoViewPage extends React.Component {
   componentDidMount = () => {
     this.props.retrieveVideo(this.props.id);
   };
@@ -79,4 +79,4 @@ class VideoPage extends React.Component {
 export default connect(
   state => state,
   { retrieveVideo }
-)(VideoPage);
+)(VideoViewPage);
