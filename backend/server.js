@@ -9,6 +9,7 @@ const knex = require('./db/knex');
 const session = require('express-session');
 const passport = require('passport');
 
+const favorites = require('./routes/favorites');
 const users = require('./routes/users');
 const videos = require('./routes/videos');
 const playlists = require('./routes/playlists');
@@ -36,6 +37,8 @@ app.use('/users', users);
 //routes
 app.use('/videos', videos);
 app.use('/playlists', playlists);
+app.use('/favorite', favorites);
+
 
 const server = app.listen(port, () => {
   console.log(`🌎  => API Server now listening on PORT ${port}!`);

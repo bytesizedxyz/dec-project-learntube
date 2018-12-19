@@ -13,7 +13,6 @@ const connection = {
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME
 };
-
 const dbConfig = {
   client: "pg",
   connection,
