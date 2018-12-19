@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { signup } from '../../state/actions/auth';
-import Form from '../fun-components/form';
+import React from "react";
+import { connect } from "react-redux";
+import { signup } from "../../state/actions/auth";
+import Form from "../fun-components/form";
 
 class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: '',
-      password: '',
-      passwordConfirmation: '',
-      email: ''
+      username: "",
+      password: "",
+      passwordConfirmation: "",
+      email: ""
     };
   }
 
