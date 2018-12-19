@@ -1,2 +1,5 @@
 .DS_Store
 *.DS_Store
+
+frontend/debug.log
+frontend/package-lock.json

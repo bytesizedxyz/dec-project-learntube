@@ -1,6 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import {connect} from 'react-redux';
+import axios from 'axios';
+
 import { signup } from "../state/actions/auth";
+import { AboveModalContainer } from '../shared-styles'
+import Form from '../shared-components/fun-components/form'
+import Icon from '../resources/icon'
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -10,32 +15,48 @@ class SignUp extends React.Component {
       username: "",
       password: "",
       passwordConfirmation: "",
-      email: ""
+      email: "",
+      validationErrorMsg: null
     };
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.oneSubmit = this.oneSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount = () => this.props.signup();
 
   onChange(e) {
     const { name, value } = e.target;
+    console.log(name, value)
     this.setState({ [name]: value });
   }
-  onSubmit(e) {
-    this.setState();
-    //send a sign up request later
+  oneSubmit(e) {
+    e.preventDefault();
+    // this.setState();
+    const {username, password, email} = this.state;
+    axios.post(`//dry-river-42897.herokuapp.com/users`, {username, password, email}).then(data => {
+      console.log(data)
+    })
   }
 
   render() {
-    const { signup } = this.props;
-    const { username, password, email, submitted } = this.state;
+    const { signup, toggleModal } = this.props;
+    const { username, password, email, submitted, validationErrorMsg } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
-        <h1> Register for LearnTube! </h1>
-
-        <div className="form-group">
-          <label className="control-label">Username</label>
+        <AboveModalContainer ref={this.props.formRef}>
+        <div>
+          <span>
+          <h3 data-testid="header-one">Sign Up</h3>
+            {validationErrorMsg ? (
+              <p data-testid="validation-err-msg">{validationErrorMsg}</p>
+            ) : null}
+          </span>
+          <span onClick={toggleModal}>
+            <Icon name="close icon" />
+          </span>
+        </div>
+        <Form>
+        <label className="control-label">Username</label>
           <input
             value={this.state.username}
             onChange={this.onChange}
@@ -43,8 +64,6 @@ class SignUp extends React.Component {
             name="username"
             className="form-control"
           />
-        </div>
-        <div className="form-group">
           <label className="control-label">Password</label>
           <input
             value={this.state.password}
@@ -53,8 +72,6 @@ class SignUp extends React.Component {
             name="password"
             className="form-control"
           />
-        </div>
-        <div className="form-group">
           <label className="control-label">Confirm Password</label>
           <input
             value={this.state.passwordConfirmation}
@@ -63,8 +80,6 @@ class SignUp extends React.Component {
             name="passwordConfirmation"
             className="form-control"
           />
-        </div>
-        <div className="form-group">
           <label className="control-label">Email Address</label>
           <input
             value={this.state.email}
@@ -73,14 +88,9 @@ class SignUp extends React.Component {
             name="email"
             className="form-control"
           />
-        </div>
-        <div className="form-group">
-          <button className="btn btn-primary btn-lg">Sign Up</button>
-        </div>
-        <div>
-          <SignUpPage path="/signup" />
-        </div>
-      </form>
+          <button className="btn btn-primary btn-lg" onClick={this.oneSubmit}>Sign Up</button>
+        </Form>
+        </AboveModalContainer>
     );
   }
 }
@@ -91,3 +101,6 @@ const SignUpPage = connect(
 )(SignUp);
 
 export default SignUpPage;
+
+//still trying to figure this out ^
+//dispatch is an event
