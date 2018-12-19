@@ -1,39 +1,45 @@
-const knex = require('../db/knex');
-const {
-  PLAYLISTTABLE,
-  PLAYLISTVIDEOTABLE
-} = require('../SERVER_CONSTANTS').tableNames;
+const knex = require("../db/knex");
+const { PLAYLISTTABLE, PLAYLISTVIDEOTABLE } = require("../SERVER_CONSTANTS").tableNames;
+const { UNPROCESSABLE_ENTITY, BAD_REQUEST, SUCCESS } = require("../SERVER_CONSTANTS").statusCodes;
 
 const dao = {
   get: (id, table) => {
-    return knex(table).where('user_uuid', id);
+    return knex(table).where("user_uuid", id);
   },
   getPlaylist: id => {
-    return knex(PLAYLISTVIDEOTABLE)
-      .select()
-      .innerJoin(PLAYLISTTABLE, { 'playlists.uuid': 'videos.uuid' })
-      .where('playlists.uuid', '=', parseInt(id, 10));
-
-    // select pl.title as playlist_title, pv.order as playlist_order, u2.username as playlist_creator, v.url as url, v.watch_count as watch_count, u.username as posted_by, v.title as video_title from playlist_video pv
-    // inner join videos v on pv.video_uuid = v.uuid inner join playlist pl on pv.playlist_uuid = pl.uuid
-    // inner join users u on u.uuid = v.user_uuid inner join users u2 on u2.uuid = pl.user_uuid where pl.uuid = ? ;, [ID_YOU_WANT_TO_LOOK_UP]
+    return knex
+      .select(
+        "pl.title AS playlist_title",
+        "pv.order AS playlist_order",
+        "u2.username AS playlist_creator",
+        "v.url AS url",
+        "v.watch_count AS watch_count",
+        "u.username AS posted_by",
+        "v.title AS video_title"
+      )
+      .from("playlist_video AS pv")
+      .innerJoin("videos AS v", "pv.video_uuid", "v.uuid")
+      .join("playlist AS pl", "pv.playlist_uuid", "pl.uuid")
+      .innerJoin("users AS u", "u.uuid", "v.user_uuid")
+      .innerJoin("users AS u2", "u2.uuid", "pl.user_uuid")
+      .where(knex.raw("pl.uuid = ?", id));
   },
   create: (table, data) => {
-    return knex(table).insert(data, '*');
+    return knex(table).insert(data, "*");
   },
   update: (id, table, data) => {
     return knex(table)
-      .where('uuid', id)
-      .update(data, '*');
+      .where("uuid", id)
+      .update(data, "*");
   },
   deletePlaylist: (id, table) => {
     return knex(table)
-      .where('playlist_uuid', id)
+      .where("playlist_uuid", id)
       .del();
   },
   deletePlaylistVideo: (id, table) => {
     return knex(table)
-      .where('video_uuid', id)
+      .where("video_uuid", id)
       .del();
   }
 };
@@ -49,9 +55,8 @@ const getAllPlaylists = (req, res) => {
       res.json(playlists);
     })
     .catch(err => {
-      console.log('error retrieving playlists');
-      console.log(err);
-      throw err;
+      console.log("error retrieving playlists");
+      res.status(UNPROCESSABLE_ENTITY).json({ error: "error retrieving playlists" });
     });
 };
 
@@ -66,7 +71,7 @@ const getPlaylist = (req, res, next) => {
       res.json(contents);
     })
     .catch(err => {
-      console.log('error retrieving playlist videos');
+      console.log("error retrieving playlist videos");
       console.log(err);
       throw err;
     });
@@ -81,7 +86,7 @@ const addPlaylist = (req, res, next) => {
       res.json(playlists[0]);
     })
     .catch(err => {
-      console.log('error adding a playlist');
+      console.log("error adding a playlist");
       console.log(err);
       throw err;
     });
@@ -96,7 +101,7 @@ const addPlaylistVideo = (req, res, next) => {
       res.json(videos[0]);
     })
     .catch(err => {
-      console.log('error adding a playlist video');
+      console.log("error adding a playlist video");
       console.log(err);
       throw err;
     });
@@ -115,7 +120,7 @@ const updatePlaylist = (req, res, next) => {
       res.json(playlists[0]);
     })
     .catch(err => {
-      console.log('error updating a playlist');
+      console.log("error updating a playlist");
       console.log(err);
       throw err;
     });
@@ -132,7 +137,7 @@ const deletePlaylist = (req, res, id) => {
       res.json({ deleted: true });
     })
     .catch(err => {
-      console.log('error deleting a playlist');
+      console.log("error deleting a playlist");
       console.log(err);
       throw err;
     });
@@ -149,7 +154,7 @@ const deletePlaylistVideo = (req, res, id) => {
       res.json({ deleted: true });
     })
     .catch(err => {
-      console.log('error deleting a video from the playlist');
+      console.log("error deleting a video from the playlist");
       console.log(err);
       throw err;
     });

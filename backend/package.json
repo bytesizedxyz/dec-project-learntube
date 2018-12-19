@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "test": "NODE_ENV=test jest --ci --verbose --detectOpenHandles --forceExit",
+    "test": "NODE_ENV=test jest --ci --verbose --detectOpenHandles --watch",
     "test-mocha": "mocha"
   },
   "dependencies": {
