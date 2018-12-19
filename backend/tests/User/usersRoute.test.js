@@ -61,6 +61,7 @@ describe('Hitting the userRoutes, a User may', () => {
   test('login a user', async done => {
     await postRequest(createdRequest, '/users/', newUser);
     const response = await postRequest(createdRequest, '/users/sign_in', loginUserInput);
+    foundUser.uuid = response.body.user.uuid;
     expect(response.status).toBe(SUCCESS);
     expect(response.body.user).toEqual(foundUser);
     expect(response.body.token).toBeTruthy();

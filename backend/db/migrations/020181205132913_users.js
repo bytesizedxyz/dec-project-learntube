@@ -1,4 +1,4 @@
-const { USERTABLE } = require("../../SERVER_CONSTANTS").tableNames;
+const { USERTABLE } = require('../../SERVER_CONSTANTS').tableNames;
 
 exports.up = (knex, Promise) => {
   return knex.schema.createTable(USERTABLE, table => {
@@ -9,7 +9,7 @@ exports.up = (knex, Promise) => {
     table.string('username');
     table.string('email').unique();
     table.string('password');
-    table.bool('is_admin');
+    table.bool('is_admin').defaultTo(false);
   });
 };
 
